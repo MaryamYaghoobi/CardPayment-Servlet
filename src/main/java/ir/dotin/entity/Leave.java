@@ -1,26 +1,34 @@
+
 package ir.dotin.entity;
 
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 
 @Entity(name = "Leave")
 @Table(name = "Leave")
 @SelectBeforeUpdate
-public class Leave implements Serializable {
+public class Leave {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO )
-    @Column(columnDefinition = "LONG",  nullable = false , unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "LONG", nullable = false, unique = true)
     public long id;
-    @Column(name = "leaveNum", columnDefinition = "LONG")
-    private String leaveNum;
-    @Column(name = "status", columnDefinition = "BOOLEAN")
-    private String status;
-    @OneToOne
-    @JoinColumn(name="registrationId")
-    private Registration registration;
+    @Column(name = "leaveToDate", columnDefinition = "DATE")
+    private LocalDate leaveToDate;
+    @Column(name = "leaveFromDate", columnDefinition = "DATE")
+    private LocalDate leaveFromDate;
+    @Column(name = "reason", columnDefinition = "VARCHAR(255)")
+    private String reason;
+    @ManyToOne()
+    @JoinColumn(name = "leaveStatus")
+    private CategoryElement leaveStatus;
+    @ManyToOne()
+    @JoinColumn(name = "employeeId")
+    private Employee employee;
+
     public long getId() {
         return id;
     }
@@ -29,30 +37,45 @@ public class Leave implements Serializable {
         this.id = id;
     }
 
-    public String getLeaveNum() {
-        return leaveNum;
+    public LocalDate getLeaveToDate() {
+        return leaveToDate;
     }
 
-    public void setLeaveNum(String leaveNum) {
-        this.leaveNum = leaveNum;
+    public void setLeaveToDate(LocalDate leaveToDate) {
+        this.leaveToDate = leaveToDate;
     }
 
-    public String getStatus() {
-        return status;
+    public LocalDate getLeaveFromDate() {
+        return leaveFromDate;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setLeaveFromDate(LocalDate leaveFromDate) {
+        this.leaveFromDate = leaveFromDate;
     }
 
-    public Registration getRegistration() {
-        return registration;
+    public String getReason() {
+        return reason;
     }
 
-    public void setRegistration(Registration registration) {
-        this.registration = registration;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
+    public CategoryElement getLeaveStatus() {
+        return leaveStatus;
+    }
+
+    public void setLeaveStatus(CategoryElement leaveStatus) {
+        this.leaveStatus = leaveStatus;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
 
 }

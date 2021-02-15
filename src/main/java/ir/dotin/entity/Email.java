@@ -1,29 +1,29 @@
+
 package ir.dotin.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Email")
 @Table(name = "Email")
-public class Email implements Serializable {
-
+public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "LONG", nullable = false, unique = true)
     public long id;
-    @Column(name = "content", columnDefinition = "VARCHAR(255)")
-    private String content;
+
+    @Column(name = "context", columnDefinition = "VARCHAR(255)")
+    private String context;
 
     @Column(name = "filePath", columnDefinition = "VARCHAR(255)")
     private String filePath;
 
     @OneToMany()
-    @JoinTable(name = "Employee_Email",
-            joinColumns = {@JoinColumn(name = "receivedEmailId")},
-            inverseJoinColumns = {@JoinColumn(name = "emailReceiverId")})
+    @JoinTable(name = "EmployeeEmail",
+            joinColumns = {@JoinColumn(name = "receiveEmailId")},
+            inverseJoinColumns = {@JoinColumn(name = "receiverId")})
     private Set<Employee> receiverEmployees = new HashSet<Employee>();
 
     public long getId() {
@@ -34,12 +34,12 @@ public class Email implements Serializable {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getContext() {
+        return context;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContext(String context) {
+        this.context = context;
     }
 
     public String getFilePath() {
@@ -57,7 +57,6 @@ public class Email implements Serializable {
     public void setReceiverEmployees(Set<Employee> receiverEmployees) {
         this.receiverEmployees = receiverEmployees;
     }
+
+
 }
-
-
-
