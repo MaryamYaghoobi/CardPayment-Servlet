@@ -4,57 +4,38 @@ package ir.dotin.entity;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 
 @Entity(name = "Employee")
-@Table(name = "Employee")
+@Table(name = "t_Employee")
 @SelectBeforeUpdate
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "LONG", nullable = false, unique = true)
-    public long id;
-    @Column(name = "firstName", columnDefinition = "VARCHAR(255)")
+public class Employee extends Common {
+
+    @Column(name = "c_firstName", columnDefinition = "VARCHAR(255)")
     private String firstName;
-    @Column(name = "lastName", columnDefinition = "VARCHAR(255)")
+    @Column(name = "c_lastName", columnDefinition = "VARCHAR(255)")
     private String lastName;
-    @Column(name = "email", columnDefinition = "VARCHAR(255)")
+    @Column(name = "c_email", columnDefinition = "VARCHAR(255)")
     private String email;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "dateOfBirth")
-    private Date dateOfBirth;
-    @Column(name = "username", columnDefinition = "VARCHAR(255)")
+    @Column(name = "c_dateOfBirth", columnDefinition = "VARCHAR(255)")
+    private String dateOfBirth;
+    @Column(name = "c_username", columnDefinition = "VARCHAR(255)")
     private String username;
-    @Column(name = "password", columnDefinition = "VARCHAR(255)")
+    @Column(name = "c_password", columnDefinition = "VARCHAR(255)")
     private String password;
     @ManyToOne()
-    @JoinColumn(name = "manager")
+    @JoinColumn(name = "c_manager")
     private Employee manager;
     @OneToMany(mappedBy = "manager")
-    private Set<Employee> employees = new HashSet<Employee>();
+    private List<Employee> employees;
     @ManyToOne()
-    @JoinColumn(name = "role")
+    @JoinColumn(name = "c_role")
     private CategoryElement role;
     @ManyToOne()
-    @JoinColumn(name = "employeeStatus")
+    @JoinColumn(name = "c_employeeStatus")
     private CategoryElement employeeStatus;
-    @OneToMany(mappedBy = "employeeId")
-    private Set<Leaves> leaves = new HashSet<Leaves>();
-    @ManyToMany(mappedBy = "employeeSenderId")
-    private Set<Email> senderEmail = new HashSet<Email>();
 
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -80,11 +61,11 @@ public class Employee {
         this.email = email;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -112,11 +93,11 @@ public class Employee {
         this.manager = manager;
     }
 
-    public Set<Employee> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<Employee> employees) {
+    public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
 
@@ -136,20 +117,5 @@ public class Employee {
         this.employeeStatus = employeeStatus;
     }
 
-    public Set<Leaves> getLeaves() {
-        return leaves;
-    }
-
-    public void setLeaves(Set<Leaves> leaves) {
-        this.leaves = leaves;
-    }
-
-    public Set<Email> getSenderEmail() {
-        return senderEmail;
-    }
-
-    public void setSenderEmail(Set<Email> senderEmail) {
-        this.senderEmail = senderEmail;
-    }
 
 }

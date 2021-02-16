@@ -4,52 +4,40 @@ package ir.dotin.entity;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDate;
 
 
 @Entity(name = "Leaves")
-@Table(name = "Leaves")
+@Table(name = "t_Leaves")
 @SelectBeforeUpdate
-public class Leaves {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "LONG", nullable = false, unique = true)
-    public long id;
-    @Column(name = "leaveToDate", columnDefinition = "DATE")
-    private LocalDate leaveToDate;
-    @Column(name = "leaveFromDate", columnDefinition = "DATE")
-    private LocalDate leaveFromDate;
-    @Column(name = "reason", columnDefinition = "VARCHAR(255)")
+public class Leaves extends Common {
+
+    @Column(name = "c_leaveToDate", columnDefinition = "VARCHAR(255)")
+    private String leaveToDate;
+    @Column(name = "c_leaveFromDate", columnDefinition = "VARCHAR(255)")
+    private String leaveFromDate;
+    @Column(name = "c_reason", columnDefinition = "VARCHAR(255)")
     private String reason;
     @ManyToOne()
-    @JoinColumn(name = "leaveStatus")
+    @JoinColumn(name = "c_leaveStatus")
     private CategoryElement leaveStatus;
     @ManyToOne()
-    @JoinColumn(name = "employeeId")
+    @JoinColumn(name = "c_employeeId")
     private Employee employee;
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public LocalDate getLeaveToDate() {
+    public String getLeaveToDate() {
         return leaveToDate;
     }
 
-    public void setLeaveToDate(LocalDate leaveToDate) {
+    public void setLeaveToDate(String leaveToDate) {
         this.leaveToDate = leaveToDate;
     }
 
-    public LocalDate getLeaveFromDate() {
+    public String getLeaveFromDate() {
         return leaveFromDate;
     }
 
-    public void setLeaveFromDate(LocalDate leaveFromDate) {
+    public void setLeaveFromDate(String leaveFromDate) {
         this.leaveFromDate = leaveFromDate;
     }
 

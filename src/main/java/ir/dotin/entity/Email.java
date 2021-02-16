@@ -2,37 +2,24 @@
 package ir.dotin.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity(name = "Email")
-@Table(name = "Email")
-public class Email {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "LONG", nullable = false, unique = true)
-    public long id;
+@Table(name = "t_Email")
+public class Email extends Common {
 
-    @Column(name = "context", columnDefinition = "VARCHAR(255)")
+
+    @Column(name = "c_context", columnDefinition = "VARCHAR(255)")
     private String context;
 
-    @Column(name = "filePath", columnDefinition = "VARCHAR(255)")
-    private String filePath;
-
     @ManyToMany()
-    @JoinTable(name = "EmployeeEmail",
-            joinColumns = {@JoinColumn(name = "receiveEmailId")},
-            inverseJoinColumns = {@JoinColumn(name = "receiverId")})
-    private Set<Employee> receiverEmployees = new HashSet<Employee>();
+    @JoinTable(name = "m_EmployeeEmail",
+            joinColumns = {@JoinColumn(name = "c_receiveEmailId")},
+            inverseJoinColumns = {@JoinColumn(name = "c_receiverId")})
+    private List<Employee> receiverEmployees;
+    @ManyToMany(mappedBy = "c_employeeSenderId")
+    private List<Email> senderEmail;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getContext() {
         return context;
@@ -42,19 +29,12 @@ public class Email {
         this.context = context;
     }
 
-    public String getFilePath() {
-        return filePath;
-    }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public Set<Employee> getReceiverEmployees() {
+    public List<Employee> getReceiverEmployees() {
         return receiverEmployees;
     }
 
-    public void setReceiverEmployees(Set<Employee> receiverEmployees) {
+    public void setReceiverEmployees(List<Employee> receiverEmployees) {
         this.receiverEmployees = receiverEmployees;
     }
 

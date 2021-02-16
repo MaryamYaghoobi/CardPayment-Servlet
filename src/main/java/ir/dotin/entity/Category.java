@@ -1,44 +1,33 @@
 package ir.dotin.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 
 @Entity(name = "Category")
-@Table(name = "Category")
-public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "LONG", nullable = false, unique = true)
-    public long id;
-    @Column(name = "instance", columnDefinition = "VARCHAR(255)")
-    private String instance;
-    @ManyToOne
-    @JoinColumn(name = "categoryElementList")
-    private Set<CategoryElement> categoryElementList = new HashSet<CategoryElement>();
+@Table(name = "t_Category")
+public class Category extends Common {
 
-    public Set<CategoryElement> getCategoryElementList() {
+    @Column(name = "c_name", columnDefinition = "VARCHAR(255)")
+    private String name;
+    @ManyToOne
+    @JoinColumn(name = "c_categoryElementList")
+    private List<CategoryElement> categoryElementList;
+
+    public List<CategoryElement> getCategoryElementList() {
         return categoryElementList;
     }
 
-    public void setCategoryElementList(Set<CategoryElement> categoryElementList) {
+    public void setCategoryElementList(List<CategoryElement> categoryElementList) {
         this.categoryElementList = categoryElementList;
     }
 
     public String getInstance() {
-        return instance;
+        return name;
     }
 
     public void setInstance(String instance) {
-        this.instance = instance;
-    }
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.name = name;
     }
 
     public Category() {
