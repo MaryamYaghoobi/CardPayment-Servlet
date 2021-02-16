@@ -20,7 +20,7 @@ public class Email {
     @Column(name = "filePath", columnDefinition = "VARCHAR(255)")
     private String filePath;
 
-    @OneToMany()
+    @ManyToMany()
     @JoinTable(name = "EmployeeEmail",
             joinColumns = {@JoinColumn(name = "receiveEmailId")},
             inverseJoinColumns = {@JoinColumn(name = "receiverId")})
