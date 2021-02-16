@@ -1,16 +1,17 @@
 package ir.dotin.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "CategoryElement")
 @Table(name = "CategoryElement")
 public class CategoryElement {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "LONG", nullable = false, unique = true)
+    public long id;
     @Column(name = "name", columnDefinition = "VARCHAR(255)")
     private String name;
 
@@ -72,6 +73,13 @@ public class CategoryElement {
 
     public void setCode(String code) {
         this.code = code;
+    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public CategoryElement() {

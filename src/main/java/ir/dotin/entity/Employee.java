@@ -43,7 +43,7 @@ public class Employee {
     @JoinColumn(name = "employeeStatus")
     private CategoryElement employeeStatus;
     @OneToMany(mappedBy = "employeeId")
-    private Set<Leave> leaves = new HashSet<Leave>();
+    private Set<Leaves> leaves = new HashSet<Leaves>();
     @ManyToMany(mappedBy = "employeeSenderId")
     private Set<Email> senderEmail = new HashSet<Email>();
 
@@ -136,11 +136,11 @@ public class Employee {
         this.employeeStatus = employeeStatus;
     }
 
-    public Set<Leave> getLeaves() {
+    public Set<Leaves> getLeaves() {
         return leaves;
     }
 
-    public void setLeaves(Set<Leave> leaves) {
+    public void setLeaves(Set<Leaves> leaves) {
         this.leaves = leaves;
     }
 

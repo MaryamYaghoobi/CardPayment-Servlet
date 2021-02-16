@@ -8,10 +8,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 
-@Entity(name = "Leave")
-@Table(name = "Leave")
+@Entity(name = "Leaves")
+@Table(name = "Leaves")
 @SelectBeforeUpdate
-public class Leave {
+public class Leaves {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "LONG", nullable = false, unique = true)

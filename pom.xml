@@ -56,6 +56,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
             </plugin>
+
         </plugins>
 
     </build>
@@ -97,6 +98,13 @@
             <artifactId>maven-deploy-plugin</artifactId>
             <version>2.7</version>
             <type>maven-plugin</type>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat</artifactId>
+            <version>8.0.48</version>
+            <type>pom</type>
         </dependency>
 
     </dependencies>

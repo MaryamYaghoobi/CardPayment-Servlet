@@ -8,7 +8,10 @@ import java.util.Set;
 @Entity(name = "Category")
 @Table(name = "Category")
 public class Category {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "LONG", nullable = false, unique = true)
+    public long id;
     @Column(name = "instance", columnDefinition = "VARCHAR(255)")
     private String instance;
     @ManyToOne
@@ -29,6 +32,13 @@ public class Category {
 
     public void setInstance(String instance) {
         this.instance = instance;
+    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Category() {
