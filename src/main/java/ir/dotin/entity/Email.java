@@ -12,13 +12,23 @@ public class Email extends Common {
     @Column(name = "c_context", columnDefinition = "VARCHAR(255)")
     private String context;
 
-    @ManyToMany()
-    @JoinTable(name = "m_EmployeeEmail",
+    @OneToMany ()
+    @JoinTable(name = "mm_EmployeeEmail",
             joinColumns = {@JoinColumn(name = "c_receiveEmailId")},
             inverseJoinColumns = {@JoinColumn(name = "c_receiverId")})
     private List<Employee> receiverEmployees;
-    @ManyToMany(mappedBy = "c_employeeSenderId")
-    private List<Email> senderEmail;
+
+    @ManyToOne()
+    @JoinColumn(columnDefinition = "c_employeeSenderId")
+    private List<Employee> senderEmail;
+
+    public List<Employee> getSenderEmail() {
+        return senderEmail;
+    }
+
+    public void setSenderEmail(List<Employee> senderEmail) {
+        this.senderEmail = senderEmail;
+    }
 
 
     public String getContext() {

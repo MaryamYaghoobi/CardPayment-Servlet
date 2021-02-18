@@ -1,7 +1,9 @@
 package ir.dotin.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity(name = "Category")
@@ -10,9 +12,10 @@ public class Category extends Common {
 
     @Column(name = "c_name", columnDefinition = "VARCHAR(255)")
     private String name;
-    @ManyToOne
+    @OneToMany()
     @JoinColumn(name = "c_categoryElementList")
     private List<CategoryElement> categoryElementList;
+
 
     public List<CategoryElement> getCategoryElementList() {
         return categoryElementList;

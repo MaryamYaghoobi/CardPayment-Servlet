@@ -37,6 +37,15 @@ public class Employee extends Common {
     private CategoryElement employeeStatus;
 
 
+    public CategoryElement getEmployeeStatus() {
+        return employeeStatus;
+    }
+
+    public void setEmployeeStatus(CategoryElement employeeStatus) {
+        this.employeeStatus = employeeStatus;
+    }
+
+
     public String getFirstName() {
         return firstName;
     }
