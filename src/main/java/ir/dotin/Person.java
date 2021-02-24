@@ -11,10 +11,10 @@ public class Person {
     @Id
     Long id;
 
-    @Column(name = "FIRST_NAME")
+    //    @Column(name = "FIRST_NAME")
     String firstName;
 
-    @Column(name = "LAST_NAME")
+    //    @Column(name = "LAST_NAME")
     String lastName;
     public Long getId() {
         return id;

@@ -24,6 +24,13 @@ public class Employee extends Common {
     private String username;
     @Column(name = "c_password", columnDefinition = "VARCHAR(255)")
     private String password;
+
+
+
+    @Column(name = "c_fatherName", columnDefinition = "VARCHAR(255)")
+    private String fatherName;
+    @Version
+    private long version;
     @ManyToOne()
     @JoinColumn(name = "c_manager")
     private Employee manager;
@@ -35,6 +42,25 @@ public class Employee extends Common {
     @ManyToOne()
     @JoinColumn(name = "c_employeeStatus")
     private CategoryElement employeeStatus;
+
+    public CategoryElement getGender() {
+        return gender;
+    }
+
+    public void setGender(CategoryElement gender) {
+        this.gender = gender;
+    }
+
+    @ManyToOne()
+    @JoinColumn(name = "c_gender")
+    private CategoryElement gender;
+    public Employee(String firstName, String lastName, String username) {
+        super();
+    }
+
+    public Employee() {
+
+    }
 
 
     public CategoryElement getEmployeeStatus() {
@@ -126,5 +152,18 @@ public class Employee extends Common {
         this.employeeStatus = employeeStatus;
     }
 
+    public long getVersion() {
+        return version;
+    }
 
+    public void setVersion(long version) {
+        this.version = version;
+    }
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
 }

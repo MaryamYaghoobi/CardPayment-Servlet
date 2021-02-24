@@ -1,6 +1,7 @@
 package ir.dotin.share;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -11,12 +12,13 @@ public class HibernateUtil {
     private static SessionFactory factory;
 
     static {
-        Metadata meta;
-        try (StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().
+        Metadata sessionFactory;
+        try (StandardServiceRegistry registry = new StandardServiceRegistryBuilder().
                 configure("META-INF/hibernate.cfg.xml").build()) {
-            meta = new MetadataSources(ssr).getMetadataBuilder().build();
+           sessionFactory = new MetadataSources(registry).getMetadataBuilder().build();
+          //  sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         }
-        factory = meta.getSessionFactoryBuilder().build();
+        factory = sessionFactory.getSessionFactoryBuilder().build();
     }
 
     public static SessionFactory getSessionFactory() throws HibernateException {

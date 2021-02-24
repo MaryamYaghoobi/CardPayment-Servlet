@@ -18,6 +18,12 @@
 
 
 <mapping class = "ir.dotin.Person"/>
+    <mapping class="ir.dotin.entity.Employee"/>
+    <mapping class="ir.dotin.entity.Leaves"/>
+    <mapping class="ir.dotin.entity.CategoryElement"/>
+    <mapping class="ir.dotin.entity.Category"/>
+    <mapping class="ir.dotin.entity.Email"/>
+    <mapping class="ir.dotin.entity.common"/>
 
 </session-factory>
 
