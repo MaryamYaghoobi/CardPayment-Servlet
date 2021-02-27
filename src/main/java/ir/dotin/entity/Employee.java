@@ -4,11 +4,14 @@ package ir.dotin.entity;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity(name = "Employee")
 @Table(name = "t_Employee")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @SelectBeforeUpdate
 public class Employee extends Common {
 
@@ -24,13 +27,10 @@ public class Employee extends Common {
     private String username;
     @Column(name = "c_password", columnDefinition = "VARCHAR(255)")
     private String password;
-
-
-
     @Column(name = "c_fatherName", columnDefinition = "VARCHAR(255)")
     private String fatherName;
     @Version
-    private long version;
+    private long c_version;
     @ManyToOne()
     @JoinColumn(name = "c_manager")
     private Employee manager;
@@ -42,26 +42,12 @@ public class Employee extends Common {
     @ManyToOne()
     @JoinColumn(name = "c_employeeStatus")
     private CategoryElement employeeStatus;
-
-    public CategoryElement getGender() {
-        return gender;
-    }
-
-    public void setGender(CategoryElement gender) {
-        this.gender = gender;
-    }
-
     @ManyToOne()
     @JoinColumn(name = "c_gender")
     private CategoryElement gender;
-    public Employee(String firstName, String lastName, String username) {
-        super();
-    }
-
-    public Employee() {
-
-    }
-
+    @OneToMany()
+    @JoinColumn(name = "c_employeeId")
+    private List<Leaves> leaveList;
 
     public CategoryElement getEmployeeStatus() {
         return employeeStatus;
@@ -152,18 +138,42 @@ public class Employee extends Common {
         this.employeeStatus = employeeStatus;
     }
 
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
     public String getFatherName() {
         return fatherName;
     }
 
     public void setFatherName(String fatherName) {
         this.fatherName = fatherName;
+    }
+
+    public CategoryElement getGender() {
+        return gender;
+    }
+
+    public void setGender(CategoryElement gender) {
+        this.gender = gender;
+    }
+
+    public Employee(String firstName, String lastName, String username) {
+        super();
+    }
+
+    public long getC_version() {
+        return c_version;
+    }
+
+    public void setC_version(long c_version) {
+        this.c_version = c_version;
+    }
+
+    public List<Leaves> getLeaveList() {
+        return leaveList;
+    }
+
+    public void setLeaveList(List<Leaves> leaveList) {
+        this.leaveList = leaveList;
+    }
+
+    public Employee() {
     }
 }

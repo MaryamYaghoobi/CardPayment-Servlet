@@ -23,7 +23,7 @@
     <mapping class="ir.dotin.entity.CategoryElement"/>
     <mapping class="ir.dotin.entity.Category"/>
     <mapping class="ir.dotin.entity.Email"/>
-    <mapping class="ir.dotin.entity.common"/>
+    <mapping class="ir.dotin.entity.Common"/>
 
 </session-factory>
 

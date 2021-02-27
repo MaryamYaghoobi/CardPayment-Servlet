@@ -2,6 +2,36 @@
 <html>
 <head>
     <style>
+	@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: bold;
+    src: url('../fonts/IRANSans-Bold-web.woff') format('woff');  /* All Major Browsers */
+}
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/IRANSans-Medium-web.woff') format('woff');  /* All Major Browsers */
+}
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/IRANSans-Light-web.woff') format('woff');  /* All Major Browsers */
+}
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 200;
+    src: url('../fonts/IRANSans-UltraLight-web.woff') format('woff');  /* All Major Browsers */
+}
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/IRANSans-web.woff') format('woff');  /* All Major Browsers */
+}
         html {
             width: 100%;
             height: 150%;
@@ -11,9 +41,8 @@
         }
 
         body {
-            background-image: -webkit-linear-gradient( 
-136deg
-, rgb(116,235,213) 0%, rgb(63,43,150) 100%);
+             background-image: radial-gradient(circle, #f0dcac, #f1dfb7, #f1e3c2, #f2e6ce, #f2ead9, #f2ebdc, #f1ebe0, #f1ece3, #f1eae0, #f0e8dc, #f0e6d9, #f0e4d6);
+
             height: 100%;
             background-position: center;
             background-repeat: no-repeat;

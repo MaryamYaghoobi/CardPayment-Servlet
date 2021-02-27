@@ -1,12 +1,12 @@
 package ir.dotin.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity(name = "CategoryElement")
 @Table(name = "t_CategoryElement")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 public class CategoryElement extends Common {
 
     @Column(name = "c_name", columnDefinition = "VARCHAR(255)")

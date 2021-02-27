@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ADAK-Shemroon
-  Date: 10/18/2020
-  Time: 3:54 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -19,34 +13,21 @@
             href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
             integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
              crossorigin="anonymous">
-	  <!--  <style>
-    html {
-            width: 100%;
-            height: 150%;
-            overflow: hidden;
-            overflow-y: scroll;
-
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            overflow-: auto;
-            font-family: 'Open Sans', sans-serif;
-			 background-image: url(images/body.jpg);
-            height: 100%;
-
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-            background-blend-mode: screen;
-        }
-		
-    </style>
-   -->
+	 
     <jsp:include page="employeeHeader.jsp"/>
 
 </head>
 <body>
+<jsp:include page="body.jsp"/>
+<c:if test="${requestScope['sendEmail']}">
+    <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
+        <div class="alert alert-info" id="info-alert" style="background-color: #F0DCAC;border: none;">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong><fmt:bundle basename="resource_fa">
+                <!--<fmt:message key="email successfully sent"/></fmt:bundle>-->پیام با موفقیت ارسال شد.
+            </strong>
+        </div>
+    </div>
+</c:if>
 </body>
 </html>

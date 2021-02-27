@@ -9,7 +9,7 @@
         </welcome-file-list>
     -->
     <welcome-file-list>
-        <welcome-file>employeeManagment.jsp</welcome-file>
+        <welcome-file>employeeManagement.jsp</welcome-file>
     </welcome-file-list>
 
     <servlet-mapping>

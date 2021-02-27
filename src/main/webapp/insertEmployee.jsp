@@ -25,9 +25,13 @@
             crossorigin="anonymous"
     >
     <title>افزودن کاربر</title>
+	<style>
+body {
+background-image: linear-gradient(to bottom, #f0dcac, #f1d89b, #f2d38a, #f2cf79, #f3ca67, #f5ca6b, #f6ca6f, #f8ca73, #f9d08c, #f8d6a5, #f5ddbe, #f0e4d6);}
+</style>
     <jsp:include page="managerHeader.jsp"/>
 </head>
-<body style="background-color: black" dir="rtl">
+<body dir="rtl">
 <jsp:include page="body.jsp"/>
 <c:if test="${sessionScope['invalidUsername']}">
 
@@ -43,9 +47,9 @@
 
 
 <div class="container" name="container"
-     style="background-color: deepskyblue; width: 700px; margin-top: 55px;border-radius: 5px;">
+     style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
     <form action="ManagerController" method="post" id="saveForm">
-        <input type="hidden" name="action" value="adduser">
+        <input type="hidden" name="action" value="addUser">
         <div class="form-row">
             <div class="form-group col-md-4" style="margin-top: 17px;">
                 <label><label style="color: #ff4626">*</label><fmt:bundle basename="resource_fa">
@@ -216,7 +220,7 @@
             </div>
 
             <div class=" col-md-4" style="margin-top: 17px;"><br><br><br><br>
-                <button type="submit" class="btn btn-primary"><fmt:bundle basename="resource_fa">
+                <button type="submit" class="btn btn-primary"style="background-color: #F4C34E;border: none;"><fmt:bundle basename="resource_fa">
                     <!--<fmt:message key="saveInfo"/>-->ثبت اطلاعات
                 </fmt:bundle></button>
             </div>

@@ -15,7 +15,8 @@ import java.util.List;
 public class MainApp {
     public static void main(String[] args) {
         SessionFactory sessionFactory;
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();

@@ -13,21 +13,21 @@
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
 <div class="container" name="container"
-     style="background-color: deepskyblue; width: 700px; margin-top: 55px;border-radius: 5px;">
+     style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
     <form action="EmployeeController" method="post" id="editForm">
         <input type="hidden" name="action" value="update">
         <input hidden type="hidden" name="id" value="${requestScope.Employee.id}">
         <div class="form-row">
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><fmt:bundle basename="resource_fa">
-                    <fmt:message key="username"/>
+                    <!--<fmt:message key="username"/>-->نام کاربری
                 </fmt:bundle></label>
                 <input type="text" readonly class="form-control" id="username" name="username"
                        value="<c:out value="${requestScope.Employee.username}"/>">
             </div>
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><fmt:bundle basename="resource_fa">
-                    <fmt:message key="password"/>
+                    <!--<fmt:message key="password"/>-->رمز عبور
                 </fmt:bundle></label>
                 <input type="text" readonly class="form-control" id="password" name="password"
                        value="<c:out value="${requestScope.Employee.password}"/>">
@@ -37,7 +37,7 @@
 
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><label style="color: #ff4626">*</label><fmt:bundle basename="resource_fa">
-                    <fmt:message key="firstName"/>
+                    <!--<fmt:message key="firstName"/>-->نام
                 </fmt:bundle>
                 </label>
                 <input type="text" class="form-control" id="firstName" name="firstName"
@@ -46,7 +46,7 @@
 
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><label style="color: #ff4626">*</label><fmt:bundle basename="resource_fa">
-                    <fmt:message key="lastName"/>
+                    <!--<fmt:message key="lastName"/>-->نام خانوادگی
                 </fmt:bundle></label>
                 <input type="text" name="lastName" class="form-control" id="lastName"
                        value="<c:out value='${requestScope.Employee.lastName}'/>">
@@ -55,7 +55,7 @@
         <div class="form-row">                                                                             
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><label style="color: #ff4626">*</label><fmt:bundle basename="resource_fa">
-                    <fmt:message key="email"/>
+                    <!--<fmt:message key="email"/>-->پست الکترونیک
                 </fmt:bundle></label>
                 <input type="email" class="form-control" id="email" name="email"
                        value="<c:out value='${requestScope.Employee.email}'/>">
@@ -64,7 +64,7 @@
         <div class="form-row">
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><fmt:bundle basename="resource_fa">
-                    <fmt:message key="manager"/>
+                    <!--<fmt:message key="manager"/>-->مدیر
                 </fmt:bundle></label>
                 <input type="text" readonly class="form-control" id="manager" name="manager"
                        value="<c:out value='${requestScope.Employee.manager.firstName} ${requestScope.Employee.manager.lastName}'/>"/>
@@ -72,7 +72,7 @@
 
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><fmt:bundle basename="resource_fa">
-                    <fmt:message key="status"/>
+                    <!--<fmt:message key="status"/>-->وضعیت
                 </fmt:bundle> : </label>
                 <input type="text" readonly class="form-control" id="employeeStatus" name="employeeStatus"
                        value="<c:out value='${requestScope.Employee.employeeStatus.name}'/> ">
@@ -81,8 +81,8 @@
         </div>
         <div class="form-row" dir="ltr">
             <div class=" col-md-3" style="margin-top: 17px;margin-bottom: 10px;">
-                <button type="submit" class="btn btn-primary" style="width:90px;"><fmt:bundle basename="resource_fa">
-                    <fmt:message key="edit"/>
+                <button type="submit" class="btn btn-primary" style="width:90px;background-color: #F4C34E;border: none;"><fmt:bundle basename="resource_fa">
+                    <!--<fmt:message key="edit"/>-->ویرایش
                 </fmt:bundle></button>
             </div>
         </div>

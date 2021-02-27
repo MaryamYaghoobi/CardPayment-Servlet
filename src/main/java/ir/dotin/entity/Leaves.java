@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Entity(name = "Leaves")
 @Table(name = "t_Leaves")
 @SelectBeforeUpdate
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 public class Leaves extends Common {
 
     @Column(name = "c_leaveToDate", columnDefinition = "VARCHAR(255)")
@@ -23,6 +25,10 @@ public class Leaves extends Common {
     @ManyToOne()
     @JoinColumn(name = "c_employeeId")
     private Employee employee;
+
+    public Leaves(String leaveFromDate, String leaveToDate, CategoryElement register) {
+        super();
+    }
 
 
     public String getLeaveToDate() {
@@ -64,6 +70,5 @@ public class Leaves extends Common {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-
 
 }

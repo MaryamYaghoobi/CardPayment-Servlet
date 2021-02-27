@@ -4,7 +4,11 @@ import ir.dotin.entity.CategoryElement;
 import ir.dotin.entity.Employee;
 import ir.dotin.share.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,48 +23,62 @@ public class ManagerDao {
 
     public List<Employee> getAllActiveEmployees() {
         List<Employee> employeeList = new ArrayList<>();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
             String getAllActiveEmployees = "from Employee  where employeeStatus.code =:code";
             Query query = session.createQuery(getAllActiveEmployees, Employee.class);
             query.setParameter("code", "active");
             employeeList = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         return employeeList;
     }
 
     public void addUser(Employee employee) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
             transaction = session.beginTransaction();
             session.save(employee);
             transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
+        if (transaction != null) {
+            transaction.rollback();
         }
+
+
     }
 
     public void updateUserDetails(Employee employee) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
             transaction = session.beginTransaction();
             session.update(employee);
             transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
+        if (transaction != null) {
+            transaction.rollback();
         }
     }
 
     public void inactive(long id) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
             transaction = session.beginTransaction();
             String getEmployeeId = " from Employee where id =: id";
             Query employeeQuery = session.createQuery(getEmployeeId);
@@ -73,18 +91,21 @@ public class ManagerDao {
             employee.setEmployeeStatus(categoryElement);
             session.update(employee);
             transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
+        if (transaction != null) {
+            transaction.rollback();
         }
     }
 
     public List<Employee> search(Employee employee) {
 
         List<Employee> employees = new ArrayList<>();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+//        session.beginTransaction();
+        try {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<Employee> Query = criteriaBuilder.createQuery(Employee.class);
             Root<Employee> emp = Query.from(Employee.class);
@@ -104,76 +125,104 @@ public class ManagerDao {
 
             org.hibernate.Query<Employee> query = session.createQuery(Query);
             employees = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } finally {
+            session.close();
         }
         return employees;
     }
 
     public Employee searchId(long id) {
         Employee employee = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
             String searchId = "from Employee  where id =: id";
             Query query = session.createQuery(searchId, Employee.class);
             query.setParameter("id", id);
             employee = (Employee) query.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return employee;
     }
 
     public List<String> searchAllUsername() {
         List<String> userUsername = new ArrayList<>();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
             String searchAllUsername = "select username from Employee";
             Query query = session.createQuery(searchAllUsername, Employee.class);
             userUsername = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return userUsername;
     }
     public Employee getManagerDetail(String firstName, String lastName) {
         Employee getManagerDetail = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
             String ManagerDetails = "from Employee where role.code =: manager and firstName =:firstName and lastName =: lastName";
             Query query = session.createQuery(ManagerDetails, Employee.class);
             query.setParameter("manager", "manager");
             query.setParameter("firstName", firstName);
             query.setParameter("lastName", lastName);
             getManagerDetail = (Employee) query.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return getManagerDetail;
     }
 
     public Employee searchUsername(String username) {
         Employee employeeList = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String searchUsername = "from Employee where username =: username";
-            Query query = session.createQuery(searchUsername, Employee.class);
-            query.setParameter("username", username);
-            employeeList = (Employee) query.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+       // session.beginTransaction();
+        Query query = session.createQuery("select e from Employee e where" +
+                " e.username =: username");
+        query.setParameter("username", username);
+        employeeList = (Employee) query.getSingleResult();
         return employeeList;
-    }
+}
+
     public List<Employee> allManager() {
         List<Employee> managerEmployeeList = new ArrayList<>();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
             String allManager = "from Employee  where role.code =: manager";
             Query query = session.createQuery(allManager, Employee.class);
             query.setParameter("manager", "manager");
             managerEmployeeList = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         return managerEmployeeList;
     }
+    public List<Employee> RegisteredLeaves(Employee manager) {
+        List<Employee> employeeList = new ArrayList<>();
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+            Query query = session.createQuery
+                    ("select distinct e from Employee e join fetch e.leaveList el " +
+                            "where el.leaveStatus.code =:registered  and e.manager =: manager ");
+            query.setParameter("manager", manager);
+            query.setParameter("register", "register");
+            employeeList = query.getResultList();
 
+        return employeeList;
+    }
 }
 
 

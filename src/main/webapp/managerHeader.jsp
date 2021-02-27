@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -11,52 +10,84 @@
             integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
             crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
     <meta charset="utf-8">
-    <style>
-        ul.nav a:hover {
-         color: white !important;
-         
-            background-blend-mode: screen;;
-            border-radius: 3px;
 
-        }
-    </style>
+<style>
 
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+   background-image: radial-gradient(circle, #f0dcac, #f1dfb7, #f1e3c2, #f2e6ce, #f2ead9, #f2ebdc, #f1ebe0, #f1ece3, #f1eae0, #f0e8dc, #f0e6d9, #f0e4d6);
+
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 16px;
+   font-weight: bold;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #EEAD18;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
 </head>
-<body dir="rtl">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ;background-color:#3e4061"
-     style="border-radius: 7px; margin-left: 10px;margin-right: 10px; margin-top: 12px;">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="nav navbar-nav mr-auto " style="left: 0px ;right: auto;">
-                <li class="nav-item">
-				 <li class="nav-item">
-                    <a class="nav-link" href="ManagerController?action=getAllActiveEmployees"><fmt:bundle basename="resource_fa">
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a class="nav-link" href="ManagerController?action=getAllActiveEmployees" ><fmt:bundle basename="resource_fa">
                         <!--<fmt:message key="EmployeeManagement"/>-->مدیریت کاربران
                     </fmt:bundle></a>
-                </li>
-				<li class="nav-item">
-                    <a class="nav-link" href="ManagerController?action=insertEmployee"><fmt:bundle basename="resource_fa">
+  <a class="nav-link" href="ManagerController?action=insertEmployee"><fmt:bundle basename="resource_fa">
                         <!--<fmt:message key="insertNewEmployee"/>-->افزودن کاربر جدید
                     </fmt:bundle></a>
-                </li>
-                    <a class="nav-link" href="#"><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="personalInfo"/>-->پروفایل شخصی
-                    </fmt:bundle><span class="sr-only">(current)</span></a>
-                </li>
-                
-               
-                </ul>
+ <a class="nav-link" href="ManagerController?action=RegisteredLeaves" ><fmt:bundle basename="resource_fa">
+                        <!--<fmt:message key="leaveEmployeeManagement"/>--> مدیریت مرخصی
+                    </fmt:bundle></a>
+ <a class="nav-link " href="ManagerController?action=logout" ><fmt:bundle basename="resource_fa">
+                    <!--<fmt:message key="logout"/>-->خروج
+                </fmt:bundle></a>
+</div>
 
-        </div>
-    </div>
-</nav>
+
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+
 <script
-        src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"
-        integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k"
-        crossorigin="anonymous"></script>
+        >
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+   
 </body>
-</html>
+</html> 
