@@ -6,6 +6,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <jsp:include page="managerHeader.jsp"/>
     <title>مدیریت کاربران</title>
 	<style>
@@ -111,24 +112,28 @@ button-family:fontfamilyIcon;}
                 <td><c:out value="${employee.role.name}"/></td>
                 <td><c:out value="${employee.employeeStatus.name}"/></td>
                 <td class="text-right" style="width: 21%;">
-                    <button type="button"
+                   <button type="button"
                             class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="update"
                             style="width: 82px;background-color: #F4C34E;border: none;" onclick="findEmployee(${employee.id})">
                             <span class="fa fa-edit"> <fmt:bundle basename="resource_fa">
-                        <fmt:message key="edit"/>
+                        <!--<fmt:message key="edit"/>-->
                     </fmt:bundle></span></button>
                     <button type="button"
                             class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"
                             style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;"
 							onclick="inactiveEmployee(${employee.id})">						
                            <span class="fa fa-trash" aria-hidden="true"> <fmt:bundle basename="resource_fa">
-                        <fmt:message key="delete"/>
+                        <!--<fmt:message key="delete"/>-->
                     </fmt:bundle> </span></button>
                 </td>
             </tr>
+			
      </c:forEach>
         </tbody>
     </table>
+	<a class="nav-link" href="ManagerController?action=insertEmployee" style="width: 50px;color: black;margin-right:1080px; font-size: 30px;">&#43;</a>
+	
 </div>
+ 
 </body>
 </html>
