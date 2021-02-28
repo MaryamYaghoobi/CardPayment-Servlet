@@ -7,10 +7,10 @@ import ir.dotin.repository.EmployeeDao;
 import java.util.List;
 
 public class EmployeeService {
-   /* public static Employee updateVersion(long employeeId, long lastVersion) {
+    public static Employee updateVersion(long employeeId, long lastVersion) {
         EmployeeDao employeeDao = new EmployeeDao();
         return employeeDao.updateVersion(employeeId,lastVersion);
-    }*/
+    }
 
     public static void updateLeaveState(Employee employee, Leaves leaveEmployee){
         EmployeeDao employeeDao = new EmployeeDao();

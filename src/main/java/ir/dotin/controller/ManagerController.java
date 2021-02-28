@@ -99,9 +99,9 @@ public class ManagerController extends HttpServlet {
     public void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         insertEmployee(request, response);
         Employee employee = new Employee();
-        /*long employeeId = 1;
-        long lastVersion = employee.getVersion();
-        EmployeeService.updateVersion(employeeId, lastVersion);*/
+        long employeeId = 1;
+        long lastVersion = employee.getC_version();
+        EmployeeService.updateVersion(employeeId, lastVersion);
         String firstName = request.getParameter("firstName");
         employee.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
@@ -135,25 +135,25 @@ public class ManagerController extends HttpServlet {
         employee.setManager(ManagerService.getManagerDetail(managerDetail[0], managerDetail[1]));
         ManagerService.addUser(employee);
         getAllActiveEmployees(request, response);
-       /* String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(employee.getVersion());
+        String strLastVersion = String.valueOf(lastVersion);
+        String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
-            System.out.println("Synchronization has occurred");}*/
+            System.out.println("Synchronization has occurred");}
     }
 
     public void insertEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Employee employee=new Employee();
         List<String> allManager = allManager();
         request.setAttribute("managerList", allManager);
-        /*long employeeId = 1;
-        long lastVersion = employee.getVersion();
-        EmployeeService.updateVersion(employeeId, lastVersion);*/
+        long employeeId = 1;
+        long lastVersion = employee.getC_version();
+        EmployeeService.updateVersion(employeeId, lastVersion);
         RequestDispatcher rs = request.getRequestDispatcher("insertEmployee.jsp");
         rs.forward(request, response);
-      /*  String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(employee.getVersion());
+        String strLastVersion = String.valueOf(lastVersion);
+        String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
-            System.out.println("Synchronization has occurred");}*/
+            System.out.println("Synchronization has occurred");}
     }
     public List<String> allManager() {
         List<String> managerInformation = new ArrayList<>();
@@ -184,27 +184,27 @@ public class ManagerController extends HttpServlet {
         long employeeId = Long.parseLong(id);
 
         Employee employee = ManagerService.searchId(employeeId);
-       /* long empId = 1;
-        long lastVersion = employee.getVersion();
-        EmployeeService.updateVersion(empId, lastVersion);*/
+        long empId = 1;
+        long lastVersion = employee.getC_version();
+        EmployeeService.updateVersion(empId, lastVersion);
         Employee manager = employee.getManager();
         request.setAttribute("Manager : ", manager.getFirstName() + "  " + manager.getLastName());
         request.setAttribute("Employee : ", employee);
         RequestDispatcher rs = request.getRequestDispatcher("editEmployee.jsp");
        rs.forward(request, response);
-       /* String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(employee.getVersion());
+       String strLastVersion = String.valueOf(lastVersion);
+        String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }*/
+        }
     }
 
     public void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long employeeId = Long.parseLong(request.getParameter("useId"));
         Employee employee = EmployeeService.getUserDetails(employeeId);
-       /* long empId = 1;
-        long lastVersion = employee.getVersion();
-        EmployeeService.updateVersion(empId, lastVersion);*/
+       long empId = 1;
+        long lastVersion = employee.getC_version();
+        EmployeeService.updateVersion(empId, lastVersion);
         String firstName = request.getParameter("firstName");
         employee.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
@@ -220,11 +220,11 @@ public class ManagerController extends HttpServlet {
         employee.setManager(ManagerService.getManagerDetail(managerDetail[0], managerDetail[1]));
         ManagerService.updateUserDetails(employee);
         getAllActiveEmployees(request, response);
-      /*  String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(employee.getVersion());
+      String strLastVersion = String.valueOf(lastVersion);
+        String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }*/
+        }
 
     }
 

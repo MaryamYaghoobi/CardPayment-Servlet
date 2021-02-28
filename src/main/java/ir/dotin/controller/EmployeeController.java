@@ -87,9 +87,9 @@ public class EmployeeController extends HttpServlet {
         //long id = (long) session.getAttribute("userId");
         long id = Long.parseLong(request.getParameter("id"));
         Employee register = EmployeeService.getUserDetails(id);
-       /* long employeeId = 1;
-        long lastVersion = register.getVersion();
-        EmployeeService.updateVersion(employeeId, lastVersion);*/
+        long employeeId = 1;
+        long lastVersion = register.getC_version();
+        EmployeeService.updateVersion(employeeId, lastVersion);
         String firstName = request.getParameter("firstName");
         register.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
@@ -110,12 +110,12 @@ public class EmployeeController extends HttpServlet {
         request.setAttribute("employee", register);
         RequestDispatcher rs = request.getRequestDispatcher("employeeInfo.jsp");
         rs.forward(request, response);
-      /*  String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(register.getVersion());
+        String strLastVersion = String.valueOf(lastVersion);
+        String strGetVersion = String.valueOf(register.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
 
-        }*/
+        }
     }
 
 
@@ -124,16 +124,15 @@ public class EmployeeController extends HttpServlet {
         Employee employee = EmployeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
         request.setAttribute("Employee", employee);
-       /* long employeeId = 1;
-        long lastVersion = employee.getVersion();
-        EmployeeService.updateVersion(employeeId, lastVersion);*/
+        long employeeId = 1;
+        long lastVersion = employee.getC_version();
+        EmployeeService.updateVersion(employeeId, lastVersion);
         RequestDispatcher rs = request.getRequestDispatcher("employeeInfo.jsp");
         rs.forward(request, response);
-        /*String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(employee.getVersion());
+        String strLastVersion = String.valueOf(lastVersion);
+        String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }*/
-
+        }
     }
 }

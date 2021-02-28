@@ -17,7 +17,7 @@
     <property name="c3p0.max_size">20</property>
 
 
-<mapping class = "ir.dotin.Person"/>
+
     <mapping class="ir.dotin.entity.Employee"/>
     <mapping class="ir.dotin.entity.Leaves"/>
     <mapping class="ir.dotin.entity.CategoryElement"/>

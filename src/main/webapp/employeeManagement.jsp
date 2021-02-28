@@ -1,4 +1,10 @@
-
+<%--
+  Created by IntelliJ IDEA.
+  User: HUZY_KAMZ
+  Date: 9/8/2016
+  Time: 5:31 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
@@ -8,17 +14,10 @@
     <meta charset="utf-8">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <jsp:include page="managerHeader.jsp"/>
-    <title>مدیریت کاربران</title>
-	<style>
-body {
- background-image: radial-gradient(circle, #f0dcac, #f1dfb7, #f1e3c2, #f2e6ce, #f2ead9, #f2ebdc, #f1ebe0, #f1ece3, #f1eae0, #f0e8dc, #f0e6d9, #f0e4d6);
-
-button-family:fontfamilyIcon;}
-</style>
-	
+    <title>مدیریت کاربران</title>	
 </head>
 <body dir="rtl">
-<!--<jsp:include page="body.jsp"/>-->
+<jsp:include page="body.jsp"/>
 <script>
     function inactiveEmployee(employeeId) {
         if (confirm('<fmt:bundle basename="resource_fa"><fmt:message key="inactive employee"/></fmt:bundle>')) {

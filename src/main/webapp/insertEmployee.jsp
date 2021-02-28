@@ -25,10 +25,7 @@
             crossorigin="anonymous"
     >
     <title>افزودن کاربر</title>
-	<style>
-body {
-background-image: linear-gradient(to bottom, #f0dcac, #f1d89b, #f2d38a, #f2cf79, #f3ca67, #f5ca6b, #f6ca6f, #f8ca73, #f9d08c, #f8d6a5, #f5ddbe, #f0e4d6);}
-</style>
+
     <jsp:include page="managerHeader.jsp"/>
 </head>
 <body dir="rtl">

@@ -158,21 +158,13 @@ public class Employee extends Common {
         super();
     }
 
-    public long getC_version() {
-        return c_version;
-    }
+    public long getC_version() {  return c_version; }
 
-    public void setC_version(long c_version) {
-        this.c_version = c_version;
-    }
+    public void setC_version(long c_version) { this.c_version = c_version; }
 
-    public List<Leaves> getLeaveList() {
-        return leaveList;
-    }
+    public List<Leaves> getLeaveList() { return leaveList; }
 
-    public void setLeaveList(List<Leaves> leaveList) {
-        this.leaveList = leaveList;
-    }
+    public void setLeaveList(List<Leaves> leaveList) {  this.leaveList = leaveList; }
 
     public Employee() {
     }

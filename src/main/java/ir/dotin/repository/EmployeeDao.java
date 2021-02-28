@@ -24,7 +24,8 @@ public class EmployeeDao {
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-            Query query = session.createQuery("update employee set c_version = c_version+1 where employee.id =:employeeId and " +
+            Query query = session.createQuery("update employee set " +
+                    "c_version = c_version+1 where employee.id =:employeeId and " +
                     "c_version =:lastVersion  ", Employee.class);
             query.setParameter("employeeId", employeeId);
             query.setParameter("lastVersion", lastVersion);
