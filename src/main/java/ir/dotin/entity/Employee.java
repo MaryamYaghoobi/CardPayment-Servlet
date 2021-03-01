@@ -4,6 +4,8 @@ package ir.dotin.entity;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -179,4 +181,49 @@ public class Employee extends Common {
 
     public Employee() {
     }
+    public Employee(long id, String firstName, String lastName, String fatherName, String email) {
+        this.id =id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fatherName = fatherName;
+        this.email = email;
+
+
+    }
+
+    public Employee(String firstName, String lastName, String fatherName, String email, String dateOfBirth, CategoryElement gender, CategoryElement role, CategoryElement employeeStatus, String username, String password, Employee manager) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fatherName = fatherName;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.role = role;
+        this.employeeStatus = employeeStatus;
+        this.username = username;
+        this.password = password;
+        this.manager = manager;
+
+    }
+
+
+    public Employee(String firstName, String lastName, String username, LocalDate creationDataTime) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+
+    }
+
+    public Employee(int id,String firstName, String lastName,String email,String fatherName,LocalDate lastModifyDataTime,CategoryElement employeeStatus,Employee manager){
+        this.id=id;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.email=email;
+        this.fatherName=fatherName;
+        this.employeeStatus = employeeStatus;
+        this.manager = manager;
+    }
+
+
+
 }
