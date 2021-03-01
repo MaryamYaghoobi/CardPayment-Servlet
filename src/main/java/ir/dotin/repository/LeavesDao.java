@@ -65,8 +65,8 @@ public class LeavesDao {
         session.beginTransaction();
         transaction = session.beginTransaction();
         Query categoryElementQuery = session.createQuery
-                (" from CategoryElement  where code =: code", CategoryElement.class);
-        categoryElementQuery.setParameter("code", "reject");
+                (" from CategoryElement  where name =:name", CategoryElement.class);
+        categoryElementQuery.setParameter("name", "reject");
         CategoryElement reject = (CategoryElement) categoryElementQuery.getSingleResult();
         Query query = session.createQuery
                 ("update Leaves set leaveStatus =:reject , " +

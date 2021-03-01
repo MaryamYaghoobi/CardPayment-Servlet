@@ -10,12 +10,11 @@ public class Validation {
         ManagerDao managerDao = new ManagerDao();
         List<String> allUsername = managerDao.searchAllUsername();
         for (String username : allUsername) {
-            if (usernameEntered.equals(username)) {
+            if (usernameEntered.equals(username)) ;
               /*  System.out.println("Username Exists");
             } else
                 System.out.println("Username Not Exists");*/
-            }
         }
-        return false;
+        return true;
     }
 }

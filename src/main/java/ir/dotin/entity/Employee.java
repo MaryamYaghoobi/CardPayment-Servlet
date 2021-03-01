@@ -49,6 +49,17 @@ public class Employee extends Common {
     @JoinColumn(name = "c_employeeId")
     private List<Leaves> leaveList;
 
+    public List<Email> getSentEmails() {
+        return sentEmails;
+    }
+
+    public void setSentEmails(List<Email> sentEmails) {
+        this.sentEmails = sentEmails;
+    }
+
+    @OneToMany()
+    @JoinColumn(name = "c_emailSenderId")
+    private List<Email> sentEmails ;
     public CategoryElement getEmployeeStatus() {
         return employeeStatus;
     }

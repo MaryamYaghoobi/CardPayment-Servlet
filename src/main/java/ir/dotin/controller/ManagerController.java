@@ -16,10 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 @WebServlet("/ManagerController")
 public class ManagerController extends HttpServlet {
@@ -85,8 +83,7 @@ public class ManagerController extends HttpServlet {
 
     public void RegisteredLeaves(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /*Employee manager = ManagerService.
-                searchUsername((String) request.getSession().getAttribute("username"));*/
+
         Employee manager = ManagerService.
                 searchUsername((String) request.getSession().getAttribute("username"));
         List<Employee> RegisteredLeaves = ManagerService.RegisteredLeaves((manager));
@@ -112,7 +109,7 @@ public class ManagerController extends HttpServlet {
         employee.setEmail(email);
         String fatherName = request.getParameter("fatherName");
         employee.setFatherName(fatherName);
-        //  if (!email.isEmpty() && matcher.matches() && !(email == null))
+
         String userName = request.getParameter("username");
         Validation usernameValidation = new Validation();
         if (usernameValidation.checkUsername(request.getParameter("username"))) {
@@ -138,11 +135,13 @@ public class ManagerController extends HttpServlet {
         String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
-            System.out.println("Synchronization has occurred");}
+            System.out.println("Synchronization has occurred");
+        }
     }
 
+
     public void insertEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Employee employee=new Employee();
+        Employee employee = new Employee();
         List<String> allManager = allManager();
         request.setAttribute("managerList", allManager);
         long employeeId = 1;
@@ -153,8 +152,10 @@ public class ManagerController extends HttpServlet {
         String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
-            System.out.println("Synchronization has occurred");}
+            System.out.println("Synchronization has occurred");
+        }
     }
+
     public List<String> allManager() {
         List<String> managerInformation = new ArrayList<>();
         List<Employee> allManager = ManagerService.allManager();
@@ -164,6 +165,7 @@ public class ManagerController extends HttpServlet {
         }
         return managerInformation;
     }
+
     public void getAllActiveEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("AllActiveEmployees", ManagerService.getAllActiveEmployees());
         RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
@@ -191,8 +193,8 @@ public class ManagerController extends HttpServlet {
         request.setAttribute("Manager : ", manager.getFirstName() + "  " + manager.getLastName());
         request.setAttribute("Employee : ", employee);
         RequestDispatcher rs = request.getRequestDispatcher("editEmployee.jsp");
-       rs.forward(request, response);
-       String strLastVersion = String.valueOf(lastVersion);
+        rs.forward(request, response);
+        String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
@@ -202,7 +204,7 @@ public class ManagerController extends HttpServlet {
     public void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long employeeId = Long.parseLong(request.getParameter("useId"));
         Employee employee = EmployeeService.getUserDetails(employeeId);
-       long empId = 1;
+        long empId = 1;
         long lastVersion = employee.getC_version();
         EmployeeService.updateVersion(empId, lastVersion);
         String firstName = request.getParameter("firstName");
@@ -220,7 +222,7 @@ public class ManagerController extends HttpServlet {
         employee.setManager(ManagerService.getManagerDetail(managerDetail[0], managerDetail[1]));
         ManagerService.updateUserDetails(employee);
         getAllActiveEmployees(request, response);
-      String strLastVersion = String.valueOf(lastVersion);
+        String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");

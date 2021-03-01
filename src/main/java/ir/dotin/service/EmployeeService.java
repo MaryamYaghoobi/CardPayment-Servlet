@@ -1,5 +1,6 @@
 package ir.dotin.service;
 
+import ir.dotin.entity.Email;
 import ir.dotin.entity.Employee;
 import ir.dotin.entity.Leaves;
 import ir.dotin.repository.EmployeeDao;
@@ -30,7 +31,7 @@ public class EmployeeService {
         return employeeDao.searchUsername(username);
     }
 
-    public List<Employee> allEmployee() {
+    public static List<Employee> allEmployee() {
         EmployeeDao employeeDao = new EmployeeDao();
         return employeeDao.allEmployee();
     }

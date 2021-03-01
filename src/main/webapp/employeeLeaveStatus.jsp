@@ -1,4 +1,10 @@
-
+<%--
+  Created by IntelliJ IDEA.
+  User: M.yaghoobi
+  Date: 28/2/2021
+  Time: 3:33 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -21,10 +27,10 @@
 <c:when test="${empty requestScope.leaveEmployeeList}">
     <div style="width: 400px;border-radius: 5px; margin: 10px auto;text-align: center;">
         <div class="alert alert-info" id="info-alert" style="background-color: #F0DCAC;border: none;">
-            <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="no leave request"/>-->درخواست مرخصی وجود ندارد.
-            </fmt:bundle>
+            <button type="button" class="close" data-dismiss="alert"></button>
+            <strong>
+               درخواست مرخصی وجود ندارد.
+           
             </strong>
         </div>
     </div>
@@ -35,25 +41,25 @@
         <thead class="thead-light ">
         <tr style="border-radius: 10px;">
           
-            <th class="text-center" scope="col"><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="leaveFromDate"/>--> مرخصی از تاریخ
-            </fmt:bundle></th>
-            <th class="text-center" scope="col"><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="leaveToDate"/>--> مرخصی تا تاریخ
-            </fmt:bundle></th>
-            <th class="text-center" scope="col"><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="leave status"/>--> وضعیت مرخصی
-            </fmt:bundle></th>
+            <th class="text-center" scope="col">
+                مرخصی از تاریخ
+            </th>
+            <th class="text-center" scope="col">
+                 مرخصی تا تاریخ
+            </th>
+            <th class="text-center" scope="col">
+                وضعیت مرخصی
+           </th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${requestScope.leaveEmployeeList}" var="leaveEmployee">
             <tr>
-                <td hidden><c:out value="${leaveEmployee.id}"/></td>
-                <td><c:out value="${leaveEmployee.creationDataTime}"/></td>
-                <td><c:out value="${leaveEmployee.leaveFromDate}"/></td>
-                <td><c:out value="${leaveEmployee.leaveToDate}"/></td>
-                <td><c:out value="${leaveEmployee.searchLeave.name}"/></td>
+                <td hidden><c:out value="${leaveEmployee.id}"/></td>               
+                <td><c:out value="${leaves.leaveFromDate}"/></td>
+                <td><c:out value="${leaves.leaveToDate}"/></td>
+				<td><c:out value="${leaves.reason}"/></td>
+                <td><c:out value="${leaves.searchLeave.name}"/></td>
             </tr>
         </c:forEach>
         </tbody>

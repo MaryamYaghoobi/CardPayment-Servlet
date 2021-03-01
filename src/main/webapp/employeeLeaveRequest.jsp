@@ -1,4 +1,10 @@
-
+<%--
+  Created by IntelliJ IDEA.
+  User: M.yaghoobi
+  Date: 28/2/2021
+  Time: 3:33 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -40,8 +46,8 @@
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-danger" id="danger-alert">
             <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="leaveFromDate occurs after leaveToDate"/></fmt:bundle>-->تاریخ شروع بعد از تاریخ پایان است.
+            <strong>
+                تاریخ شروع بعد از تاریخ پایان است.
             </strong>
         </div>
     </div>
@@ -50,8 +56,7 @@
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-success" id="success-alert">
             <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong><!--<fmt:bundle basename="resource_fa">-->
-                <!--<fmt:message key="register request successfully"/></fmt:bundle>-->درخواست با موفقیت ثبت شد.
+            <strong>درخواست با موفقیت ثبت شد.
             </strong>
         </div>
     </div>
@@ -66,13 +71,13 @@
         <div class="form-row">
 		
             <div class="form-group col-md-6" style="margin-top: 17px;">
-                <label><label style="color: #ff4626">*</label><fmt:bundle basename="resource_fa">
-                    <!--<fmt:message key="leaveFromDate"/>-->از تاریخ</fmt:bundle></label>
+                <label><label style="color: #ff4626">*</label>
+                    از تاریخ</label>
                 <input type="date" class="form-control" id="leaveFromDate" name="leaveFromDate">
             </div>
             <div class="form-group col-md-6" style="margin-top: 17px;">
-                <label><label style="color: #ff4626">*</label><fmt:bundle basename="resource_fa">
-                    <!--<fmt:message key="leaveToDate"/>-->تا تاریخ</fmt:bundle></label>
+                <label><label style="color: #ff4626">*</label>
+                    تا تاریخ</label>
                 <input type="date" class="form-control" id="leaveToDate" name="leaveToDate">
             </div>
         </div>
@@ -83,9 +88,9 @@
             </div>
         <div class="form-row" dir="rtl">
             <div class="col-md-3" style="margin-top: 17px;margin-bottom: 10px;">
-                <button type="submit" class="btn btn-primary" style="background-color: #F4C34E;border: none;"><fmt:bundle basename="resource_fa">
-                    <!--<fmt:message key="saveLeave"/>-->ذخیره مرخصی
-                </fmt:bundle></button>
+                <button type="submit" class="btn btn-primary" style="background-color: #F4C34E;border: none;">
+                    ذخیره مرخصی
+                </button>
             </div>
         </div>
     </form>

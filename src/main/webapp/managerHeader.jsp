@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: M.yaghoobi
+  Date: 28/2/2021
+  Time: 3:33 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -60,18 +67,18 @@
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a class="nav-link" href="ManagerController?action=getAllActiveEmployees" ><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="EmployeeManagement"/>-->مدیریت کاربران
-                    </fmt:bundle></a>
-  <a class="nav-link" href="ManagerController?action=insertEmployee"><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="insertNewEmployee"/>-->افزودن کاربر جدید
-                    </fmt:bundle></a>
- <a class="nav-link" href="ManagerController?action=RegisteredLeaves" ><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="leaveEmployeeManagement"/>--> مدیریت مرخصی
-                    </fmt:bundle></a>
- <a class="nav-link " href="ManagerController?action=logout" ><fmt:bundle basename="resource_fa">
-                    <!--<fmt:message key="logout"/>-->خروج
-                </fmt:bundle></a>
+  <a class="nav-link" href="ManagerController?action=getAllActiveEmployees" >
+                        مدیریت کاربران
+                    </a>
+  <a class="nav-link" href="ManagerController?action=insertEmployee">
+                        افزودن کاربر جدید
+                    </a>
+ <a class="nav-link" href="ManagerController?action=RegisteredLeaves" >
+                         مدیریت مرخصی
+                    </a>
+ <a class="nav-link " href="ManagerController?action=logout" >
+                   خروج
+                </a>
 </div>
 
 

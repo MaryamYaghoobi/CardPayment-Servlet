@@ -60,24 +60,24 @@
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a class="nav-link" href="EmployeeController?action=editEmployee"><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="personalInfo"/>-->پروفایل شخصی
-                    </fmt:bundle><span class="sr-only">(current)</span></a>
-  <a class="nav-link" href="employeeLeaveRequest.jsp""><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="leave request"/>-->درخواست مرخصی
-                    </fmt:bundle></a>
-  <a class="nav-link" href="EmployeeController?action=searchLeave"><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="leave status"/>-->وضعیت مرخصی
-                    </fmt:bundle></a>
-					 <a class="nav-link" href="EmployeeController?action=sendEmail"><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="send email"/>-->ارسال پیام
-                    </fmt:bundle></a>
-					<a class="nav-link" href="EmployeeController?action=emailsList"><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="emails list"/>-->پیام ها
-                    </fmt:bundle></a>
- <a class="nav-link " href="ManagerController?action=logout" ><fmt:bundle basename="resource_fa">
-                    <!--<fmt:message key="logout"/>-->خروج
-                </fmt:bundle></a>
+  <a class="nav-link" href="EmployeeController?action=editEmployee">
+                        پروفایل شخصی
+                    <span class="sr-only">(current)</span></a>
+  <a class="nav-link" href="employeeLeaveRequest.jsp"">
+                        درخواست مرخصی
+                    </a>
+  <a class="nav-link" href="EmployeeController?action=searchLeave">
+                       وضعیت مرخصی
+                    </a>
+					 <a class="nav-link" href="EmployeeController?action=sendEmail">
+                       ارسال پیام
+                    </a>
+					<a class="nav-link" href="EmployeeController?action=emailsList">
+                        پیام ها
+                    </a>
+ <a class="nav-link " href="ManagerController?action=logout" >
+                    خروج
+                </a>
 </div>
 
 

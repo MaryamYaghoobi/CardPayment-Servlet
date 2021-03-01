@@ -41,6 +41,7 @@ public class EmployeeController extends HttpServlet {
             case "searchLeave":
                 searchLeave(req, resp);
                 break;
+
         }
     }
 
@@ -82,9 +83,6 @@ public class EmployeeController extends HttpServlet {
     }
 
     protected void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     /*   HttpSession session = request.getSession();
-        if (session.getAttribute("userId") != null) {*/
-        //long id = (long) session.getAttribute("userId");
         long id = Long.parseLong(request.getParameter("id"));
         Employee register = EmployeeService.getUserDetails(id);
         long employeeId = 1;
@@ -95,14 +93,14 @@ public class EmployeeController extends HttpServlet {
         String lastName = request.getParameter("lastName");
         register.setFirstName(lastName);
         String email = request.getParameter("email");
-
+        register.setEmail(email);
         register.setFatherName(request.getParameter("fatherName"));
               /*  Pattern pattern = Pattern.compile("\\b[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b");
                 Matcher matcher = pattern.matcher(email);*/
-        register.setEmail(email);
+
         // if (!email.isEmpty() && matcher.matches() && !(email == null)) {
         EmployeeService.updateUserDetails(register);
-                   /* RequestDispatcher rs = request.getRequestDispatcher("employeeDashboard.jsp");
+                   /* RequestDispatcher rs = request.getRequestDispatcher("employeeInfo.jsp");
                     rs.forward(request, response);*/
         //    } else {
         //  request.setAttribute("updateError", "Invalid Details");
@@ -135,4 +133,5 @@ public class EmployeeController extends HttpServlet {
             System.out.println("Synchronization has occurred");
         }
     }
+
 }

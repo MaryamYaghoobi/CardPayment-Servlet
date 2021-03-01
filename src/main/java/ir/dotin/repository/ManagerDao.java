@@ -29,9 +29,9 @@ public class ManagerDao {
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-            String getAllActiveEmployees = "from Employee  where employeeStatus.code =:code";
+            String getAllActiveEmployees = " from Employee  where c_employeeStatus =4";
             Query query = session.createQuery(getAllActiveEmployees, Employee.class);
-            query.setParameter("code", "active");
+
             employeeList = query.getResultList();
 
         return employeeList;
@@ -80,13 +80,13 @@ public class ManagerDao {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
             transaction = session.beginTransaction();
-            String getEmployeeId = " from Employee where id =: id";
+            String getEmployeeId = " from Employee where id =:id";
             Query employeeQuery = session.createQuery(getEmployeeId);
             employeeQuery.setParameter("id", id);
             Employee employee = (Employee) employeeQuery.getSingleResult();
-            String getInactive = "from CategoryElement where code =: code";
+            String getInactive = "from CategoryElement where name =:name";
             Query categoryElementQuery = session.createQuery(getInactive);
-            categoryElementQuery.setParameter("code", "inactive");
+            categoryElementQuery.setParameter("name", "inactive");
             CategoryElement categoryElement = (CategoryElement) categoryElementQuery.getSingleResult();
             employee.setEmployeeStatus(categoryElement);
             session.update(employee);
@@ -139,7 +139,7 @@ public class ManagerDao {
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-            String searchId = "from Employee  where id =: id";
+            String searchId = "from Employee  where id =:id";
             Query query = session.createQuery(searchId, Employee.class);
             query.setParameter("id", id);
             employee = (Employee) query.getSingleResult();
@@ -167,9 +167,9 @@ public class ManagerDao {
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-            String ManagerDetails = "from Employee where role.code =: manager and firstName =:firstName and lastName =: lastName";
+            String ManagerDetails = "from Employee where c_manager =1 and firstName =:firstName and lastName =: lastName";
             Query query = session.createQuery(ManagerDetails, Employee.class);
-            query.setParameter("manager", "manager");
+
             query.setParameter("firstName", firstName);
             query.setParameter("lastName", lastName);
             getManagerDetail = (Employee) query.getSingleResult();
@@ -184,8 +184,8 @@ public class ManagerDao {
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
        // session.beginTransaction();
-        Query query = session.createQuery("select e from Employee e where" +
-                " e.username =: username");
+        Query query = session.createQuery("from Employee  where" +
+                " Employee.username =:username");
         query.setParameter("username", username);
         employeeList = (Employee) query.getSingleResult();
         return employeeList;
@@ -199,9 +199,9 @@ public class ManagerDao {
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-            String allManager = "from Employee  where role.code =: manager";
+            String allManager = "from Employee  where c_manager =1";
             Query query = session.createQuery(allManager, Employee.class);
-            query.setParameter("manager", "manager");
+           // query.setParameter("manager", "manager");
             managerEmployeeList = query.getResultList();
 
         return managerEmployeeList;
@@ -215,9 +215,9 @@ public class ManagerDao {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
             Query query = session.createQuery
-                    ("select distinct e from Employee e join fetch e.leaveList el " +
-                            "where el.leaveStatus.code =:registered  and e.manager =: manager ");
-            query.setParameter("manager", manager);
+                    ("select distinct emp from Employee emp join fetch emp.leaveList  " +
+                            "where emp.leaveList.leaveStatus.code =:register  and c_manager =1 ");
+
             query.setParameter("register", "register");
             employeeList = query.getResultList();
 

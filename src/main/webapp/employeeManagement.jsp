@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: HUZY_KAMZ
-  Date: 9/8/2016
-  Time: 5:31 PM
+  User: M.yaghoobi
+  Date: 28/2/2021
+  Time: 3:33 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -20,7 +20,7 @@
 <jsp:include page="body.jsp"/>
 <script>
     function inactiveEmployee(employeeId) {
-        if (confirm('<fmt:bundle basename="resource_fa"><fmt:message key="inactive employee"/></fmt:bundle>')) {
+        if (confirm('کاربر حذف شود؟')) {
             window.location = 'ManagerController?action=inactive&employeeId=' + employeeId;
         }
     }
@@ -36,42 +36,34 @@
             <div class="form-row">
                 <input hidden type="hidden" name="action" value="search">
                 <div class="form-group col-md-3">
-                    <label for="firstName" style="font-weight: 600;"><fmt:bundle basename="resource_fa">
-                         <!--<fmt:message key="firstName"/>-->نام
-                    </fmt:bundle></label>
+                    <label for="firstName" style="font-weight: 600;">
+                        نام
+                    </label>
                     <input type="text" name="firstName" class="form-control" id="firstName"
                            value="${requestScope.firstName}"
-                           <!--placeholder='<fmt:bundle basename="resource_fa">-->
-                       <fmt:message key="firstName"/>
-                    </fmt:bundle>'>
+                          placeholder=''>                                          
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="lastName" style="font-weight: 600;"><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="lastName"/>-->نام خانوادگی
-                    </fmt:bundle></label>
+                    <label for="lastName" style="font-weight: 600;">
+                       نام خانوادگی
+                   </label>
                     <input type="text" name="lastName" class="form-control" id="lastName"
                            value="${requestScope.lastName}"
-                           <!--placeholder='<fmt:bundle basename="resource_fa">-->
-                        <fmt:message key="lastName"/>
-                    </fmt:bundle>'>
+                           placeholder=''>
                 </div>
 
-
                 <div class="form-group col-md-3">
-                    <label for="username" style="font-weight: 600;"><fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="username"/>-->نام کاربری
-                    </fmt:bundle></label>
+                    <label for="username" style="font-weight: 600;">
+                       نام کاربری
+                    </label>
                     <input type="text" name="username" class="form-control" id="username"
                            value="${requestScope.username}"
-                           <!--placeholder='<fmt:bundle basename="resource_fa">-->
-                       <fmt:message key="lastName"/>
-                    </fmt:bundle>'>
+                           placeholder=''>                                    
                 </div>
                 <button type="submit" class="btn btn-lg btn-block btn btn btn-info " 
 				style="margin-top: 31px;width:260px; height: 38px;background-color: #F4C34E;border: none;"> <span
-                        class="fa fa-search"><fmt:bundle basename="resource_fa">
-                    <!--<fmt:message key="search"/>-->
-                </fmt:bundle></span></button>
+                        class="fa fa-search">                  
+                </span></button>
             </div>
             
         </div>
@@ -81,24 +73,12 @@
     <table class="table table-bordered table-hover table-responsive-lg;">
         <thead class="thead-light " style="background-color: #F4C34E;">
         <tr style="border-radius: 10px;">
-            <th class="text-center" scope="col"><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="firstName"/>-->نام
-            </fmt:bundle></th>
-            <th class="text-center" scope="col"><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="lastName"/>-->نام خانوادگی
-            </fmt:bundle></th>
-            <th class="text-center" scope="col"><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="manager"/>-->مدیر
-            </fmt:bundle></th>
-            <th class="text-center" scope="col"><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="role"/>-->نقش
-            </fmt:bundle></th>
-            <th class="text-center" scope="col"><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="status"/>-->وضعیت
-            </fmt:bundle></th>
-            <th class="text-center" scope="col"><fmt:bundle basename="resource_fa">
-                <!--<fmt:message key="action"/>-->عملیات
-            </fmt:bundle></th>
+            <th class="text-center" scope="col">نام</th>                        
+            <th class="text-center" scope="col">نام خانوادگی</th>            
+            <th class="text-center" scope="col">مدیر</th>    
+            <th class="text-center" scope="col"> نقش</th>
+            <th class="text-center" scope="col">وضعیت</th>
+            <th class="text-center" scope="col">عملیات</th>                           
         </tr>
         </thead>
         <tbody>
@@ -114,16 +94,12 @@
                    <button type="button"
                             class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="update"
                             style="width: 82px;background-color: #F4C34E;border: none;" onclick="findEmployee(${employee.id})">
-                            <span class="fa fa-edit"> <fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="edit"/>-->
-                    </fmt:bundle></span></button>
+                            <span class="fa fa-edit"></span></button>                      
                     <button type="button"
                             class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"
                             style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;"
 							onclick="inactiveEmployee(${employee.id})">						
-                           <span class="fa fa-trash" aria-hidden="true"> <fmt:bundle basename="resource_fa">
-                        <!--<fmt:message key="delete"/>-->
-                    </fmt:bundle> </span></button>
+                           <span class="fa fa-trash" aria-hidden="true"> </span></button>                        
                 </td>
             </tr>
 			
