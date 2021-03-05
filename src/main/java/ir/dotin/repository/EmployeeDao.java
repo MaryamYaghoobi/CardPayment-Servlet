@@ -1,7 +1,9 @@
 package ir.dotin.repository;
 
+import ir.dotin.entity.Email;
 import ir.dotin.entity.Employee;
 import ir.dotin.entity.Leaves;
+import org.hibernate.MultiIdentifierLoadAccess;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,20 +17,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDao {
-    public Employee updateVersion(long employeeId, long lastVersion) {
+    public Employee updateVersion(long Id, long lastVersion) {
         SessionFactory sessionFactory;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
                 ("META-INF/hibernate.cfg.xml").build();
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query query = session.createQuery("update employee set " +
-                "c_version = c_version+1 where employee.id =:employeeId and " +
-                "c_version =:lastVersion  ", Employee.class);
-        query.setParameter("employeeId", employeeId);
-        query.setParameter("c_version", lastVersion);
-        query.setLockMode(LockModeType.OPTIMISTIC);
-        Employee version = (Employee) query.getResultList();
+        Query querySelect = session.createQuery("select e from Employee e where e.id =:Id");
+        querySelect.setParameter("id", Id);
+        querySelect.setLockMode(LockModeType.OPTIMISTIC);
+        querySelect.getResultList();
+        Query queryUpdate = session.createQuery("update Employee e set " +
+                "c_version = c_version+1 where e.id =:Id and " +
+                "c_version =:c_version  ");
+        queryUpdate.setParameter("Id", Id);
+        queryUpdate.setParameter("c_version", lastVersion);
+        queryUpdate.setLockMode(LockModeType.OPTIMISTIC);
+        Employee version = (Employee) queryUpdate.getResultList();
         return version;
     }
 
@@ -40,11 +46,11 @@ public class EmployeeDao {
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        String strSelectWithUsername = "from Employee  where username =:username";
-        Query query = session.createQuery(strSelectWithUsername, Employee.class);
+        String strSelectWithUsername = "select e from Employee e " +
+                "where e.username =:username";
+        Query query = session.createQuery(strSelectWithUsername);
         query.setParameter("username", username);
         employeeList = (Employee) query.getSingleResult();
-
         return employeeList;
     }
 
@@ -72,8 +78,9 @@ public class EmployeeDao {
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        String getUserDetails = "from Employee  where id =:id";
-        Query query = session.createQuery(getUserDetails, Employee.class);
+        String getUserDetails = "select e from Employee e " +
+        "where e.id =:id";
+        Query query = session.createQuery(getUserDetails);
         query.setParameter("id", id);
         employeeList = (Employee) query.getSingleResult();
 
@@ -88,8 +95,8 @@ public class EmployeeDao {
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        String allEmployee = "from Employee";
-        Query query = session.createQuery(allEmployee, Employee.class);
+        String allEmployee = "select e from Employee e";
+        Query query = session.createQuery(allEmployee);
         employeeList = query.getResultList();
 
         return employeeList;
@@ -121,9 +128,42 @@ public class EmployeeDao {
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query query = session.createQuery("select leaveList from Employee where id =: id", Employee.class);
+        Query query = session.createQuery("select e.leaveList from Employee e where e.id =:id");
         query.setParameter("id", employee.getId());
         leaveEmployee = (List<Leaves>) query.getResultList();
         return leaveEmployee;
     }
+
+public void updateSentEmail(Employee employee, Email email) {
+    Transaction transaction = null;
+    SessionFactory sessionFactory;
+    StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+            ("META-INF/hibernate.cfg.xml").build();
+    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+        transaction = session.beginTransaction();
+        Employee updatedEmployee = session.get(Employee.class, employee.getId());
+        updatedEmployee.getSentEmails().add(email);
+        session.update(updatedEmployee);
+        transaction.commit();
+    }
+
+
+    public List<Employee> receivedEmailEmployees(List<Integer> employeeIds) {
+        List<Employee> receivedEmailEmployees = new ArrayList<>();
+        SessionFactory sessionFactory;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+                ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+            MultiIdentifierLoadAccess<Employee> multiLoadAccess =
+                    session.byMultipleIds(Employee.class);
+            receivedEmailEmployees = multiLoadAccess.multiLoad(employeeIds);
+
+
+        return receivedEmailEmployees;
+    }
+
 }

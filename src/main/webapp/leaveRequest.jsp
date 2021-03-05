@@ -12,37 +12,12 @@
 <html>
 <head>
   <title>درخواست مرخصی</title>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script>
-
-        function dateCheck() {
-            var leaveFromDate = new Date($('#leaveFromDate').val());
-            var leaveToDate = new Date($('#leaveToDate').val());
-            if (document.forms["leaveRequestForm"]["leaveFromDate"].value == null || document.forms["leaveRequestForm"]["leaveFromDate"].value === "") {
-                window.alert("تاریخ شروع مرخصی نمیتواند خالی باشد.");
-                return false;
-            }
-            if (document.forms["leaveRequestForm"]["leaveToDate"].value == null || document.forms["leaveRequestForm"]["leaveToDate"].value === "") {
-                window.alert("تاریخ پایان مرخصی نمیتواند خالی باشد.");
-                return false;
-            }
-            if (Date.parse(leaveFromDate) >= Date.parse(leaveToDate)) {
-                window.alert("تاریخ شروع بعد از تاریخ پایان است.");
-                return false;
-            }
-        }
-    </script>
-
     <jsp:include page="employeeHeader.jsp"/>
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
-<c:if test="${requestScope['LeaveIsNotValid'] =='LeaveIsNotValid'}">
+<c:if test="${requestScope['LeaveIsNotValid'] =='validLeaveRequest'}">
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-danger" id="danger-alert">
             <button type="button" class="close" data-dismiss="alert">x</button>
@@ -95,5 +70,30 @@
         </div>
     </form>
 </div>
+<!--===============================================================================-->	
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<!--===============================================================================-->	
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<!--=================================================================================-->	
+    <script>
+
+        function dateCheck() {
+            var leaveFromDate = new Date($('#leaveFromDate').val());
+            var leaveToDate = new Date($('#leaveToDate').val());
+            if (document.forms["leaveRequestForm"]["leaveFromDate"].value == null || document.forms["leaveRequestForm"]["leaveFromDate"].value === "") {
+                window.alert("تاریخ شروع مرخصی نمیتواند خالی باشد.");
+                return false;
+            }
+            if (document.forms["leaveRequestForm"]["leaveToDate"].value == null || document.forms["leaveRequestForm"]["leaveToDate"].value === "") {
+                window.alert("تاریخ پایان مرخصی نمیتواند خالی باشد.");
+                return false;
+            }
+            if (Date.parse(leaveFromDate) >= Date.parse(leaveToDate)) {
+                window.alert("تاریخ شروع بعد از تاریخ پایان است.");
+                return false;
+            }
+        }
+    </script>
+	
 </body>
 </html>

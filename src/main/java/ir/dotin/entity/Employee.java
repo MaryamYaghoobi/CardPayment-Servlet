@@ -4,11 +4,7 @@ package ir.dotin.entity;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity(name = "Employee")
@@ -50,18 +46,10 @@ public class Employee extends Common {
     @OneToMany()
     @JoinColumn(name = "c_employeeId")
     private List<Leaves> leaveList;
-
-    public List<Email> getSentEmails() {
-        return sentEmails;
-    }
-
-    public void setSentEmails(List<Email> sentEmails) {
-        this.sentEmails = sentEmails;
-    }
-
     @OneToMany()
     @JoinColumn(name = "c_emailSenderId")
-    private List<Email> sentEmails ;
+    private List<Email> sentEmails;
+
     public CategoryElement getEmployeeStatus() {
         return employeeStatus;
     }
@@ -70,6 +58,13 @@ public class Employee extends Common {
         this.employeeStatus = employeeStatus;
     }
 
+    public List<Email> getSentEmails() {
+        return sentEmails;
+    }
+
+    public void setSentEmails(List<Email> sentEmails) {
+        this.sentEmails = sentEmails;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -167,22 +162,27 @@ public class Employee extends Common {
         this.gender = gender;
     }
 
-    public Employee(String firstName, String lastName, String username) {
-        super();
+    public long getC_version() {
+        return c_version;
     }
 
-    public long getC_version() {  return c_version; }
+    public void setC_version(long c_version) {
+        this.c_version = c_version;
+    }
 
-    public void setC_version(long c_version) { this.c_version = c_version; }
+    public List<Leaves> getLeaveList() {
+        return leaveList;
+    }
 
-    public List<Leaves> getLeaveList() { return leaveList; }
-
-    public void setLeaveList(List<Leaves> leaveList) {  this.leaveList = leaveList; }
+    public void setLeaveList(List<Leaves> leaveList) {
+        this.leaveList = leaveList;
+    }
 
     public Employee() {
     }
+
     public Employee(long id, String firstName, String lastName, String fatherName, String email) {
-        this.id =id;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.fatherName = fatherName;
@@ -207,23 +207,22 @@ public class Employee extends Common {
     }
 
 
-    public Employee(String firstName, String lastName, String username, LocalDate creationDataTime) {
+    public Employee(String firstName, String lastName, String username) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
 
     }
 
-    public Employee(int id,String firstName, String lastName,String email,String fatherName,LocalDate lastModifyDataTime,CategoryElement employeeStatus,Employee manager){
-        this.id=id;
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.email=email;
-        this.fatherName=fatherName;
+    public Employee(long id, String firstName, String lastName, String email, String fatherName, CategoryElement employeeStatus, Employee manager) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.fatherName = fatherName;
         this.employeeStatus = employeeStatus;
         this.manager = manager;
     }
-
 
 
 }

@@ -12,23 +12,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>مدیریت کاربران</title>	
+<!--==============================================================================================================-->	
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--==============================================================================================================-->	
     <jsp:include page="managerHeader.jsp"/>
-    <title>مدیریت کاربران</title>	
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
-<script>
-    function inactiveEmployee(employeeId) {
-        if (confirm('کاربر حذف شود؟')) {
-            window.location = 'ManagerController?action=inactive&employeeId=' + employeeId;
-        }
-    }
-
-    function findEmployee(employeeId) {
-        window.location = 'ManagerController?action=editAndAppointmentOfManager&employeeId=' + employeeId;
-    }
-</script>
 
 <div class="container" style="margin-top: 50px;border-radius: 6px;background-color: #F0E1BE;">
     <form action="ManagerController" method="post">
@@ -62,7 +53,7 @@
                 </div>
                 <button type="submit" class="btn btn-lg btn-block btn btn btn-info " 
 				style="margin-top: 31px;width:260px; height: 38px;background-color: #F4C34E;border: none;"> <span
-                        class="fa fa-search">                  
+                       id="form_search" name="search" class="fa fa-search">                  
                 </span></button>
             </div>
             
@@ -82,23 +73,23 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${requestScope.employeeList}" var="employee">
+        <c:forEach items="${requestScope.employeeList}" var="employees">
             <tr>
-                <td hidden><c:out value="${employee.id}"/></td>
-                <td><c:out value="${employee.firstName}"/></td>
-                <td><c:out value="${employee.lastName}"/></td>
-                <td><c:out value="${employee.manager.firstName} ${employee.manager.lastName}"/></td>
-                <td><c:out value="${employee.role.name}"/></td>
-                <td><c:out value="${employee.employeeStatus.name}"/></td>
+                <td hidden><c:out value="${employees.id}"/></td>
+                <td><c:out value="${employees.firstName}"/></td>
+                <td><c:out value="${employees.lastName}"/></td>
+                <td><c:out value="${employees.manager.firstName} ${employees.manager.lastName}"/></td>
+                <td><c:out value="${employees.role.name}"/></td>
+                <td><c:out value="${employees.employeeStatus.name}"/></td>
                 <td class="text-right" style="width: 21%;">
                    <button type="button"
                             class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="update"
-                            style="width: 82px;background-color: #F4C34E;border: none;" onclick="findEmployee(${employee.id})">
+                            style="width: 82px;background-color: #F4C34E;border: none;" onclick="searchId(${employees.id})">
                             <span class="fa fa-edit"></span></button>                      
                     <button type="button"
                             class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"
                             style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;"
-							onclick="inactiveEmployee(${employee.id})">						
+							onclick="delete(${employees.id})">						
                            <span class="fa fa-trash" aria-hidden="true"> </span></button>                        
                 </td>
             </tr>
@@ -109,6 +100,18 @@
 	<a class="nav-link" href="ManagerController?action=insertEmployee" style="width: 50px;color: black;margin-right:1080px; font-size: 30px;">&#43;</a>
 	
 </div>
- 
+ <script>
+    function delete(employeeId) {
+        if (confirm('کاربر حذف شود؟')) {
+            window.location = 'ManagerController?action=delete&employeesId=' + employeeId;
+        }
+    }
+
+    function searchId(employeeId) {
+        window.location = 'ManagerController?action=editAndAppointmentOfManager&employeesId=' + employeeId;
+    }
+       
+</script>
+
 </body>
 </html>

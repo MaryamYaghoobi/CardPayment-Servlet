@@ -12,26 +12,11 @@
 <html>
 <head>
     <title>مدیریت مرخصی</title>
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <link
-            rel="stylesheet"
-            href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
-            integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
-            crossorigin="anonymous">
-    <jsp:include page="managerHeader.jsp"/>
-    <script>
-        function LeaveConfirmation(leavesId) {
-            window.location = 'ManagerController?action=LeaveConfirmation&leavesId=' + leavesId;
-
-        }
-
-        function rejectLeave(leavesId) {
-            if (confirm("رد درخواست")) {
-                window.location = 'ManagerController?action=rejectLeave&leavesId=' + leavesId;
-            }
-        }
-    </script>
+<!--======================================================================================================-->			
+<link  rel="stylesheet"  href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"                     
+ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">            
+<!--======================================================================================================-->				
+<jsp:include page="managerHeader.jsp"/>
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
@@ -86,13 +71,13 @@
                     <td class="text-right" style="width: 21%;">
                         <button type="button"
                                 class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="update"
-                                style="width: 82px;background-color: #F4C34E;border: none;" onclick="LeaveConfirmation(${leaves.id})"><span
+                                style="width: 82px;background-color: #F4C34E;border: none;" onclick="LeaveConfirmation(${leave.id})"><span
                                 class="fa fa-check"> 
                             تایید
                         </span></button>
                         <button type="button"
                                 class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"
-                                style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;" onclick="rejectLeave(${leaves.id})"><span
+                                style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;" onclick="rejectLeave(${leave.id})"><span
                                 class="fa fa-times"> 
                              رد
                          </span></button>
@@ -105,5 +90,22 @@
     </c:otherwise>
     </c:choose>
 </div>
+<!--======================================================================-->		
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<!--======================================================================-->		
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<!--======================================================================-->
+    <script>
+        function LeaveConfirmation(leaveId) {
+            window.location = 'ManagerController?action=LeaveConfirmation&leaveId=' + leaveId;
+
+        }
+
+        function rejectLeave(leaveId) {
+            if (confirm("رد درخواست")) {
+                window.location = 'ManagerController?action=rejectLeave&leaveId=' + leaveId;
+            }
+        }
+    </script>
 </body>
 </html>

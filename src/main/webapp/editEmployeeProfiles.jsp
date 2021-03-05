@@ -12,16 +12,13 @@
 <html>
 <head>
     <jsp:include page="employeeHeader.jsp"/>
-    <script src="resources/js/jquery.min.js"></script>
-    <script src="resources/js/jquery.validate.min.js"></script>
-    <script src="resources/js/input.validation.js"></script>
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
 <div class="container" name="container"
      style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
     <form action="EmployeeController" method="post" id="editForm">
-        <input type="hidden" name="action" value="update">
+        <input type="hidden" name="action" value="updateProfile">
         <input hidden type="hidden" name="id" value="${requestScope.Employee.id}">
         <div class="form-row">
             <div class="form-group col-md-6" style="margin-top: 17px;">
@@ -95,5 +92,12 @@
     </form>
 
 </div>
+<!--======================================================-->	
+<script src="resources/js/jquery.min.js"></script>
+<!--======================================================-->	 
+<script src="resources/js/jquery.validate.min.js"></script>
+<!--=======================================================-->		
+<script src="resources/js/input.validation.js"></script>
+<!--======================================================-->		
 </body>
 </html>

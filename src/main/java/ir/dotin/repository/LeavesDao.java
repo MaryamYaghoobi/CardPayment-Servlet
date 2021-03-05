@@ -1,7 +1,6 @@
 package ir.dotin.repository;
 
 import ir.dotin.entity.CategoryElement;
-import ir.dotin.entity.Employee;
 import ir.dotin.entity.Leaves;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,7 +28,7 @@ public class LeavesDao {
         }
     }
 
-    public void LeaveConfirmation(Long leaveId) {
+    public void LeaveConfirmation(long leaveId) {
         Transaction transaction = null;
         SessionFactory sessionFactory;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
@@ -39,13 +38,13 @@ public class LeavesDao {
         session.beginTransaction();
         transaction = session.beginTransaction();
         Query categoryElementQuery = session.createQuery
-                ("from CategoryElement where code =: code", CategoryElement.class);
+                ("select ce from CategoryElement ce where ce.code =:code");
         categoryElementQuery.setParameter("code", "accept");
         CategoryElement accept = (CategoryElement) categoryElementQuery.getSingleResult();
         Query query = session.createQuery
-                ("update Leaves set leaveStatus =:accept ," +
-                        " where id =:id",Leaves.class);
-        query.setParameter("accepted", accept);
+                ("update Leaves l set l.leaveStatus =:accept " +
+                        "  where l.id =:id");
+        query.setParameter("accept", accept);
         query.setParameter("id", leaveId);
         query.executeUpdate();
         transaction.commit();
@@ -55,7 +54,7 @@ public class LeavesDao {
         }
     }
 
-    public void rejectionLeave(Long leaveId) {
+    public void rejectionLeave(long leaveId) {
         Transaction transaction = null;
         SessionFactory sessionFactory;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
@@ -65,12 +64,12 @@ public class LeavesDao {
         session.beginTransaction();
         transaction = session.beginTransaction();
         Query categoryElementQuery = session.createQuery
-                (" from CategoryElement  where name =:name", CategoryElement.class);
-        categoryElementQuery.setParameter("name", "reject");
+                (" select ce from CategoryElement ce where ce.code =:code");
+        categoryElementQuery.setParameter("code", "reject");
         CategoryElement reject = (CategoryElement) categoryElementQuery.getSingleResult();
         Query query = session.createQuery
-                ("update Leaves set leaveStatus =:reject , " +
-                        " where id =:id",Leaves.class);
+                ("update Leaves l set l.leaveStatus =:rejected " +
+                        " where l.id =:id");
         query.setParameter("reject", reject);
         query.setParameter("id", leaveId);
         query.executeUpdate();

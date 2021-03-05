@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: M.yaghoobi
+  Date: 28/2/2021
+  Time: 3:33 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -5,12 +12,12 @@
 <html>
 <head>
     <title>employeeHeader</title>
-    <link
-            rel="stylesheet"
-            href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
-            integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
-            crossorigin="anonymous">
+<!--=======================================================================================================-->		
+<link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
+integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"  crossorigin="anonymous">                             
+<!--============================================================================================================-->				
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!--============================================================================================================-->		
   <meta charset="utf-8">
 <style>
 
@@ -60,19 +67,21 @@
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a class="nav-link" href="EmployeeController?action=editEmployee">
+  <a class="nav-link" href="EmployeeController?action=editEmployeeProfiles">
                         پروفایل شخصی
                     <span class="sr-only">(current)</span></a>
-  <a class="nav-link" href="employeeLeaveRequest.jsp"">
+					
+  <a class="nav-link" href="leaveRequest.jsp">
                         درخواست مرخصی
                     </a>
+					
   <a class="nav-link" href="EmployeeController?action=searchLeave">
                        وضعیت مرخصی
                     </a>
-					 <a class="nav-link" href="EmployeeController?action=sendEmail">
+					 <a class="nav-link" href="EmployeeController?action=sendMessages">
                        ارسال پیام
                     </a>
-					<a class="nav-link" href="EmployeeController?action=emailsList">
+					<a class="nav-link" href="EmployeeController?action=ReceiveMessages">
                         پیام ها
                     </a>
  <a class="nav-link " href="ManagerController?action=logout" >

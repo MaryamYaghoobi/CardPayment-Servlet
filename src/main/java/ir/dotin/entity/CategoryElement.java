@@ -1,6 +1,7 @@
 package ir.dotin.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity(name = "CategoryElement")
@@ -14,6 +15,18 @@ public class CategoryElement extends Common {
 
     @Column(name = "c_code", columnDefinition = "VARCHAR(255)")
     private String code;
+
+    @OneToMany()
+    @JoinColumn(name = "id")
+    private List<Category> category;
+
+    public List<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(List<Category> category) {
+        this.category = category;
+    }
 
     public String getName() {
         return name;

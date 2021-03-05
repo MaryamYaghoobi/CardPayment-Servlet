@@ -14,7 +14,17 @@ public class Email extends Common {
     @Column(name = "c_context", columnDefinition = "VARCHAR(255)")
     private String context;
 
-    @OneToMany ()
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    @Column(name = "c_subject", columnDefinition = "VARCHAR(255)")
+    private String subject;
+    @OneToMany()
     @JoinTable(name = "mm_EmployeeEmail",
             joinColumns = {@JoinColumn(name = "c_receiveEmailId")},
             inverseJoinColumns = {@JoinColumn(name = "c_receiverId")})

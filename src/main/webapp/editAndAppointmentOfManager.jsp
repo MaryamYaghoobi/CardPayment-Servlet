@@ -11,11 +11,8 @@
 <!doctype html>
 <html>
 <head>
-    <title>editEmployee</title>
-    <jsp:include page="managerHeader.jsp"/>
-    <script src="resources/js/jquery.min.js"></script>
-    <script src="resources/js/jquery.validate.min.js"></script>
-    <script src="resources/js/input.validation.js"></script>
+<title>ویرایش کاربران</title>
+<jsp:include page="managerHeader.jsp"/>
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
@@ -23,7 +20,7 @@
 <div class="container" name="container"
      style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
     <form action="ManagerController" method="post" id="editForm">
-        <input type="hidden" name="action" value="update">
+        <input type="hidden" name="action" value="updateProfile">
         <input hidden type="hidden" name="id" value="${requestScope.Employee.id}">
         <div class="form-row">
             <div class="form-group col-md-6" style="margin-top: 17px;">
@@ -44,8 +41,7 @@
         <div class="form-row">
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><label style="color: #ff4626">*</label>
-                    نام
-                
+                    نام                
                 </label>
                 <input type="text" class="form-control" id="firstName" name="firstName"
                        value="<c:out value="${requestScope.Employee.firstName}"/>">
@@ -79,7 +75,7 @@
                 <label>
                     مدیر 
                </label>
-                <select name='selectedManager' id="selectedManager" class="form-control">
+                <select name='getManagerDetail' id="getManagerDetail" class="form-control">
                     <c:forEach items="<%=request.getAttribute(\"managerList\") %>" var="manager">
                         <option value="<c:out value="${manager}"/>" ${manager.equals(Manager) ? 'selected="selected"' : ''} >
                             <c:out value="${manager}"/></option>
@@ -117,6 +113,12 @@
         </div>
     </form>
 </div>
-
+<!--========================================================-->		
+    <script src="resources/js/jquery.min.js"></script>
+<!--========================================================-->		
+    <script src="resources/js/jquery.validate.min.js"></script>
+<!--=========================================================-->		
+    <script src="resources/js/input.validation.js"></script>
+<!--========================================================-->		
 </body>
 </html>

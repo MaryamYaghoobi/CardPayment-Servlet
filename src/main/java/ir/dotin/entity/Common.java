@@ -13,7 +13,6 @@ public class Common {
     public long id;
 
 
-
     public long getId() {
         return id;
     }
@@ -21,7 +20,6 @@ public class Common {
     public void setId(long id) {
         this.id = id;
     }
-
 
 
 }
