@@ -49,7 +49,7 @@ public class EmployeeService {
         EmployeeDao employeeDao = new EmployeeDao();
         employeeDao.updateSentEmail(employee,email);
     }
-    public  List<Employee> receivedEmailEmployees(List<Integer> employeeIds){
+    public  List<Employee> receivedEmailEmployees(List<Long> employeeIds){
         EmployeeDao employeeDao = new EmployeeDao();
         return employeeDao.receivedEmailEmployees(employeeIds);
     }

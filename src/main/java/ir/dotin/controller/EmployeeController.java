@@ -40,33 +40,33 @@ public class EmployeeController extends HttpServlet {
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = null;
-        action = req.getParameter("action");
+        action = request.getParameter("action");
         switch (action) {
             case "editEmployeeProfiles":
-                editEmployeeProfiles(req, resp);
+                editEmployeeProfiles(request, response);
                 break;
             case "updateProfile":
-                updateProfile(req, resp);
+                updateProfile(request, response);
                 break;
             case "leaveRequest":
-                leaveRequest(req, resp);
+                leaveRequest(request, response);
                 break;
             case "searchLeave":
-                searchLeave(req, resp);
+                searchLeave(request, response);
                 break;
             case "sendMessages":
-                sendMessages(req, resp);
+                sendMessages(request, response);
                 break;
             case "forwardingMessage":
-                forwardingMessage(req, resp);
+                forwardingMessage(request, response);
                 break;
             case "ReceiveMessages":
-                ReceiveMessages(req, resp);
+                ReceiveMessages(request, response);
                 break;
             case "downloadAttachment":
-                downloadAttachment(req, resp);
+                downloadAttachment(request, response);
                 break;
 
         }
@@ -123,8 +123,8 @@ public class EmployeeController extends HttpServlet {
         String message = request.getParameter("message");
         email.setContext(message);
         String[] employeeIds = request.getParameterValues("select");
-        List<Integer> Ids = Arrays.stream(employeeIds)
-                .map(Integer::parseInt)
+        List<Long> Ids = Arrays.stream(employeeIds)
+                .map(Long::parseLong)
                 .collect(Collectors.toList());
         List<Employee> receivedEmailEmployees = employeeService.receivedEmailEmployees(Ids);
         email.getReceiverEmployees().addAll(receivedEmailEmployees);
