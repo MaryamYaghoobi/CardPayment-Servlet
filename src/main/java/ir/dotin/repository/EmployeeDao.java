@@ -150,7 +150,7 @@ public void updateSentEmail(Employee employee, Email email) {
     }
 
 
-    public List<Employee> receivedEmailEmployees(List<Integer> employeeIds) {
+    public List<Employee> receivedEmailEmployees(List<Long> employeeIds) {
         List<Employee> receivedEmailEmployees = new ArrayList<>();
         SessionFactory sessionFactory;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure

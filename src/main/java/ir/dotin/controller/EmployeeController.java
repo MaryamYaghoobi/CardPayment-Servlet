@@ -144,7 +144,6 @@ public class EmployeeController extends HttpServlet {
        rs.forward(request, response);
     }
 
-    //====================================================
     public void searchLeave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
@@ -161,11 +160,13 @@ public class EmployeeController extends HttpServlet {
         boolean validLeaveRequest;
         String leaveFromDate = request.getParameter("leaveFromDate");
         String leaveToDate = request.getParameter("leaveToDate");
+        String reason = request.getParameter("reason");
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
 
         try {
-            validLeaveRequest = validation.leaveValidation(leaveFromDate, leaveToDate, employee);
+            validLeaveRequest = validation.leaveValidation
+                    (leaveFromDate, leaveToDate, employee);
             if (!validLeaveRequest) {
                 request.setAttribute("LeaveIsNotValid", "LeaveIsNotValid");
                 RequestDispatcher rs = request.getRequestDispatcher("leaveRequest.jsp");
@@ -174,7 +175,7 @@ public class EmployeeController extends HttpServlet {
 
                 return;
             }
-            Leaves leaveEmployee = new Leaves(leaveFromDate, leaveToDate,
+            Leaves leaveEmployee = new Leaves(leaveFromDate, leaveToDate,reason,
                     searchCategoryElement.findCategoryElement("register"));
             leavesService.addLeave(leaveEmployee);
             employeeService.updateLeaveState(employee, leaveEmployee);
@@ -195,7 +196,7 @@ public class EmployeeController extends HttpServlet {
         String firstName = request.getParameter("firstName");
         register.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
-        register.setFirstName(lastName);
+        register.setLastName(lastName);
         String email = request.getParameter("email");
         register.setEmail(email);
         register.setFatherName(request.getParameter("fatherName"));
@@ -203,7 +204,6 @@ public class EmployeeController extends HttpServlet {
                 Matcher matcher = pattern.matcher(email);*/
 
         // if (!email.isEmpty() && matcher.matches() && !(email == null)) {
-        EmployeeService employeeService = new EmployeeService();
         employeeService.updateUserDetails(register);
         //    } else {
         //  request.setAttribute("updateError", "Invalid Details");

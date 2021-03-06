@@ -89,7 +89,7 @@ public class ManagerController extends HttpServlet {
                 break;
         }
     }
-//------------------------------------------------------------
+
 
 
     public void rejectLeave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -98,7 +98,7 @@ public class ManagerController extends HttpServlet {
         long leaveId = Long.parseLong(request.getParameter("leaveId"));
         leavesService.rejectionLeave(leaveId);
         System.out.println("The leave request was rejected");
-        rejectLeave(request, response);
+        RegisteredLeaves(request, response);
     }
 
     public void LeaveConfirmation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -345,8 +345,8 @@ public class ManagerController extends HttpServlet {
         String message = request.getParameter("message");
         email.setContext(message);
         String[] employeeIds = request.getParameterValues("select");
-        List<Integer> Ids = Arrays.stream(employeeIds)
-                .map(Integer::parseInt)
+        List<Long> Ids = Arrays.stream(employeeIds)
+                .map(Long::parseLong)
                 .collect(Collectors.toList());
         List<Employee> receivedEmailEmployees = employeeService.receivedEmailEmployees(Ids);
         email.getReceiverEmployees().addAll(receivedEmailEmployees);

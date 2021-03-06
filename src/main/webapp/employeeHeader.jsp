@@ -64,7 +64,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 </style>
 </head>
 <body>
-
+<jsp:include page="body.jsp"/>
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a class="nav-link" href="EmployeeController?action=editEmployeeProfiles">
