@@ -52,7 +52,6 @@ public class ManagerController extends HttpServlet {
             case "updateProfile":
                 updateProfile(request, response);
             case "insertEmployee":
-
                 insertEmployee(request, response);
                 break;
             case "RegisteredLeaves":
