@@ -56,7 +56,7 @@
                 <td><c:out value="${leaves.leaveFromDate}"/></td>
                 <td><c:out value="${leaves.leaveToDate}"/></td>
 				<td><c:out value="${leaves.reason}"/></td>
-                <td><c:out value="${leaves.searchLeave.name}"/></td>
+                <td><c:out value="${leaves.leaveStatus.name}"/></td>
             </tr>
         </c:forEach>
         </tbody>

@@ -5,6 +5,7 @@
   Time: 3:33 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
@@ -82,11 +83,11 @@
                 <td><c:out value="${employees.role.name}"/></td>
                 <td><c:out value="${employees.employeeStatus.name}"/></td>
                 <td class="text-right" style="width: 21%;">
-                   <button type="button"
+                   <button type="submit"
                             class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="update"
                             style="width: 82px;background-color: #F4C34E;border: none;" onclick="searchId(${employees.id})">
                             <span class="fa fa-edit"></span></button>                      
-                    <button type="button"
+                    <button type="submit"
                             class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"
                             style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;"
 							onclick="delete(${employees.id})">						

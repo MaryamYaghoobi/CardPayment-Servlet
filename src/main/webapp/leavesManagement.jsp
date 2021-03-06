@@ -67,17 +67,19 @@
                     <td><c:out value="${leaves.leaveFromDate}"/></td>
                     <td><c:out value="${leaves.leaveToDate}"/></td>
 					<td><c:out value="${leaves.reason}"/></td>
-                    <td><c:out value="${leaves.searchLeave.name}"/></td>
+                    <td><c:out value="${leaves.leaveStatus.name}"/></td>
                     <td class="text-right" style="width: 21%;">
                         <button type="button"
                                 class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="update"
-                                style="width: 82px;background-color: #F4C34E;border: none;" onclick="LeaveConfirmation(${leave.id})"><span
+                                style="width: 82px;background-color: #F4C34E;border: none;"
+								onclick="LeaveConfirmation(${leave.id})"><span
                                 class="fa fa-check"> 
                             تایید
                         </span></button>
                         <button type="button"
                                 class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"
-                                style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;" onclick="rejectLeave(${leave.id})"><span
+                                style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;"
+								onclick="rejectLeave(${leave.id})"><span
                                 class="fa fa-times"> 
                              رد
                          </span></button>

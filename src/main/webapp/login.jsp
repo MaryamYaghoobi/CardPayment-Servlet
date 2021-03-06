@@ -14,49 +14,10 @@
 <!DOCTYPE html>
 <html dir="rtl">
 <head>
-   <!-- <link href="<c:url value="/css/login.css rel="stylesheet"/>-->	
-</head>
-
-<body style="background-color:white">
-<h2>ورود</h2><br>
-
-<c:if test= "${requestScope['invalidationUserOrPassword'] && empty sessionScope['username']}">
-    <div>
-    <label id="" style=" vertical-align: middle;
-    display:inline-block;
-    width:100%;
-    text-align:center;
-    height:30px;
-    line-height:30px;
-    color: #ff4626;
-"><b>نام کاربری یا رمز عبور نادرست است.
-    </b>
-    </label>
-    </div>
-    </c:if>
-
-
-<div class="login">
-
-    <form id="login" name="Form" action="LoginController" method="post" onsubmit="return validateForm()">
-        <label><b>نام کاربری
-        </b>
-        </label>
-        <input type="text" name="username" id="username" placeholder="Username">
-        <br><br>
-        <label><b>رمز عبور
-        </b>
-        </label>
-        <input type="Password" name="password" id="password" placeholder="Password">
-        <br><br>
-        <button type="submit" name="login" id="login">ورود</button>
-        <br><br>
-
-    </form>
-	<div class="login100-more" style="background-image: url('images/bg-01.jpg');">
-				</div>
-</div>
-<script type="text/javascript">
+<!--==============================================================-->	
+    <link href="<c:url value="/css/login.css" rel="stylesheet"/>
+<!--==============================================================-->
+    <script type="text/javascript">
 
         function validateForm() {
             var username = document.forms["Form"]["username"].value;
@@ -70,5 +31,54 @@
             }
         }
     </script>
+</head>
+
+<body style="background-color:black">
+
+
+<h2><fmt:bundle basename="resource_fa">
+    <fmt:message key="login"/></fmt:bundle></h2><br>
+
+
+<c:if test= "${requestScope['invalidUser'] && empty sessionScope['username']}">
+    <div>
+    <label id="" style=" vertical-align: middle;
+    display:inline-block;
+    width:100%;
+    text-align:center;
+    height:30px;
+    line-height:30px;
+    color: #ff4626;
+"><b><fmt:bundle basename="resource_fa">
+        <fmt:message key="invalid username or password"/></fmt:bundle>
+    </b>
+    </label>
+    </div>
+    </c:if>
+
+
+<div class="login">
+
+    <form id="login" name="Form" action="/loginController.do" method="post" onsubmit="return validateForm()">
+        <label><b>نام کاربری
+        </b>
+        </label>
+        <input type="text" name="username" id="Uname" placeholder="Username">
+        <br><br>
+        <label><b>رمز عبور
+        </b>
+        </label>
+        <input type="Password" name="password" id="Pass" placeholder="Password">
+        <br><br>
+        <button type="submit" name="log" id="log">ورود</button>
+        <br><br>
+
+    </form>
+	<div class="login100-more" style="background-image: url('images/bg-01.jpg');">
+				</div>
+</div>
+
+
+
 </body>
 </html>

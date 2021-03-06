@@ -11,7 +11,7 @@ import javax.persistence.*;
 @SelectBeforeUpdate
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public class Leaves extends Common {
+public class Leaves extends entity {
 
     @Column(name = "c_leaveToDate", columnDefinition = "VARCHAR(255)")
     private String leaveToDate;
@@ -26,7 +26,7 @@ public class Leaves extends Common {
     @JoinColumn(name = "c_employeeId")
     private Employee employee;
 
-    public Leaves(String leaveFromDate, String leaveToDate, CategoryElement register) {
+    public Leaves(String fromDate, String leaveFromDate, String leaveToDate, CategoryElement register) {
         super();
     }
 

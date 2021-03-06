@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "t_CategoryElement")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public class CategoryElement extends Common {
+public class CategoryElement extends entity {
 
     @Column(name = "c_name", columnDefinition = "VARCHAR(255)")
     private String name;

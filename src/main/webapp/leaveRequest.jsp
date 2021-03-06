@@ -17,7 +17,7 @@
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
-<c:if test="${requestScope['LeaveIsNotValid'] =='validLeaveRequest'}">
+<c:if test="${requestScope['LeaveIsNotValid'] =='LeaveIsNotValid'}">
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-danger" id="danger-alert">
             <button type="button" class="close" data-dismiss="alert">x</button>
@@ -27,7 +27,7 @@
         </div>
     </div>
 </c:if>
-<c:if test="${requestScope['LeaveIsNotValid'] =='LeaveIsNotValid'}">
+<c:if test="${requestScope['LeaveIsNotValid'] =='validLeaveRequest'}">
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-success" id="success-alert">
             <button type="button" class="close" data-dismiss="alert">x</button>
@@ -59,7 +59,7 @@
 		 <div class="form-group col-md-15" style="margin-top: 17px;">
                
  <label> دلیل :</label>
-                <input type="date" class="form-control" id="reason" name="reason">
+                <input type="text" class="form-control" id="reason" name="reason">
             </div>
         <div class="form-row" dir="rtl">
             <div class="col-md-3" style="margin-top: 17px;margin-bottom: 10px;">
@@ -80,11 +80,13 @@
         function dateCheck() {
             var leaveFromDate = new Date($('#leaveFromDate').val());
             var leaveToDate = new Date($('#leaveToDate').val());
-            if (document.forms["leaveRequestForm"]["leaveFromDate"].value == null || document.forms["leaveRequestForm"]["leaveFromDate"].value === "") {
+            if (document.forms["leaveRequestForm"]["leaveFromDate"].value == null 
+			|| document.forms["leaveRequestForm"]["leaveFromDate"].value === "") {
                 window.alert("تاریخ شروع مرخصی نمیتواند خالی باشد.");
                 return false;
             }
-            if (document.forms["leaveRequestForm"]["leaveToDate"].value == null || document.forms["leaveRequestForm"]["leaveToDate"].value === "") {
+            if (document.forms["leaveRequestForm"]["leaveToDate"].value == null ||
+			document.forms["leaveRequestForm"]["leaveToDate"].value === "") {
                 window.alert("تاریخ پایان مرخصی نمیتواند خالی باشد.");
                 return false;
             }
