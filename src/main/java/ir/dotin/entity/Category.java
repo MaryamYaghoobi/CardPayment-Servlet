@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Table(name = "t_Category")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public class Category extends Common {
+public class Category extends entity {
 
     @Column(name = "c_name", columnDefinition = "VARCHAR(255)")
     private String name;

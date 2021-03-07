@@ -15,7 +15,7 @@
 <html dir="rtl">
 <head>
 <!--==============================================================-->	
-    <link href="<c:url value="/css/login.css" rel="stylesheet"/>
+  <!--  <link href="<c:url value="/css/login.css" rel="stylesheet"/>-->
 <!--==============================================================-->
     <script type="text/javascript">
 
@@ -33,14 +33,13 @@
     </script>
 </head>
 
-<body style="background-color:black">
+<body>
 
 
-<h2><fmt:bundle basename="resource_fa">
-    <fmt:message key="login"/></fmt:bundle></h2><br>
+<h2>ورود</h2><br>
 
 
-<c:if test= "${requestScope['invalidUser'] && empty sessionScope['username']}">
+<c:if test= "${requestScope['invalidationUserOrPassword'] && empty sessionScope['username']}">
     <div>
     <label id="" style=" vertical-align: middle;
     display:inline-block;
@@ -49,8 +48,7 @@
     height:30px;
     line-height:30px;
     color: #ff4626;
-"><b><fmt:bundle basename="resource_fa">
-        <fmt:message key="invalid username or password"/></fmt:bundle>
+"><b>نام کاربری یا رمز عبور نادرست است.
     </b>
     </label>
     </div>
@@ -59,7 +57,7 @@
 
 <div class="login">
 
-    <form id="login" name="Form" action="/loginController.do" method="post" onsubmit="return validateForm()">
+    <form id="login" name="Form" action="LoginController" method="post" onsubmit="return validateForm()">
         <label><b>نام کاربری
         </b>
         </label>

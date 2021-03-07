@@ -1,0 +1,84 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+html { width: 100%; height:100%; overflow:hidden; }
+
+body
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(
+            limegreen,
+            transparent
+    ),
+    linear-gradient(
+            90deg,
+            skyblue,
+            transparent
+    ),
+    linear-gradient(
+            -90deg,
+            coral,
+            transparent
+    );
+    background-blend-mode: screen;
+}
+.login{
+    width: 382px;
+    overflow: hidden;
+    margin: auto;
+    padding: 80px;
+    background: rgba(52, 29, 23, 0.43);
+    border-radius: 15px ;
+
+}
+h2{
+    text-align: center;
+    color: #f1e3dd;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.39);
+    letter-spacing:1px;
+    padding: 20px;
+}
+label{
+    color:#f1e3dd;
+    font-size: 17px;
+    margin-right: 40px;
+}
+#Uname{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    padding-left: 6px;
+    margin-right: 40px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    color: #f1e3dd;
+    background: rgba(0,0,0,0.3);
+    outline: none;
+    font-size: 13px;
+
+}
+#Pass{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    padding-left: 6px;
+    margin-right: 40px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    color: #f1e3dd;
+    background: rgba(0,0,0,0.3);
+    outline: none;
+    font-size: 13px;
+}
+#log{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    padding-left: 3px;
+    color: #f1e3dd;
+    margin-right: 40px;
+    background: #7eb0c9;
+}
+input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }

@@ -12,6 +12,7 @@ import ir.dotin.share.Validation;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +26,15 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 5,
+        maxRequestSize = 1024 * 1024 * 5 * 5)
 @WebServlet("/EmployeeController")
 public class EmployeeController extends HttpServlet {
     public static final String FILE_PATH_PREFIX = "B:";
-    public static final String TOMCAT_FILE_PATH = FILE_PATH_PREFIX + "\\apache8\\apache-tomcat-8.0.0\\";
+    public static final String TOMCAT_FILE_PATH = FILE_PATH_PREFIX
+            + "\\javaSchool\\SESSION11\\apache-tomcat-8.0.0-RC5\\apache-tomcat-8.0.0-RC5";
+
     LeavesService leavesService = new LeavesService();
     EmailService emailService = new EmailService();
     EmployeeService employeeService = new EmployeeService();

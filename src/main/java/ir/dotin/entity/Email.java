@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "t_Email")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public class Email extends Common {
+public class Email extends entity {
 
 
     @Column(name = "c_context", columnDefinition = "VARCHAR(255)")
