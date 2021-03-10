@@ -4,6 +4,7 @@ package ir.dotin.entity;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 @Entity(name = "Leaves")
@@ -26,9 +27,7 @@ public class Leaves extends entity {
     @JoinColumn(name = "c_employeeId")
     private Employee employee;
 
-    public Leaves(String fromDate, String leaveFromDate, String leaveToDate, CategoryElement register) {
-        super();
-    }
+
 
 
     public String getLeaveToDate() {
@@ -70,5 +69,17 @@ public class Leaves extends entity {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+    public Leaves(String leaveFromDate, String leaveToDate,String reason ,CategoryElement leaveStatus) {
+        this.leaveFromDate = leaveFromDate;
+        this.leaveToDate = leaveToDate;
+        this.reason = reason;
+        this.leaveStatus = leaveStatus;
+
+    }
+
+    public Leaves() {
+
+    }
+
 
 }

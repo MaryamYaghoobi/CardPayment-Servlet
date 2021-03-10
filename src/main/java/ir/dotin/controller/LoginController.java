@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
         if (employee != null) {
             session.setAttribute("username", username);
             if (employee.getRole().getCode().equals("manager")) {
-                RequestDispatcher rs = request.getRequestDispatcher("managerDashboard.jsp");
+                RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
                 rs.forward(request, response);
             } else {
 

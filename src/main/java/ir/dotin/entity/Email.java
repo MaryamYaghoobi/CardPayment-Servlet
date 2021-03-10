@@ -30,7 +30,7 @@ public class Email extends entity {
             inverseJoinColumns = {@JoinColumn(name = "c_receiverId")})
     private List<Employee> receiverEmployees;
 
-    @OneToMany()
+   /* @OneToMany()
     @JoinColumn(columnDefinition = "c_employeeSenderId")
     private List<Employee> senderEmail;
 
@@ -40,7 +40,7 @@ public class Email extends entity {
 
     public void setSenderEmail(List<Employee> senderEmail) {
         this.senderEmail = senderEmail;
-    }
+    }*/
 
 
     public String getContext() {

@@ -73,6 +73,9 @@ public class EmployeeController extends HttpServlet {
             case "downloadAttachment":
                 downloadAttachment(request, response);
                 break;
+            case "sentMessages":
+                sentMessages(request, response);
+                break;
 
         }
     }
@@ -105,10 +108,18 @@ public class EmployeeController extends HttpServlet {
                 searchUsername((String) request.getSession().getAttribute("username"));
 
         List<Object[]> ReceiveMessages = emailService.detailsMessagesReceived(employee);
-        List<Object[]> sentMessages = emailService.detailsMessagesSent(employee);
         request.setAttribute("ReceiveMessages", ReceiveMessages);
-        request.setAttribute("sentMessages", sentMessages);
         RequestDispatcher rs = request.getRequestDispatcher("ReceiveMessages.jsp");
+        rs.forward(request, response);
+
+    }
+    public void sentMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Employee employee = employeeService.
+                searchUsername((String) request.getSession().getAttribute("username"));
+
+        List<Object[]> sentMessages = emailService.detailsMessagesSent(employee);
+        request.setAttribute("sentMessages", sentMessages);
+        RequestDispatcher rs = request.getRequestDispatcher("sentMessages.jsp");
         rs.forward(request, response);
 
     }
@@ -131,10 +142,10 @@ public class EmployeeController extends HttpServlet {
         List<Long> Ids = Arrays.stream(employeeIds)
                 .map(Long::parseLong)
                 .collect(Collectors.toList());
-        List<Employee> receivedEmailEmployees = employeeService.receivedEmailEmployees(Ids);
-        email.getReceiverEmployees().addAll(receivedEmailEmployees);
+        List<Employee> ReceiveMessages = employeeService.ReceiveMessages(Ids);
+        email.getReceiverEmployees().addAll(ReceiveMessages);
         emailService.addMessages(email);
-        employeeService.updateSentEmailEmployee(senderEmail, email);
+        employeeService.forwardingMessage(senderEmail, email);
         String messages="forwardingMessage";
         request.setAttribute(messages, true);
         RequestDispatcher rs = request.getRequestDispatcher("employeeDashboard.jsp");
@@ -194,28 +205,29 @@ public class EmployeeController extends HttpServlet {
 
     protected void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
-        Employee register = employeeService.getUserDetails(id);
+        Employee employee = employeeService.getUserDetails(id);
        /* long employeeId = 1;
         long lastVersion = register.getC_version();
         employeeService.updateVersion(employeeId, lastVersion);*/
         String firstName = request.getParameter("firstName");
-        register.setFirstName(firstName);
+        employee.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
-        register.setLastName(lastName);
+        employee.setLastName(lastName);
         String email = request.getParameter("email");
-        register.setEmail(email);
-        register.setFatherName(request.getParameter("fatherName"));
+        employee.setEmail(email);
+        employee.setFatherName(request.getParameter("fatherName"));
               /*  Pattern pattern = Pattern.compile("\\b[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b");
                 Matcher matcher = pattern.matcher(email);*/
 
         // if (!email.isEmpty() && matcher.matches() && !(email == null)) {
-        employeeService.updateUserDetails(register);
+        employeeService.updateUserDetails(employee);
         //    } else {
         //  request.setAttribute("updateError", "Invalid Details");
         //  Employee employee = EmployeeService.getUserDetails(id);
-        request.setAttribute("employee", register);
-        RequestDispatcher rs = request.getRequestDispatcher("employeeDashboard.jsp");
+        request.setAttribute("employee", employee);
+       RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
         rs.forward(request, response);
+      //  response.sendRedirect("employeeDashboard.jsp");
        /* String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(register.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
@@ -227,16 +239,16 @@ public class EmployeeController extends HttpServlet {
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
         request.setAttribute("Employee", employee);
-        long employeeId = 1;
+       /* long employeeId = 1;
         long lastVersion = employee.getC_version();
-        employeeService.updateVersion(employeeId, lastVersion);
+        employeeService.updateVersion(employeeId, lastVersion);*/
         RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
         rs.forward(request, response);
-        String strLastVersion = String.valueOf(lastVersion);
+       /* String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }
+        }*/
     }
 
 }

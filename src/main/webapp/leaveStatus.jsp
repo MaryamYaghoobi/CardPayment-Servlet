@@ -33,26 +33,29 @@
     </div>
 </c:when>
 <c:otherwise>
-<div class="container" style="margin-top: 50px;border-radius: 6px;background-color: #F4C34E;">
-    <table class="table table-bordered table-hover table-responsive-lg">
-        <thead class="thead-light ">
-        <tr style="border-radius: 10px;">
+<div class="container" style="margin-top: 50px;border-radius: 6px; background-color: #F0E1BE;">
+    <table class="table table-bordered table-hover table-responsive-lg" >
+        <thead class="thead-light " >
+        <tr style="border-radius: 10px;" >
           
-            <th class="text-center" scope="col">
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
                 مرخصی از تاریخ
             </th>
-            <th class="text-center" scope="col">
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
                  مرخصی تا تاریخ
             </th>
-            <th class="text-center" scope="col">
+			<th class="text-center" scope="col" style="background-color:#F4C34E;">
+                دلیل
+            </th>
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
                 وضعیت مرخصی
            </th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${requestScope.leaveEmployeeList}" var="Leaves">
+        <c:forEach items="${requestScope.leaveEmployeeList}" var="leaves">
             <tr>
-                <td hidden><c:out value="${Leaves.id}"/></td>               
+                <td hidden><c:out value="${leaves.id}"/></td>               
                 <td><c:out value="${leaves.leaveFromDate}"/></td>
                 <td><c:out value="${leaves.leaveToDate}"/></td>
 				<td><c:out value="${leaves.reason}"/></td>

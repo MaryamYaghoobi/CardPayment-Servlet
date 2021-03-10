@@ -34,9 +34,30 @@ public class ManagerDao {
         Query query = session.createQuery(getAllActiveEmployees);
         query.setParameter("code", "active");
         employeeList = query.getResultList();
+        session.close();
+        sessionFactory.close();
+
         return employeeList;
     }
 
+    //=======================================================
+/*public List<Employee> getAllActiveEmployees() {
+
+    List<Employee> employeeList = new ArrayList<>();
+    SessionFactory sessionFactory;
+    StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+            ("META-INF/hibernate.cfg.xml").build();
+    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    Session session = sessionFactory.openSession();
+    //=========================
+    String getAllActiveEmployees = "select e from Employee e where " +
+            "e.disable =:disable";
+    Query query = session.createQuery(getAllActiveEmployees);
+    query.setParameter("disable", false);
+    employeeList = query.getResultList();
+    return employeeList;
+}*/
+//=======================================================
     public void addUser(Employee employee) {
         Transaction transaction = null;
         SessionFactory sessionFactory;
@@ -47,6 +68,9 @@ public class ManagerDao {
         transaction = session.beginTransaction();
         session.save(employee);
         transaction.commit();
+        session.close();
+        sessionFactory.close();
+
     }
 
     public void updateUserDetails(Employee employee) {
@@ -59,6 +83,9 @@ public class ManagerDao {
         transaction = session.beginTransaction();
         session.update(employee);
         transaction.commit();
+        session.close();
+        sessionFactory.close();
+
 
     }
 
@@ -81,8 +108,35 @@ public class ManagerDao {
         employee.setEmployeeStatus(categoryElement);
         session.update(employee);
         transaction.commit();
+        session.close();
+        sessionFactory.close();
+
 
     }
+//=========================================================
+/*public void isdeleted(long id) {
+    Transaction transaction = null;
+    SessionFactory sessionFactory;
+    StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+            ("META-INF/hibernate.cfg.xml").build();
+    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    Session session = sessionFactory.openSession();
+    transaction = session.beginTransaction();
+    String getEmployeeId = " select e from Employee e where e.id =:id";
+    Query employeeQuery = session.createQuery(getEmployeeId);
+    employeeQuery.setParameter("id", id);
+    Employee employee = (Employee) employeeQuery.getSingleResult();
+    String getInactive = "UPDATE Employee e SET e.disable = true WHERE e.id =:id";
+    Query Inactive = session.createQuery(getInactive);
+    Inactive.setParameter("disable", true);
+    Employee employeeList = (Employee) Inactive.getSingleResult();
+    employee.setDisable(employeeList);
+    session.update(employee);
+    transaction.commit();
+
+}*/
+
+//=========================================================
 
     public List<Employee> search(Employee employee) {
         //  Transaction transaction = null;
@@ -114,6 +168,8 @@ public class ManagerDao {
             employees = query.getResultList();
         } finally {
             session.close();
+            sessionFactory.close();
+
         }
         return employees;
     }
@@ -131,27 +187,33 @@ public class ManagerDao {
         Query query = session.createQuery(searchId);
         query.setParameter("id", id);
         employee = (Employee) query.getSingleResult();
+        session.close();
+        sessionFactory.close();
+
         return employee;
     }
 
     public int searchAllUsername(String username) {
-       // Transaction transaction = null;
+        // Transaction transaction = null;
         Object userUsername = null;
         SessionFactory sessionFactory;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
                 ("META-INF/hibernate.cfg.xml").build();
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
-       session.beginTransaction();
+        session.beginTransaction();
         String searchAllUsername = "select count(e) from Employee e where username =:username";
         Query query = session.createQuery(searchAllUsername, Object.class);
         query.setParameter("username", username);
         userUsername = query.getSingleResult();
+        session.close();
+        sessionFactory.close();
+
         return userUsername == null ? 0 : 1;
     }
 
     public Employee getManagerDetail(String firstName, String lastName) {
-       // Transaction transaction = null;
+        // Transaction transaction = null;
         Employee getManagerDetail = null;
         SessionFactory sessionFactory;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
@@ -165,11 +227,14 @@ public class ManagerDao {
         query.setParameter("firstName", firstName);
         query.setParameter("lastName", lastName);
         getManagerDetail = (Employee) query.getSingleResult();
+        session.close();
+        sessionFactory.close();
+
         return getManagerDetail;
     }
 
     public Employee searchUsername(String username) {
-      //  Transaction transaction = null;
+        //  Transaction transaction = null;
         Employee employeeList = null;
         SessionFactory sessionFactory;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
@@ -181,11 +246,13 @@ public class ManagerDao {
                 " e.username =:username");
         query.setParameter("username", username);
         employeeList = (Employee) query.getSingleResult();
+        session.close();
+        sessionFactory.close();
         return employeeList;
     }
 
     public List<Employee> allManager() {
-      //  Transaction transaction = null;
+        //  Transaction transaction = null;
         List<Employee> managerEmployeeList = new ArrayList<>();
         SessionFactory sessionFactory;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
@@ -198,11 +265,14 @@ public class ManagerDao {
         Query query = session.createQuery(allManager);
         query.setParameter("manager", "manager");
         managerEmployeeList = query.getResultList();
+        session.close();
+        sessionFactory.close();
+
         return managerEmployeeList;
     }
 
     public List<Employee> RegisteredLeaves(Employee manager) {
-       // Transaction transaction = null;
+        // Transaction transaction = null;
 
         List<Employee> employeeList = new ArrayList<>();
         SessionFactory sessionFactory;
@@ -210,13 +280,16 @@ public class ManagerDao {
                 ("META-INF/hibernate.cfg.xml").build();
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
-         session.beginTransaction();
-        String registeredLeaves="select distinct e from Employee e join fetch e.leaveList el " +
+        session.beginTransaction();
+        String registeredLeaves = "select distinct e from Employee e join fetch e.leaveList el " +
                 "where el.leaveStatus.code =:register  and e.role.code =:manager ";
         Query query = session.createQuery(registeredLeaves);
         query.setParameter("manager", manager);
         query.setParameter("register", "register");
         employeeList = query.getResultList();
+        session.close();
+        sessionFactory.close();
+
         return employeeList;
     }
 
@@ -233,16 +306,13 @@ public class ManagerDao {
         employee = (Employee) session.createQuery("select e from Employee e where " +
                 "e.username =:username and e.password =:password")
                 .setParameter("username", username).setParameter("password", password).uniqueResult();
-        transaction.commit();
-        if (transaction != null) {
-            transaction.rollback();
+        session.close();
+        sessionFactory.close();
 
-        }
         return employee;
     }
 }
 
-//--------------------------------
 
 
 

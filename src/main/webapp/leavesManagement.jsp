@@ -59,21 +59,21 @@
         </thead>
         <tbody>
         <c:forEach items="${requestScope.RegisteredLeaves}" var="Employee">
-            <c:forEach items="${Employee.leaveList}" var="leaves">
+            <c:forEach items="${Employee.leaveList}" var="leave">
                 <tr>
                     <td hidden><c:out value="${leave.id}"/></td>
                     <td><c:out value="${Employee.firstName}"/></td>
                     <td><c:out value="${Employee.lastName}"/></td>
-                    <td><c:out value="${leaves.leaveFromDate}"/></td>
-                    <td><c:out value="${leaves.leaveToDate}"/></td>
-					<td><c:out value="${leaves.reason}"/></td>
-                    <td><c:out value="${leaves.leaveStatus.name}"/></td>
+                    <td><c:out value="${leave.leaveFromDate}"/></td>
+                    <td><c:out value="${leave.leaveToDate}"/></td>
+					<td><c:out value="${leave.reason}"/></td>
+                    <td><c:out value="${leave.leaveStatus.name}"/></td>
                     <td class="text-right" style="width: 21%;">
                         <button type="button"
                                 class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="update"
                                 style="width: 82px;background-color: #F4C34E;border: none;"
-								onclick="LeaveConfirmation(${leave.id})"><span
-                                class="fa fa-check"> 
+								onclick="LeaveConfirmation(${leave.id})"><span class="fa fa-check"> 
+                               
                             تایید
                         </span></button>
                         <button type="button"

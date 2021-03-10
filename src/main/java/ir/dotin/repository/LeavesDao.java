@@ -12,7 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import javax.persistence.Query;
 
 public class LeavesDao {
-    public static void addLeave(Leaves leaveEmployee) {
+    public  void addLeave(Leaves leaveEmployee) {
         Transaction transaction = null;
         SessionFactory sessionFactory;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
@@ -23,9 +23,10 @@ public class LeavesDao {
         transaction = session.beginTransaction();
         session.save(leaveEmployee);
         transaction.commit();
-        if (transaction != null) {
-            transaction.rollback();
-        }
+        session.close();
+        sessionFactory.close();
+
+
     }
 
     public void LeaveConfirmation(long leaveId) {
@@ -48,10 +49,10 @@ public class LeavesDao {
         query.setParameter("id", leaveId);
         query.executeUpdate();
         transaction.commit();
+        session.close();
+        sessionFactory.close();
 
-        if (transaction != null) {
-            transaction.rollback();
-        }
+
     }
 
     public void rejectionLeave(long leaveId) {
@@ -74,8 +75,9 @@ public class LeavesDao {
         query.setParameter("id", leaveId);
         query.executeUpdate();
         transaction.commit();
-        if (transaction != null) {
-            transaction.rollback();
-        }
+        session.close();
+        sessionFactory.close();
+
+
     }
 }

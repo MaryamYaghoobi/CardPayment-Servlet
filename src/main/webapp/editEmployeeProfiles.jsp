@@ -12,6 +12,7 @@
 <html>
 <head>
     <jsp:include page="employeeHeader.jsp"/>
+	 <title>ویرایش پروفایل</title>
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
@@ -52,10 +53,17 @@
                     نام خانوادگی
                </label>
                 <input type="text" name="lastName" class="form-control" id="lastName"
-                       value="<c:out value='${requestScope.Employee.lastName}'/>">
+                       value="<c:out value="${requestScope.Employee.lastName}"/>">
             </div>
         </div>
-        <div class="form-row">                                                                             
+        <div class="form-row"> 
+ <div class="form-group col-md-6" style="margin-top: 17px;">
+                <label><label>*</label>
+                   نام پدر
+                </label>
+                <input type="text" class="form-control" id="fatherName" name="fatherName"
+                       value="<c:out value="${requestScope.Employee.fatherName}"/>">
+            </div>		
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><label style="color: #ff4626">*</label>
                     پست الکترونیک

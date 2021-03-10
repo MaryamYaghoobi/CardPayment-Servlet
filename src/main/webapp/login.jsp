@@ -11,72 +11,28 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html dir="rtl">
-<head>
-<!--==============================================================-->	
-  <!--  <link href="<c:url value="/css/login.css" rel="stylesheet"/>-->
-<!--==============================================================-->
-    <script type="text/javascript">
-
-        function validateForm() {
-            var username = document.forms["Form"]["username"].value;
-            var password = document.forms["Form"]["password"].value;
-            if (username == null || username == "" ) {
-                window.alert('نام کاربری نمیتواند خالی باشد.');
-                return false;
-            }if(password == null || password == ""){
-                window.alert('رمز عبور نمی تواند خالی باشد.');
-                return false;
-            }
-        }
-    </script>
-</head>
-
-<body>
-
-
-<h2>ورود</h2><br>
-
+<!--<jsp:include page="body.jsp"/>-->
 
 <c:if test= "${requestScope['invalidationUserOrPassword'] && empty sessionScope['username']}">
     <div>
-    <label id="" style=" vertical-align: middle;
-    display:inline-block;
-    width:100%;
-    text-align:center;
-    height:30px;
-    line-height:30px;
-    color: #ff4626;
-"><b>نام کاربری یا رمز عبور نادرست است.
-    </b>
+    <label>
+<b>نام کاربری یا رمز عبور نادرست است.</b>   
     </label>
     </div>
     </c:if>
-
-
-<div class="login">
-
-    <form id="login" name="Form" action="LoginController" method="post" onsubmit="return validateForm()">
-        <label><b>نام کاربری
-        </b>
-        </label>
-        <input type="text" name="username" id="Uname" placeholder="Username">
-        <br><br>
-        <label><b>رمز عبور
-        </b>
-        </label>
-        <input type="Password" name="password" id="Pass" placeholder="Password">
-        <br><br>
-        <button type="submit" name="log" id="log">ورود</button>
-        <br><br>
-
-    </form>
-	<div class="login100-more" style="background-image: url('images/bg-01.jpg');">
-				</div>
+<div id="login">
+ <link rel="stylesheet" href="css/login.css">
+   <form  name="Form" action="LoginController" method="post" onsubmit="return validateForm()">
+    <h1>ورود</h1>
+    <input type="text" name="username" id="Uname" placeholder="نام کاربری">
+    <input type="Password" name="password" id="Pass" placeholder="رمز عبور">
+	 
+    <button type="submit" name="log" >ورود</button>
+  </form>
 </div>
+  
 
 
 
-</body>
-</html>
+
+

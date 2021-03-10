@@ -6,8 +6,11 @@ import ir.dotin.repository.ManagerDao;
 import java.util.List;
 
 public class ManagerService {
-
+    private static ManagerService managerService = new ManagerService();
     public ManagerService() {
+    }
+    public static ManagerService getInstance() {
+        return managerService;
     }
 
     public List<Employee> RegisteredLeaves(Employee manager) {

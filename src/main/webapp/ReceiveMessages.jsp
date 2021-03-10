@@ -11,7 +11,7 @@
 <!doctype html>
 <html>
 <head>
-<title>پیام ها</title>
+<title>پیام های دریافتی</title>
 <!--===============================================================================================-->	
 <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" 
 integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
@@ -31,16 +31,17 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
     </div>
 </c:when>
 <c:otherwise>
-<div class="container" style="margin-top: 50px;border-radius: 6px;background-color: #F0E1BE;">
-    <span style="font-weight: bold;font-size: 17px;color:darkblue"><h>لیست پیام های دریافت شده</h></span>
+<div class="container" style="margin-top: 50px;border-radius: 6px;background-color: #F0E1BE;"><br>
+    <span style="font-weight: bold;font-size: 17px;color:darkblue"><h>لیست پیام های دریافت شده</h></span><br><br>
     <table class="table table-bordered table-hover table-responsive-lg">
         <thead class="thead-light ">
         <tr style="border-radius: 10px;">
 
-            <th class="text-center" scope="col">نام ارسال کننده</th>
-            <th class="text-center" scope="col">نام خانوادگی ارسال کننده</th>
-            <th class="text-center" scope="col">متن پیام دریافت شده</th>
-            <th class="text-center" scope="col">فایل پیوست</th>
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">نام ارسال کننده</th>
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">نام خانوادگی ارسال کننده</th>
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">متن پیام دریافت شده</th>
+			<th class="text-center" scope="col" style="background-color:#F4C34E;">دلیل</th>
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">فایل پیوست</th>
         </tr>
         </thead>
         <tbody>
@@ -61,58 +62,6 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
                                     style="width: 110px; border-radius: 7px; align-self: center;"
                                     onclick="downloadAttachment('${messagesReceived[5]}')">دریافت فایل
                             </button>
-                        </c:otherwise>
-                    </c:choose>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    </c:otherwise>
-    </c:choose>
-</div>
-
-
-<c:choose>
-    <c:when test="${empty requestScope.sentMessages}">
-        <div style="width: 400px;border-radius: 5px; margin: 10px auto;text-align: center;">
-            <div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">x</button>
-                <strong>پیام
-                </strong>
-            </div>
-        </div>
-    </c:when>
-    <c:otherwise>
-<div class="container" style="margin-top: 50px;border-radius: 6px;background-color: #F0E1BE;">
-    <span style="font-weight: bold;font-size: 17px;color:darkblue">لیست پیام های ارسال شده</span>
-    <table class="table table-bordered table-hover table-responsive-lg">
-        <thead class="thead-light ">
-        <tr style="border-radius: 10px;">
-          
-            <th class="text-center" scope="col">نام دریافت کننده</th>
-            <th class="text-center" scope="col">نام خانوادگی دریافت کننده</th>
-            <th class="text-center" scope="col">متن پیام ارسال شده</th>
-            <th class="text-center" scope="col">فایل پیوست</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${requestScope.sentMessages}" var="detailsMessagesSent">
-            <tr>
-                <td hidden><c:out value="${detailsMessagesSent[0]}"/></td>
-                <td><c:out value="${detailsMessagesSent[1]}"/></td>
-                <td><c:out value="${detailsMessagesSent[2]}"/></td>
-                <td><c:out value="${detailsMessagesSent[3]}"/></td>
-                <td><c:out value="${detailsMessagesSent[4]}"/></td>
-                <td>
-                    <c:choose>
-                        <c:when test="${empty detailsMessagesSent[5]}">
-                            <span>فایلی پیوست نشده است</span>
-                        </c:when>
-                        <c:otherwise>
-                            <button type="button" class="btn btn-primary btn-lm my-0 badge-pill"
-                                    style="width: 110px; border-radius: 7px; align-self: center;"
-                                    onclick="downloadAttachment('${detailsMessagesSent[5]}')">ارسال فایل</button>                            
                         </c:otherwise>
                     </c:choose>
                 </td>

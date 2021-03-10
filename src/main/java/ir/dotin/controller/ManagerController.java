@@ -91,10 +91,7 @@ public class ManagerController extends HttpServlet {
     }
 
 
-
     public void rejectLeave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         long leaveId = Long.parseLong(request.getParameter("leaveId"));
         leavesService.rejectionLeave(leaveId);
         System.out.println("The leave request was rejected");
@@ -111,8 +108,7 @@ public class ManagerController extends HttpServlet {
 
     public void RegisteredLeaves(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-        Employee manager = managerService.
+        Employee manager = ManagerService.getInstance().
                 searchUsername((String) request.getSession().getAttribute("username"));
         List<Employee> RegisteredLeaves = managerService.RegisteredLeaves((manager));
         request.setAttribute("RegisteredLeaves", RegisteredLeaves);
@@ -130,23 +126,21 @@ public class ManagerController extends HttpServlet {
                     request.getParameter("username"));
         } else {
             employee.setUsername(userName);
-        insertEmployee(request, response);
+            insertEmployee(request, response);
 
        /* long employeeId = employee.getId();
         long lastVersion = employee.getC_version();
         employeeService.updateVersion(employeeId, lastVersion);*/
-        String firstName = request.getParameter("firstName");
-        employee.setFirstName(firstName);
-        String lastName = request.getParameter("lastName");
-        employee.setLastName(lastName);
-        String email = request.getParameter("email");
-        employee.setEmail(email);
-        String fatherName = request.getParameter("fatherName");
-        employee.setFatherName(fatherName);
-        String dateOfBirth = request.getParameter("dateOfBirth");
-        employee.setDateOfBirth(dateOfBirth);
-
-
+            String firstName = request.getParameter("firstName");
+            employee.setFirstName(firstName);
+            String lastName = request.getParameter("lastName");
+            employee.setLastName(lastName);
+            String email = request.getParameter("email");
+            employee.setEmail(email);
+            String fatherName = request.getParameter("fatherName");
+            employee.setFatherName(fatherName);
+            String dateOfBirth = request.getParameter("dateOfBirth");
+            employee.setDateOfBirth(dateOfBirth);
             String password = request.getParameter("password");
             employee.setPassword(password);
             CategoryElement role = searchCategoryElement.findCategoryElement
@@ -162,7 +156,7 @@ public class ManagerController extends HttpServlet {
             employee.setManager(managerService.getManagerDetail(managerDetail[0], managerDetail[1]));
             managerService.addUser(employee);
             getAllActiveEmployees(request, response);
-       /* String strLastVersion = String.valueOf(lastVersion);
+      /* String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
@@ -177,12 +171,12 @@ public class ManagerController extends HttpServlet {
         }
         List<String> allManager = allManager();
         request.setAttribute("managerList", allManager);
-       /* long employeeId = 1;
+       /* long employeeId =employee.getId();
         long lastVersion = employee.getC_version();
         employeeService.updateVersion(employeeId, lastVersion);*/
         RequestDispatcher rs = request.getRequestDispatcher("insertEmployee.jsp");
         rs.forward(request, response);
-      /*  String strLastVersion = String.valueOf(lastVersion);
+        /*String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
@@ -217,22 +211,22 @@ public class ManagerController extends HttpServlet {
 
         List<String> allManager = allManager();
         request.setAttribute("managerList", allManager);
-        String id = request.getParameter("employeeId");
-        long employeeId = Long.parseLong(id);
+        // String id = request.getParameter("employeeId");
+        long employeeId = Long.parseLong(request.getParameter("employeeId"));
         Employee employee = managerService.searchId(employeeId);
-        long empId = 1;
+      /*  long empId = 1;
         long lastVersion = employee.getC_version();
-        employeeService.updateVersion(empId, lastVersion);
+        employeeService.updateVersion(empId, lastVersion);*/
         Employee manager = employee.getManager();
         request.setAttribute("Manager : ", manager.getFirstName() + "  " + manager.getLastName());
         request.setAttribute("Employee : ", employee);
         RequestDispatcher rs = request.getRequestDispatcher("editAndAppointmentOfManager.jsp");
         rs.forward(request, response);
-        String strLastVersion = String.valueOf(lastVersion);
+       /* String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }
+        }*/
     }
 
     public void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -278,6 +272,13 @@ public class ManagerController extends HttpServlet {
         request.setAttribute("firstName", request.getParameter("firstName"));
         request.setAttribute("lastName", request.getParameter("lastName"));
         request.setAttribute("username", request.getParameter("username"));
+      /*  if (employee.getDisable){
+            request.setAttribute("statue", "غیرفعال ");
+        } else {
+            request.setAttribute("statue", "فعال");
+
+        }
+*/
         RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
         rs.forward(request, response);
 
@@ -323,6 +324,7 @@ public class ManagerController extends HttpServlet {
         rs.forward(request, response);
 
     }
+
     public void sendMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Employee> employeeList = employeeService.allEmployee();
         request.setAttribute("employeeList", employeeList);
@@ -335,7 +337,8 @@ public class ManagerController extends HttpServlet {
         Part filePart = request.getPart("file");
         String fileName = filePart.getSubmittedFileName();
         for (Part part : request.getParts()) {
-            part.write(TOMCAT_FILE_PATH + fileName); }
+            part.write(TOMCAT_FILE_PATH + fileName);
+        }
         response.getWriter().print("The file uploaded Successfully.");
         Employee senderEmail = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
@@ -348,11 +351,11 @@ public class ManagerController extends HttpServlet {
         List<Long> Ids = Arrays.stream(employeeIds)
                 .map(Long::parseLong)
                 .collect(Collectors.toList());
-        List<Employee> receivedEmailEmployees = employeeService.receivedEmailEmployees(Ids);
+        List<Employee> receivedEmailEmployees = employeeService.ReceiveMessages(Ids);
         email.getReceiverEmployees().addAll(receivedEmailEmployees);
         emailService.addMessages(email);
-        employeeService.updateSentEmailEmployee(senderEmail, email);
-        String messages="forwardingMessage";
+        employeeService.forwardingMessage(senderEmail, email);
+        String messages = "forwardingMessage";
         request.setAttribute(messages, true);
         RequestDispatcher rs = request.getRequestDispatcher("employeeDashboard.jsp");
         rs.forward(request, response);

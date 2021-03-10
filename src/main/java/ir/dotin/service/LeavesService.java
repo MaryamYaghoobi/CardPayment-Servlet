@@ -7,7 +7,7 @@ import ir.dotin.repository.LeavesDao;
 public class LeavesService {
     public  void addLeave(Leaves leaveEmployee) {
         LeavesDao leavesDao = new LeavesDao();
-        LeavesDao.addLeave(leaveEmployee);
+        leavesDao.addLeave(leaveEmployee);
     }
 
     public  void LeaveConfirmation(Long leaveId) {

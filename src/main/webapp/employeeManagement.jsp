@@ -74,27 +74,29 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${requestScope.employeeList}" var="employees">
+        <c:forEach items="${requestScope.employeeList}" var="employee">
             <tr>
-                <td hidden><c:out value="${employees.id}"/></td>
-                <td><c:out value="${employees.firstName}"/></td>
-                <td><c:out value="${employees.lastName}"/></td>
-                <td><c:out value="${employees.manager.firstName} ${employees.manager.lastName}"/></td>
-                <td><c:out value="${employees.role.name}"/></td>
-                <td><c:out value="${employees.employeeStatus.name}"/></td>
+                <td hidden><c:out value="${employee.id}"/></td>
+                <td><c:out value="${employee.firstName}"/></td>
+                <td><c:out value="${employee.lastName}"/></td>
+                <td><c:out value="${employee.manager.firstName}${employee.manager.lastName}"/></td>
+                <td><c:out value="${employee.role.name}"/></td>
+                <td><c:out value="${employee.employeeStatus.name}"/></td>
                 <td class="text-right" style="width: 21%;">
                    <button type="submit"
                             class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="update"
-                            style="width: 82px;background-color: #F4C34E;border: none;" onclick="searchId(${employees.id})">
-                            <span class="fa fa-edit"></span></button>                      
+                            style="width: 82px;background-color: #F4C34E;border: none;" onclick="searchId(${employee.id})"
+							action="editAndAppointmentOfManager">
+                            <!--<a class="nav-link" href="ManagerController?action=editAndAppointmentOfManager">-->
+							<span class="fa fa-edit"></span>
+							</button>                      
                     <button type="submit"
                             class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"
                             style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;"
-							onclick="delete(${employees.id})">						
-                           <span class="fa fa-trash" aria-hidden="true"> </span></button>                        
+							onclick="delete(${employee.id})">						                         
+						 <span class="fa fa-trash" aria-hidden="true"> </span> </button> 				  						                        
                 </td>
-            </tr>
-			
+            </tr>			
      </c:forEach>
         </tbody>
     </table>
@@ -104,12 +106,12 @@
  <script>
     function delete(employeeId) {
         if (confirm('کاربر حذف شود؟')) {
-            window.location = 'ManagerController?action=delete&employeesId=' + employeeId;
+            window.location = 'ManagerController?action=delete&employeeId=' + employeeId;
         }
     }
 
     function searchId(employeeId) {
-        window.location = 'ManagerController?action=editAndAppointmentOfManager&employeesId=' + employeeId;
+        window.location = 'ManagerController?action=editAndAppointmentOfManager&employeeId=' + employeeId;
     }
        
 </script>

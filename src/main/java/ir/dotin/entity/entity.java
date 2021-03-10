@@ -16,7 +16,7 @@ public class entity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "LONG", nullable = false, unique = true)
     public long id;
-    @Column(columnDefinition = "boolean default false")
+   /* @Column(columnDefinition = "boolean default false")
     private Boolean disabled;
     @Column(columnDefinition = "boolean default false")
     private Boolean active;
@@ -37,7 +37,7 @@ public class entity {
 
     public void setC_version(long c_version) {
         this.c_version = c_version;
-    }
+    }*/
 
     public long getId() {
         return id;
@@ -47,11 +47,11 @@ public class entity {
         this.id = id;
     }
 
-    public Boolean getDisabled() {
+  /*  public Boolean getDisabled() {
         return disabled;
     }
 
     public void setDisabled(Boolean disabled) {
         this.disabled = disabled;
-    }
+    }*/
 }

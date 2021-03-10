@@ -45,14 +45,15 @@ public class EmployeeService {
         employeeDao.updateUserDetails(employee);
     }
 //=================================================================
-    public  void updateSentEmailEmployee(Employee employee, Email email){
+    public  void forwardingMessage(Employee employee, Email email){
         EmployeeDao employeeDao = new EmployeeDao();
-        employeeDao.updateSentEmail(employee,email);
+        employeeDao.forwardingMessage(employee,email);
     }
-    public  List<Employee> receivedEmailEmployees(List<Long> employeeIds){
+    public  List<Employee> ReceiveMessages(List<Long> employeeIds){
         EmployeeDao employeeDao = new EmployeeDao();
-        return employeeDao.receivedEmailEmployees(employeeIds);
+        return employeeDao.ReceiveMessages(employeeIds);
     }
 }
+
 
 

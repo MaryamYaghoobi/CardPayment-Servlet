@@ -68,7 +68,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a class="nav-link" href="EmployeeController?action=editEmployeeProfiles">
-                        پروفایل شخصی
+                        ویرایش پروفایل
                     <span class="sr-only">(current)</span></a>
 					
   <a class="nav-link" href="leaveRequest.jsp">
@@ -82,7 +82,10 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
                        ارسال پیام
                     </a>
 					<a class="nav-link" href="EmployeeController?action=ReceiveMessages">
-                        پیام ها
+                       پیام های دریافتی
+                    </a>
+					<a class="nav-link" href="EmployeeController?action=sentMessages">
+                      پیام های ارسالی
                     </a>
  <a class="nav-link " href="ManagerController?action=logout" >
                     خروج

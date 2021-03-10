@@ -25,7 +25,8 @@ public class Employee extends entity {
     private String password;
     @Column(name = "c_fatherName", columnDefinition = "VARCHAR(255)")
     private String fatherName;
-
+    @Version
+    private long c_version;
     @ManyToOne()
     @JoinColumn(name = "c_manager")
     private Employee manager;
@@ -34,7 +35,11 @@ public class Employee extends entity {
     @ManyToOne()
     @JoinColumn(name = "c_role")
     private CategoryElement role;
-
+    @ManyToOne()
+    @JoinColumn(name = "c_employeeStatus")
+    private CategoryElement employeeStatus;
+   /* @Column(columnDefinition = "boolean default false")
+    private Boolean active;*/
     @ManyToOne()
     @JoinColumn(name = "c_gender")
     private CategoryElement gender;
@@ -44,6 +49,14 @@ public class Employee extends entity {
     @OneToMany()
     @JoinColumn(name = "c_emailSenderId")
     private List<Email> sentEmails;
+
+    public CategoryElement getEmployeeStatus() {
+        return employeeStatus;
+    }
+
+    public void setEmployeeStatus(CategoryElement employeeStatus) {
+        this.employeeStatus = employeeStatus;
+    }
 
     public List<Email> getSentEmails() {
         return sentEmails;
@@ -125,6 +138,14 @@ public class Employee extends entity {
         this.role = role;
     }
 
+    public CategoryElement getStatus() {
+        return employeeStatus;
+    }
+
+    public void setStatus(CategoryElement employeeStatus) {
+        this.employeeStatus = employeeStatus;
+    }
+
     public String getFatherName() {
         return fatherName;
     }
@@ -141,6 +162,13 @@ public class Employee extends entity {
         this.gender = gender;
     }
 
+    public long getC_version() {
+        return c_version;
+    }
+
+    public void setC_version(long c_version) {
+        this.c_version = c_version;
+    }
 
     public List<Leaves> getLeaveList() {
         return leaveList;
@@ -171,7 +199,7 @@ public class Employee extends entity {
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.role = role;
-
+        this.employeeStatus = employeeStatus;
         this.username = username;
         this.password = password;
         this.manager = manager;
@@ -192,7 +220,7 @@ public class Employee extends entity {
         this.lastName = lastName;
         this.email = email;
         this.fatherName = fatherName;
-
+        this.employeeStatus = employeeStatus;
         this.manager = manager;
     }
 
