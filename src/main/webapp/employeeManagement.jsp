@@ -21,7 +21,18 @@
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
+<script>
+    function delete(employeeId) {
+        if (confirm('کاربر حذف شود؟')) {
+            window.location = 'ManagerController?action=delete&employeeId=' + employeeId;
+        }
+    }
 
+    function searchId(employeeId) {
+        window.location = 'ManagerController?action=editAndAppointmentOfManager&employeeId=' + employeeId;
+    }
+       
+</script>
 <div class="container" style="margin-top: 50px;border-radius: 6px;background-color: #F0E1BE;">
     <form action="ManagerController" method="post">
         <div>
@@ -83,14 +94,14 @@
                 <td><c:out value="${employee.role.name}"/></td>
                 <td><c:out value="${employee.employeeStatus.name}"/></td>
                 <td class="text-right" style="width: 21%;">
-                   <button type="submit"
-                            class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="update"
+                   <button type="button"
+                            class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="updateProfile"
                             style="width: 82px;background-color: #F4C34E;border: none;" onclick="searchId(${employee.id})"
 							action="editAndAppointmentOfManager">
                             <!--<a class="nav-link" href="ManagerController?action=editAndAppointmentOfManager">-->
 							<span class="fa fa-edit"></span>
 							</button>                      
-                    <button type="submit"
+                    <button type="button"
                             class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"
                             style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;"
 							onclick="delete(${employee.id})">						                         
@@ -103,18 +114,7 @@
 	<a class="nav-link" href="ManagerController?action=insertEmployee" style="width: 50px;color: black;margin-right:1080px; font-size: 30px;">&#43;</a>
 	
 </div>
- <script>
-    function delete(employeeId) {
-        if (confirm('کاربر حذف شود؟')) {
-            window.location = 'ManagerController?action=delete&employeeId=' + employeeId;
-        }
-    }
-
-    function searchId(employeeId) {
-        window.location = 'ManagerController?action=editAndAppointmentOfManager&employeeId=' + employeeId;
-    }
-       
-</script>
+ 
 
 </body>
 </html>

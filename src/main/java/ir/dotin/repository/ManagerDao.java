@@ -34,8 +34,8 @@ public class ManagerDao {
         Query query = session.createQuery(getAllActiveEmployees);
         query.setParameter("code", "active");
         employeeList = query.getResultList();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
         return employeeList;
     }
@@ -68,8 +68,8 @@ public class ManagerDao {
         transaction = session.beginTransaction();
         session.save(employee);
         transaction.commit();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
     }
 
@@ -83,8 +83,8 @@ public class ManagerDao {
         transaction = session.beginTransaction();
         session.update(employee);
         transaction.commit();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
 
     }
@@ -108,8 +108,8 @@ public class ManagerDao {
         employee.setEmployeeStatus(categoryElement);
         session.update(employee);
         transaction.commit();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
 
     }
@@ -167,8 +167,8 @@ public class ManagerDao {
             org.hibernate.Query<Employee> query = session.createQuery(Query);
             employees = query.getResultList();
         } finally {
-            session.close();
-            sessionFactory.close();
+           /* session.close();
+            sessionFactory.close();*/
 
         }
         return employees;
@@ -187,8 +187,8 @@ public class ManagerDao {
         Query query = session.createQuery(searchId);
         query.setParameter("id", id);
         employee = (Employee) query.getSingleResult();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
         return employee;
     }
@@ -206,8 +206,8 @@ public class ManagerDao {
         Query query = session.createQuery(searchAllUsername, Object.class);
         query.setParameter("username", username);
         userUsername = query.getSingleResult();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
         return userUsername == null ? 0 : 1;
     }
@@ -227,8 +227,8 @@ public class ManagerDao {
         query.setParameter("firstName", firstName);
         query.setParameter("lastName", lastName);
         getManagerDetail = (Employee) query.getSingleResult();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
         return getManagerDetail;
     }
@@ -246,8 +246,8 @@ public class ManagerDao {
                 " e.username =:username");
         query.setParameter("username", username);
         employeeList = (Employee) query.getSingleResult();
-        session.close();
-        sessionFactory.close();
+      /*  session.close();
+        sessionFactory.close();*/
         return employeeList;
     }
 
@@ -265,9 +265,9 @@ public class ManagerDao {
         Query query = session.createQuery(allManager);
         query.setParameter("manager", "manager");
         managerEmployeeList = query.getResultList();
-        session.close();
+       /* session.close();
         sessionFactory.close();
-
+*/
         return managerEmployeeList;
     }
 
@@ -287,8 +287,8 @@ public class ManagerDao {
         query.setParameter("manager", manager);
         query.setParameter("register", "register");
         employeeList = query.getResultList();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
         return employeeList;
     }
@@ -306,8 +306,6 @@ public class ManagerDao {
         employee = (Employee) session.createQuery("select e from Employee e where " +
                 "e.username =:username and e.password =:password")
                 .setParameter("username", username).setParameter("password", password).uniqueResult();
-        session.close();
-        sessionFactory.close();
 
         return employee;
     }

@@ -19,15 +19,14 @@ public class LeavesDao {
                 ("META-INF/hibernate.cfg.xml").build();
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
         transaction = session.beginTransaction();
         session.save(leaveEmployee);
         transaction.commit();
         session.close();
         sessionFactory.close();
 
-
     }
+
 
     public void LeaveConfirmation(long leaveId) {
         Transaction transaction = null;

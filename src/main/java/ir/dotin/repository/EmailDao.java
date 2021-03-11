@@ -26,8 +26,8 @@ public class EmailDao {
             transaction = session.beginTransaction();
             session.persist(email);
             transaction.commit();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
     }
 
@@ -44,8 +44,8 @@ public class EmailDao {
                     "  where employee.id =:id");
             query.setParameter("id", employee.getId());
             receivedEmails = query.getResultList();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
         return receivedEmails;
     }
@@ -64,8 +64,8 @@ public class EmailDao {
                     "  where receiver.id =:id AND se.id = email.id");
             query.setParameter("id", employee.getId());
             receivedEmailsInfo = query.getResultList();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
         return receivedEmailsInfo;
     }
@@ -87,8 +87,8 @@ public class EmailDao {
                     "dotin.t_employee sender on sender.id = email.c_emailSenderId where sender.id =:id");
             query.setParameter("id", employee.getId());
             sentEmailsInfo = query.getResultList();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
         return sentEmailsInfo;
     }

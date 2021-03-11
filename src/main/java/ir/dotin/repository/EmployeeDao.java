@@ -35,8 +35,8 @@ public class EmployeeDao {
         queryUpdate.setParameter("c_version", c_version);
        // queryUpdate.setLockMode(LockModeType.OPTIMISTIC);
         Employee version = (Employee) queryUpdate.getResultList();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
         return version;
     }
@@ -54,9 +54,9 @@ public class EmployeeDao {
         Query query = session.createQuery(strSelectWithUsername);
         query.setParameter("username", username);
         employeeList = (Employee) query.getSingleResult();
-        session.close();
+       /* session.close();
         sessionFactory.close();
-
+*/
         return employeeList;
     }
 
@@ -88,7 +88,7 @@ public class EmployeeDao {
         Query query = session.createQuery(getUserDetails);
         query.setParameter("id", id);
         employeeList = (Employee) query.getSingleResult();
-        session.close();
+       session.close();
         sessionFactory.close();
 
         return employeeList;
@@ -105,9 +105,9 @@ public class EmployeeDao {
         String allEmployee = "select e from Employee e";
         Query query = session.createQuery(allEmployee);
         employeeList = query.getResultList();
-        session.close();
+      /* session.close();
         sessionFactory.close();
-
+*/
         return employeeList;
     }
 
@@ -124,8 +124,8 @@ public class EmployeeDao {
         updatedEmployee.getLeaveList().add(leaveEmployee);
         session.update(updatedEmployee);
         transaction.commit();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
     }
 
@@ -141,8 +141,8 @@ public class EmployeeDao {
                 " where e.id =:id");
         query.setParameter("id", employee.getId());
         leaveEmployee = (List<Leaves>) query.getResultList();
-        session.close();
-        sessionFactory.close();
+       /* session.close();
+        sessionFactory.close();*/
 
         return leaveEmployee;
     }
@@ -160,9 +160,9 @@ public void forwardingMessage(Employee employee, Email email) {
         updatedEmployee.getSentEmails().add(email);
         session.update(updatedEmployee);
         transaction.commit();
-    session.close();
+   /* session.close();
     sessionFactory.close();
-
+*/
 }
 
 
@@ -177,8 +177,8 @@ public void forwardingMessage(Employee employee, Email email) {
             MultiIdentifierLoadAccess<Employee> multiLoadAccess =
                     session.byMultipleIds(Employee.class);
             receivedEmailEmployees = multiLoadAccess.multiLoad(employeeIds);
-        session.close();
-        sessionFactory.close();
+        /*session.close();
+        sessionFactory.close();*/
 
 
         return receivedEmailEmployees;

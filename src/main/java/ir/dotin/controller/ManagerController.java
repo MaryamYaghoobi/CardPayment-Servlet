@@ -108,9 +108,11 @@ public class ManagerController extends HttpServlet {
 
     public void RegisteredLeaves(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Employee manager = ManagerService.getInstance().
+        Employee manager = managerService.
                 searchUsername((String) request.getSession().getAttribute("username"));
+
         List<Employee> RegisteredLeaves = managerService.RegisteredLeaves((manager));
+
         request.setAttribute("RegisteredLeaves", RegisteredLeaves);
         RequestDispatcher rs = request.getRequestDispatcher("leavesManagement.jsp");
         rs.forward(request, response);
