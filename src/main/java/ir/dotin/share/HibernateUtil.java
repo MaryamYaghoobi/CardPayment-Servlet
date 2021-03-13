@@ -26,4 +26,10 @@ public class HibernateUtil {
 
     }
 
-}
+}/*
+    SessionFactory sessionFactory;
+    StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
+            ("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+                Session session = sessionFactory.openSession();
+                session.beginTransaction();*/

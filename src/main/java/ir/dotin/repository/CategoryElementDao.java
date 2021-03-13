@@ -1,6 +1,7 @@
 package ir.dotin.repository;
 
 import ir.dotin.entity.CategoryElement;
+import ir.dotin.share.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -13,20 +14,19 @@ public class CategoryElementDao {
 
     public CategoryElement searchCategoryElement(String code) {
         CategoryElement categoryElementList = null;
-        SessionFactory sessionFactory;
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
-                ("META-INF/hibernate.cfg.xml").build();
-        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Query query = session.createQuery
-                ("select c from CategoryElement c where c.code=:category");
-        query.setParameter("category", code);
-        categoryElementList = (CategoryElement) query.getSingleResult();
-        return categoryElementList;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            Query query = session.createQuery
+                    ("select c from CategoryElement c where c.code=:category");
+            query.setParameter("category", code);
+            categoryElementList = (CategoryElement) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            return categoryElementList;
 
+        }
     }
-}
 
 
 
