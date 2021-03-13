@@ -23,7 +23,7 @@ public class LeavesDao {
         session.save(leaveEmployee);
         transaction.commit();
         session.close();
-        sessionFactory.close();
+       // sessionFactory.close();
 
     }
 
@@ -35,7 +35,7 @@ public class LeavesDao {
                 ("META-INF/hibernate.cfg.xml").build();
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        //session.beginTransaction();
         transaction = session.beginTransaction();
         Query categoryElementQuery = session.createQuery
                 ("select ce from CategoryElement ce where ce.code =:code");
@@ -49,7 +49,7 @@ public class LeavesDao {
         query.executeUpdate();
         transaction.commit();
         session.close();
-        sessionFactory.close();
+       // sessionFactory.close();
 
 
     }
@@ -61,21 +61,21 @@ public class LeavesDao {
                 ("META-INF/hibernate.cfg.xml").build();
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
+       // session.beginTransaction();
         transaction = session.beginTransaction();
         Query categoryElementQuery = session.createQuery
                 (" select ce from CategoryElement ce where ce.code =:code");
         categoryElementQuery.setParameter("code", "reject");
         CategoryElement reject = (CategoryElement) categoryElementQuery.getSingleResult();
         Query query = session.createQuery
-                ("update Leaves l set l.leaveStatus =:rejected " +
+                ("update Leaves l set l.leaveStatus =:reject " +
                         " where l.id =:id");
         query.setParameter("reject", reject);
         query.setParameter("id", leaveId);
         query.executeUpdate();
         transaction.commit();
         session.close();
-        sessionFactory.close();
+      //  sessionFactory.close();
 
 
     }

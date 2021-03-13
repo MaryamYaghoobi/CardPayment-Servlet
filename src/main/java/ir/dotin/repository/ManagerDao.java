@@ -20,7 +20,7 @@ import java.util.List;
 public class ManagerDao {
 
 
-    public List<Employee> getAllActiveEmployees() {
+ /* public List<Employee> getAllActiveEmployees() {
 
         List<Employee> employeeList = new ArrayList<>();
         SessionFactory sessionFactory;
@@ -34,14 +34,14 @@ public class ManagerDao {
         Query query = session.createQuery(getAllActiveEmployees);
         query.setParameter("code", "active");
         employeeList = query.getResultList();
-       /* session.close();
-        sessionFactory.close();*/
+       *//* session.close();
+        sessionFactory.close();*//*
 
         return employeeList;
-    }
+    }*/
 
     //=======================================================
-/*public List<Employee> getAllActiveEmployees() {
+public List<Employee> getAllActiveEmployees() {
 
     List<Employee> employeeList = new ArrayList<>();
     SessionFactory sessionFactory;
@@ -51,12 +51,12 @@ public class ManagerDao {
     Session session = sessionFactory.openSession();
     //=========================
     String getAllActiveEmployees = "select e from Employee e where " +
-            "e.disable =:disable";
+            "e.disabled =:disabled";
     Query query = session.createQuery(getAllActiveEmployees);
-    query.setParameter("disable", false);
+    query.setParameter("disabled", false);
     employeeList = query.getResultList();
     return employeeList;
-}*/
+}
 //=======================================================
     public void addUser(Employee employee) {
         Transaction transaction = null;
@@ -88,8 +88,7 @@ public class ManagerDao {
 
 
     }
-
-    public void delete(long id) {
+/*   public void delete(long id) {
         Transaction transaction = null;
         SessionFactory sessionFactory;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
@@ -108,13 +107,13 @@ public class ManagerDao {
         employee.setEmployeeStatus(categoryElement);
         session.update(employee);
         transaction.commit();
-       /* session.close();
-        sessionFactory.close();*/
+       // session.close();
+     //   sessionFactory.close();
 
 
-    }
+    }*/
 //=========================================================
-/*public void isdeleted(long id) {
+public void delete(long id) {
     Transaction transaction = null;
     SessionFactory sessionFactory;
     StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
@@ -126,15 +125,15 @@ public class ManagerDao {
     Query employeeQuery = session.createQuery(getEmployeeId);
     employeeQuery.setParameter("id", id);
     Employee employee = (Employee) employeeQuery.getSingleResult();
-    String getInactive = "UPDATE Employee e SET e.disable = true WHERE e.id =:id";
+    String getInactive = "UPDATE Employee e SET e.disabled = true WHERE e.id =:id";
     Query Inactive = session.createQuery(getInactive);
     Inactive.setParameter("disable", true);
-    Employee employeeList = (Employee) Inactive.getSingleResult();
-    employee.setDisable(employeeList);
+    Boolean employeeList = (Boolean) Inactive.getSingleResult();
+    employee.setC_disabled(employeeList);
     session.update(employee);
     transaction.commit();
 
-}*/
+}
 
 //=========================================================
 
@@ -167,8 +166,8 @@ public class ManagerDao {
             org.hibernate.Query<Employee> query = session.createQuery(Query);
             employees = query.getResultList();
         } finally {
-           /* session.close();
-            sessionFactory.close();*/
+          // session.close();
+         //   sessionFactory.close();*/
 
         }
         return employees;
@@ -206,8 +205,8 @@ public class ManagerDao {
         Query query = session.createQuery(searchAllUsername, Object.class);
         query.setParameter("username", username);
         userUsername = query.getSingleResult();
-       /* session.close();
-        sessionFactory.close();*/
+        //session.close();
+       // sessionFactory.close();*/
 
         return userUsername == null ? 0 : 1;
     }
@@ -282,13 +281,13 @@ public class ManagerDao {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         String registeredLeaves = "select distinct e from Employee e join fetch e.leaveList el " +
-                "where el.leaveStatus.code =:register  and e.role.code =:manager ";
+                "where el.leaveStatus.code =:register  and e.manager.id =:managerId ";
         Query query = session.createQuery(registeredLeaves);
-        query.setParameter("manager", manager);
+        query.setParameter("managerId", manager.getId());
         query.setParameter("register", "register");
         employeeList = query.getResultList();
-       /* session.close();
-        sessionFactory.close();*/
+        session.close();
+       // sessionFactory.close();*/
 
         return employeeList;
     }

@@ -24,9 +24,9 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 <c:choose>
  <c:when test="${empty requestScope.sentMessages}">
         <div style="width: 400px;border-radius: 5px; margin: 10px auto;text-align: center;">
-            <div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">x</button>
-                <strong>پیام
+            <div class="alert alert-info" style="background-color: #F0E1BE; border: none;">
+                <button type="button" class="close" data-dismiss="alert" ></button>
+                <strong>پیامی ارسال نشده است. 
                 </strong>
             </div>
         </div>

@@ -130,9 +130,9 @@ public class ManagerController extends HttpServlet {
             employee.setUsername(userName);
             insertEmployee(request, response);
 
-       /* long employeeId = employee.getId();
+       long employeeId = employee.getId();
         long lastVersion = employee.getC_version();
-        employeeService.updateVersion(employeeId, lastVersion);*/
+        employeeService.updateVersion(employeeId, lastVersion);
             String firstName = request.getParameter("firstName");
             employee.setFirstName(firstName);
             String lastName = request.getParameter("lastName");
@@ -148,9 +148,18 @@ public class ManagerController extends HttpServlet {
             CategoryElement role = searchCategoryElement.findCategoryElement
                     (request.getParameter("role"));
             employee.setRole(role);
-            String Status = request.getParameter("employeeStatus");
+           /* String Status = request.getParameter("employeeStatus");
             CategoryElement employeeStatus = searchCategoryElement.findCategoryElement(Status);
-            employee.setEmployeeStatus(employeeStatus);
+            employee.setEmployeeStatus(employeeStatus);*/
+           Boolean Status = Boolean.valueOf(request.getParameter("employeeStatus"));
+            employee.setC_disabled(Status);
+            boolean disable= Boolean.parseBoolean(request.getParameter("employeeStatus"));
+
+            if (request.getParameter("employeeStatus").equals("inactive")){
+                request.setAttribute("employeeStatus", "غیرفعال ");} else
+
+            if ( request.getParameter("employeeStatus").equals("active")){
+                request.setAttribute("employeeStatus", "فعال");}
             String g = request.getParameter("gender");
             CategoryElement gender = searchCategoryElement.findCategoryElement(g);
             employee.setGender(gender);
@@ -158,11 +167,11 @@ public class ManagerController extends HttpServlet {
             employee.setManager(managerService.getManagerDetail(managerDetail[0], managerDetail[1]));
             managerService.addUser(employee);
             getAllActiveEmployees(request, response);
-      /* String strLastVersion = String.valueOf(lastVersion);
+      String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }*/
+        }
         }
     }
 
@@ -173,16 +182,16 @@ public class ManagerController extends HttpServlet {
         }
         List<String> allManager = allManager();
         request.setAttribute("managerList", allManager);
-       /* long employeeId =employee.getId();
+        long employeeId =employee.getId();
         long lastVersion = employee.getC_version();
-        employeeService.updateVersion(employeeId, lastVersion);*/
+        employeeService.updateVersion(employeeId, lastVersion);
         RequestDispatcher rs = request.getRequestDispatcher("insertEmployee.jsp");
         rs.forward(request, response);
-        /*String strLastVersion = String.valueOf(lastVersion);
+       String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }*/
+        }
     }
 
     public List<String> allManager() {
@@ -213,30 +222,29 @@ public class ManagerController extends HttpServlet {
 
         List<String> allManager = allManager();
         request.setAttribute("managerList", allManager);
-        // String id = request.getParameter("employeeId");
         long employeeId = Long.parseLong(request.getParameter("employeeId"));
         Employee employee = managerService.searchId(employeeId);
-      /*  long empId = 1;
+        long empId = employee.getId();;
         long lastVersion = employee.getC_version();
-        employeeService.updateVersion(empId, lastVersion);*/
+        employeeService.updateVersion(empId, lastVersion);
         Employee manager = employee.getManager();
         request.setAttribute("Manager : ", manager.getFirstName() + "  " + manager.getLastName());
         request.setAttribute("Employee : ", employee);
         RequestDispatcher rs = request.getRequestDispatcher("editAndAppointmentOfManager.jsp");
         rs.forward(request, response);
-       /* String strLastVersion = String.valueOf(lastVersion);
+        String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }*/
+        }
     }
 
     public void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long employeeId = Long.parseLong(request.getParameter("id"));
         Employee employee = employeeService.getUserDetails(employeeId);
-      /*  long empId = 1;
+      long empId = employee.getId();;
         long lastVersion = employee.getC_version();
-        employeeService.updateVersion(empId, lastVersion);*/
+        employeeService.updateVersion(empId, lastVersion);
         String firstName = request.getParameter("firstName");
         employee.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
@@ -245,18 +253,28 @@ public class ManagerController extends HttpServlet {
        /* Pattern pattern = Pattern.compile("\\b[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b");
         String matcher = String.valueOf(pattern.matcher(email));*/
         employee.setEmail(email);
-        String Status = request.getParameter("employeeStatus");
-        CategoryElement employeeStatus = searchCategoryElement.findCategoryElement(Status);
-        employee.setEmployeeStatus(employeeStatus);
+       /* String Status = request.getParameter("employeeStatus");
+       CategoryElement employeeStatus = searchCategoryElement.findCategoryElement(Status);
+       employee.setEmployeeStatus(employeeStatus);*/
+        boolean Status = Boolean.parseBoolean(request.getParameter("employeeStatus"));
+       employee.setC_disabled(Status);
+      boolean disable= Boolean.parseBoolean(request.getParameter("employeeStatus"));
+
+        if (request.getParameter("employeeStatus").equals("inactive")){
+            request.setAttribute("employeeStatus", "غیرفعال ");} else
+
+        if ( request.getParameter("employeeStatus").equals("active")){
+            request.setAttribute("employeeStatus", "فعال");}
+
         String[] managerDetail = request.getParameter("getManagerDetail").split("  ");
         employee.setManager(managerService.getManagerDetail(managerDetail[0], managerDetail[1]));
         managerService.updateUserDetails(employee);
         getAllActiveEmployees(request, response);
-       /* String strLastVersion = String.valueOf(lastVersion);
+        String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }*/
+        }
 
     }
 

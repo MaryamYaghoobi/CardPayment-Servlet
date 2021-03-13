@@ -24,6 +24,7 @@ public class CategoryElementDao {
         query.setParameter("category", code);
         categoryElementList = (CategoryElement) query.getSingleResult();
         return categoryElementList;
+
     }
 }
 

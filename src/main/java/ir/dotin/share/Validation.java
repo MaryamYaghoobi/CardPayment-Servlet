@@ -16,7 +16,7 @@ public class Validation {
         ManagerDao managerDao = new ManagerDao();
         int allUsername = managerDao.searchAllUsername(usernameEntered);
         if (allUsername > 0)
-            System.out.println("Username Not Exists");
+            System.out.println("Username Exists");
        /*for (String username : allUsername) {
            if (usernameEntered.equals(username)) ;
               *//*  System.out.println("Username Exists");
@@ -34,7 +34,8 @@ public class Validation {
             for (Leaves leaveEmployee : leaveEmployeeList) {
                 leaveFromDate = leaveEmployee.getLeaveFromDate();
                 leaveToDate = leaveEmployee.getLeaveToDate();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy");
+
                 Date dateStart = simpleDateFormat.parse(leaveFromDate);
                 Date dateEnd = simpleDateFormat.parse(leaveToDate);
                 if (dateStart.compareTo(dateEnd) > 0) {

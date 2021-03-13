@@ -4,13 +4,12 @@ package ir.dotin.entity;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 
 @Entity(name = "Leaves")
 @Table(name = "t_Leaves")
 @SelectBeforeUpdate
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
 public class Leaves extends entity {
 
@@ -26,8 +25,6 @@ public class Leaves extends entity {
     @ManyToOne()
     @JoinColumn(name = "c_employeeId")
     private Employee employee;
-
-
 
 
     public String getLeaveToDate() {
@@ -69,7 +66,8 @@ public class Leaves extends entity {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-    public Leaves(String leaveFromDate, String leaveToDate,String reason ,CategoryElement leaveStatus) {
+
+    public Leaves(String leaveFromDate, String leaveToDate, String reason, CategoryElement leaveStatus) {
         this.leaveFromDate = leaveFromDate;
         this.leaveToDate = leaveToDate;
         this.reason = reason;

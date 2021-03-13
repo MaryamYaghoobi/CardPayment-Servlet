@@ -17,7 +17,7 @@
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
-<c:if test="${requestScope['LeaveIsNotValid'] =='LeaveIsNotValid'}">
+<!--<c:if test="${requestScope['LeaveIsNotValid'] =='LeaveIsNotValid'}">
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-danger" id="danger-alert">
             <button type="button" class="close" data-dismiss="alert">x</button>
@@ -26,7 +26,7 @@
             </strong>
         </div>
     </div>
-</c:if>
+</c:if>-->
 <c:if test="${requestScope['LeaveIsNotValid'] =='validLeaveRequest'}">
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-success" id="success-alert">
@@ -48,12 +48,12 @@
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><label style="color: #ff4626">*</label>
                     از تاریخ</label>
-                <input type="date" class="form-control" id="leaveFromDate" name="leaveFromDate">
+                <input type="text" placeholder="YYYY-MM-dd" class="form-control" id="leaveFromDate" name="leaveFromDate">
             </div>
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label><label style="color: #ff4626">*</label>
                     تا تاریخ</label>
-                <input type="date" class="form-control" id="leaveToDate" name="leaveToDate">
+                <input type="text" placeholder="YYYY-MM-dd" class="form-control" id="leaveToDate" name="leaveToDate">
             </div>
         </div>
 		 <div class="form-group col-md-15" style="margin-top: 17px;">

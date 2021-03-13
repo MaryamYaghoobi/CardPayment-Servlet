@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity(name = "Email")
 @Table(name = "t_Email")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
 public class Email extends entity {
 

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -150,6 +151,7 @@ public class EmployeeController extends HttpServlet {
                 .map(Long::parseLong)
                 .collect(Collectors.toList());
         List<Employee> ReceiveMessages = employeeService.ReceiveMessages(Ids);
+        email.setReceiverEmployees(new ArrayList<>());
         email.getReceiverEmployees().addAll(ReceiveMessages);
         emailService.addMessages(email);
         employeeService.forwardingMessage(senderEmail, email);
@@ -187,7 +189,7 @@ public class EmployeeController extends HttpServlet {
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
 
-       try {
+     try {
             validLeaveRequest = validation.leaveValidation
                     (leaveFromDate, leaveToDate, employee);
             if (!validLeaveRequest) {
@@ -205,7 +207,7 @@ public class EmployeeController extends HttpServlet {
             request.setAttribute("invalidLeaveRequest", "validLeaveRequest");
             RequestDispatcher rs = request.getRequestDispatcher("leaveRequest.jsp");
             rs.forward(request, response);
-        } catch (ParseException e) {
+      } catch (ParseException e) {
             e.printStackTrace();
         }
     }
@@ -213,9 +215,9 @@ public class EmployeeController extends HttpServlet {
     protected void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
         Employee employee = employeeService.getUserDetails(id);
-       /* long employeeId = 1;
-        long lastVersion = register.getC_version();
-        employeeService.updateVersion(employeeId, lastVersion);*/
+        long employeeId = employee.getId();;
+        long lastVersion = employee.getC_version();
+        employeeService.updateVersion(employeeId, lastVersion);
         String firstName = request.getParameter("firstName");
         employee.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
@@ -223,40 +225,42 @@ public class EmployeeController extends HttpServlet {
         String email = request.getParameter("email");
         employee.setEmail(email);
         employee.setFatherName(request.getParameter("fatherName"));
-              /*  Pattern pattern = Pattern.compile("\\b[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b");
-                Matcher matcher = pattern.matcher(email);*/
-
-        // if (!email.isEmpty() && matcher.matches() && !(email == null)) {
         employeeService.updateUserDetails(employee);
-        //    } else {
-        //  request.setAttribute("updateError", "Invalid Details");
-        //  Employee employee = EmployeeService.getUserDetails(id);
+        Boolean Status = Boolean.valueOf(request.getParameter("employeeStatus"));
+        employee.setC_disabled(Status);
+        boolean disable= Boolean.parseBoolean(request.getParameter("employeeStatus"));
+
+        if (request.getParameter("employeeStatus").equals("inactive")){
+            request.setAttribute("employeeStatus", "غیرفعال ");} else
+
+        if ( request.getParameter("employeeStatus").equals("active")){
+            request.setAttribute("employeeStatus", "فعال");}
+
         request.setAttribute("employee", employee);
        RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
         rs.forward(request, response);
-       /* String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(register.getC_version());
+       String strLastVersion = String.valueOf(lastVersion);
+        String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }*/
+        }
     }
     public void editEmployeeProfiles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
         request.setAttribute("Employee", employee);
-       /* long employeeId = 1;
+       long employeeId = employee.getId();;
         long lastVersion = employee.getC_version();
-        employeeService.updateVersion(employeeId, lastVersion);*/
+        employeeService.updateVersion(employeeId, lastVersion);
         RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
         rs.forward(request, response);
-       /* String strLastVersion = String.valueOf(lastVersion);
+        String strLastVersion = String.valueOf(lastVersion);
         String strGetVersion = String.valueOf(employee.getC_version());
         if (!strGetVersion.equals(strLastVersion)) {
-        request.setAttribute("SynchronizationHasOccurred", "SynchronizationHasOccurred");
-               // rs.forward(request, response);
+
             System.out.println("SynchronizationHasOccurred");
-        }*/
+        }
     }
 
 }

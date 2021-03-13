@@ -1,13 +1,14 @@
 package ir.dotin.entity;
 
 import org.hibernate.annotations.SelectBeforeUpdate;
+
 import javax.persistence.*;
 import java.util.List;
 
 
 @Entity(name = "Employee")
 @Table(name = "t_Employee")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @SelectBeforeUpdate
 public class Employee extends entity {
 
@@ -25,8 +26,6 @@ public class Employee extends entity {
     private String password;
     @Column(name = "c_fatherName", columnDefinition = "VARCHAR(255)")
     private String fatherName;
-    @Version
-    private long c_version;
     @ManyToOne()
     @JoinColumn(name = "c_manager")
     private Employee manager;
@@ -36,11 +35,6 @@ public class Employee extends entity {
     @JoinColumn(name = "c_role")
     private CategoryElement role;
     @ManyToOne()
-    @JoinColumn(name = "c_employeeStatus")
-    private CategoryElement employeeStatus;
-   /* @Column(columnDefinition = "boolean default false")
-    private Boolean active;*/
-    @ManyToOne()
     @JoinColumn(name = "c_gender")
     private CategoryElement gender;
     @OneToMany()
@@ -49,7 +43,11 @@ public class Employee extends entity {
     @OneToMany()
     @JoinColumn(name = "c_emailSenderId")
     private List<Email> sentEmails;
-
+   /* @Version
+    private long c_version;
+    @ManyToOne()
+    @JoinColumn(name = "c_employeeStatus")
+    private CategoryElement employeeStatus;
     public CategoryElement getEmployeeStatus() {
         return employeeStatus;
     }
@@ -57,6 +55,13 @@ public class Employee extends entity {
     public void setEmployeeStatus(CategoryElement employeeStatus) {
         this.employeeStatus = employeeStatus;
     }
+ public long getC_version() {
+        return c_version;
+    }
+
+    public void setC_version(long c_version) {
+        this.c_version = c_version;
+    }*/
 
     public List<Email> getSentEmails() {
         return sentEmails;
@@ -138,13 +143,13 @@ public class Employee extends entity {
         this.role = role;
     }
 
-    public CategoryElement getStatus() {
+    /*public CategoryElement getStatus() {
         return employeeStatus;
     }
 
     public void setStatus(CategoryElement employeeStatus) {
         this.employeeStatus = employeeStatus;
-    }
+    }*/
 
     public String getFatherName() {
         return fatherName;
@@ -162,13 +167,6 @@ public class Employee extends entity {
         this.gender = gender;
     }
 
-    public long getC_version() {
-        return c_version;
-    }
-
-    public void setC_version(long c_version) {
-        this.c_version = c_version;
-    }
 
     public List<Leaves> getLeaveList() {
         return leaveList;
@@ -199,7 +197,7 @@ public class Employee extends entity {
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.role = role;
-        this.employeeStatus = employeeStatus;
+        //this.employeeStatus = employeeStatus;
         this.username = username;
         this.password = password;
         this.manager = manager;
@@ -220,7 +218,7 @@ public class Employee extends entity {
         this.lastName = lastName;
         this.email = email;
         this.fatherName = fatherName;
-        this.employeeStatus = employeeStatus;
+     //  this.employeeStatus = employeeStatus;
         this.manager = manager;
     }
 

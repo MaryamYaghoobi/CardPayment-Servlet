@@ -37,22 +37,25 @@
     <table class="table table-bordered table-hover table-responsive-lg">
         <thead class="thead-light ">
         <tr style="border-radius: 10px;">
-            <th class="text-center" scope="col">
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
                 نام
             </th>
-            <th class="text-center" scope="col">
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
                نام خانوادگی
             </th>
-            <th class="text-center" scope="col">
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
                 از تاریخ
            </th>
-            <th class="text-center" scope="col">
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
                 تا تاریخ
             </th>
-            <th class="text-center" scope="col">
+			            <th class="text-center" scope="col" style="background-color:#F4C34E;">
+                دلیل
+            </th>
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
                وضعیت مرخصی
             </th>
-            <th class="text-center" scope="col">
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
                 عملیات
             </th>
         </tr>

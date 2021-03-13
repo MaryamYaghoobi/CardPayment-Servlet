@@ -1,7 +1,6 @@
 package ir.dotin.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 //@Entity(name = "Common")
@@ -16,20 +15,30 @@ public class entity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "LONG", nullable = false, unique = true)
     public long id;
-   /* @Column(columnDefinition = "boolean default false")
-    private Boolean disabled;
     @Column(columnDefinition = "boolean default false")
-    private Boolean active;
+    private Boolean c_disabled;
+
+    public Boolean getC_disabled() {
+        return c_disabled;
+    }
+
+    public void setC_disabled(Boolean c_disabled) {
+        this.c_disabled = c_disabled;
+    }
+
+    public Boolean getC_active() {
+        return c_active;
+    }
+
+    public void setC_active(Boolean c_active) {
+        this.c_active = c_active;
+    }
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean c_active;
     @Version
     private long c_version;
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
 
     public long getC_version() {
         return c_version;
@@ -37,7 +46,7 @@ public class entity {
 
     public void setC_version(long c_version) {
         this.c_version = c_version;
-    }*/
+    }
 
     public long getId() {
         return id;
@@ -47,11 +56,4 @@ public class entity {
         this.id = id;
     }
 
-  /*  public Boolean getDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(Boolean disabled) {
-        this.disabled = disabled;
-    }*/
 }

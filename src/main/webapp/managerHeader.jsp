@@ -76,8 +76,24 @@
  <a class="nav-link" href="ManagerController?action=RegisteredLeaves" >
                          مدیریت مرخصی
                     </a>
+ <a class="nav-link" href="leaveRequest.jsp">
+                        درخواست مرخصی
+                    </a>
+					
+  <a class="nav-link" href="EmployeeController?action=searchLeave">
+                       وضعیت مرخصی
+                    </a>
+					 <a class="nav-link" href="EmployeeController?action=sendMessages">
+                       ارسال پیام
+                    </a>
+					<a class="nav-link" href="EmployeeController?action=ReceiveMessages">
+                       پیام های دریافتی
+                    </a>
+					<a class="nav-link" href="EmployeeController?action=sentMessages">
+                      پیام های ارسالی
+                    </a>
  <a class="nav-link " href="ManagerController?action=logout" >
-                   خروج
+                    خروج
                 </a>
 </div>
 
