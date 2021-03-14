@@ -86,7 +86,7 @@
                    وضعیت
                  </label>
                 <input type="text" readonly class="form-control" id="employeeStatus" name="employeeStatus"
-                       value="<c:out value='${requestScope.Employee.employeeStatus.name}'/> ">
+                       value="<c:out value='${requestScope.employeeStatus}'/> ">
                 <label class="form-check-label"></label>
             </div>
         </div>

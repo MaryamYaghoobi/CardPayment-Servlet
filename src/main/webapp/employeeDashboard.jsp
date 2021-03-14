@@ -20,7 +20,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 </head>
 <body>
 <jsp:include page="body.jsp"/>
-<c:if test="${requestScope['sendEmail']}">
+<c:if test="${requestScope['forwardingMessage']}">
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-info" id="info-alert" style="background-color: #F0DCAC;border: none;">
             <button type="button" class="close" data-dismiss="alert">x</button>

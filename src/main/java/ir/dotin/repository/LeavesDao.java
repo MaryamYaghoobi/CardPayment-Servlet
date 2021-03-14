@@ -15,22 +15,26 @@ import javax.persistence.Query;
 public class LeavesDao {
     public  void addLeave(Leaves leaveEmployee) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        // configures settings from hibernate.cfg.xml
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(leaveEmployee);
             transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-
+        session.close();
         }
-    }
+
 
 
     public void LeaveConfirmation(long leaveId) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        // configures settings from hibernate.cfg.xml
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
         transaction = session.beginTransaction();
         Query categoryElementQuery = session.createQuery
                 ("select ce from CategoryElement ce where ce.code =:code");
@@ -43,17 +47,18 @@ public class LeavesDao {
         query.setParameter("id", leaveId);
         query.executeUpdate();
         transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+        session.close();
         }
 
-    }
+
 
     public void rejectionLeave(long leaveId) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        SessionFactory sessionFactory;
+        // configures settings from hibernate.cfg.xml
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
         transaction = session.beginTransaction();
         Query categoryElementQuery = session.createQuery
                 (" select ce from CategoryElement ce where ce.code =:code");
@@ -66,13 +71,6 @@ public class LeavesDao {
         query.setParameter("id", leaveId);
         query.executeUpdate();
         transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-
-
+        session.close();
     }
 }

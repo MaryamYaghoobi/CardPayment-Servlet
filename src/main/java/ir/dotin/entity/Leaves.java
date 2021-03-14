@@ -1,17 +1,16 @@
 
 package ir.dotin.entity;
-
+import javax.persistence.Entity;
 import org.hibernate.annotations.SelectBeforeUpdate;
-
 import javax.persistence.*;
 
 
 @Entity(name = "Leaves")
 @Table(name = "t_Leaves")
 @SelectBeforeUpdate
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public class Leaves extends entity {
+public class Leaves extends ir.dotin.entity.Entity {
 
     @Column(name = "c_leaveToDate", columnDefinition = "VARCHAR(255)")
     private String leaveToDate;

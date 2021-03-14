@@ -1,14 +1,14 @@
 package ir.dotin.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity(name = "CategoryElement")
 @Table(name = "t_CategoryElement")
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public class CategoryElement extends entity {
+public class CategoryElement extends ir.dotin.entity.Entity {
 
     @Column(name = "c_name", columnDefinition = "VARCHAR(255)")
     private String name;
@@ -43,7 +43,6 @@ public class CategoryElement extends entity {
     public void setCode(String code) {
         this.code = code;
     }
-
 
     public CategoryElement() {
     }

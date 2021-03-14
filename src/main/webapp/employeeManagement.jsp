@@ -91,8 +91,8 @@
                 <td><c:out value="${employee.firstName}"/></td>
                 <td><c:out value="${employee.lastName}"/></td>
                 <td><c:out value="${employee.manager.firstName}${employee.manager.lastName}"/></td>
-                <td><c:out value="${employee.role.name}"/></td>
-                <td><c:out value="${employee.employeeStatus.name}"/></td>
+                <td><c:out value="${employee.role.name}"/></td>            
+				  <td><c:out value="${employee.disabled}"/></td>
                 <td class="text-right" style="width: 21%;">
                    <button type="button"
                             class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="updateProfile"

@@ -2,15 +2,16 @@ package ir.dotin.entity;
 
 import org.hibernate.annotations.SelectBeforeUpdate;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.List;
 
 
 @Entity(name = "Employee")
 @Table(name = "t_Employee")
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @SelectBeforeUpdate
-public class Employee extends entity {
+public class Employee extends ir.dotin.entity.Entity {
 
     @Column(name = "c_firstName", columnDefinition = "VARCHAR(255)")
     private String firstName;
@@ -43,25 +44,6 @@ public class Employee extends entity {
     @OneToMany()
     @JoinColumn(name = "c_emailSenderId")
     private List<Email> sentEmails;
-   /* @Version
-    private long c_version;
-    @ManyToOne()
-    @JoinColumn(name = "c_employeeStatus")
-    private CategoryElement employeeStatus;
-    public CategoryElement getEmployeeStatus() {
-        return employeeStatus;
-    }
-
-    public void setEmployeeStatus(CategoryElement employeeStatus) {
-        this.employeeStatus = employeeStatus;
-    }
- public long getC_version() {
-        return c_version;
-    }
-
-    public void setC_version(long c_version) {
-        this.c_version = c_version;
-    }*/
 
     public List<Email> getSentEmails() {
         return sentEmails;
@@ -143,14 +125,6 @@ public class Employee extends entity {
         this.role = role;
     }
 
-    /*public CategoryElement getStatus() {
-        return employeeStatus;
-    }
-
-    public void setStatus(CategoryElement employeeStatus) {
-        this.employeeStatus = employeeStatus;
-    }*/
-
     public String getFatherName() {
         return fatherName;
     }
@@ -189,7 +163,7 @@ public class Employee extends entity {
 
     }
 
-    public Employee(String firstName, String lastName, String fatherName, String email, String dateOfBirth, CategoryElement gender, CategoryElement role, CategoryElement employeeStatus, String username, String password, Employee manager) {
+    public Employee(String firstName, String lastName, String fatherName, String email, String dateOfBirth, CategoryElement gender, CategoryElement role, String username, String password, Employee manager) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.fatherName = fatherName;
@@ -197,7 +171,7 @@ public class Employee extends entity {
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.role = role;
-        //this.employeeStatus = employeeStatus;
+        //   this.employeeStatus = employeeStatus;
         this.username = username;
         this.password = password;
         this.manager = manager;
@@ -218,7 +192,7 @@ public class Employee extends entity {
         this.lastName = lastName;
         this.email = email;
         this.fatherName = fatherName;
-     //  this.employeeStatus = employeeStatus;
+        //  this.employeeStatus = employeeStatus;
         this.manager = manager;
     }
 

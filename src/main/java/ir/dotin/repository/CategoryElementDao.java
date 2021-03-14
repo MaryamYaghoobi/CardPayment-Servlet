@@ -14,15 +14,17 @@ public class CategoryElementDao {
 
     public CategoryElement searchCategoryElement(String code) {
         CategoryElement categoryElementList = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
+        SessionFactory sessionFactory;
+        // configures settings from hibernate.cfg.xml
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
             Query query = session.createQuery
                     ("select c from CategoryElement c where c.code=:category");
             query.setParameter("category", code);
             categoryElementList = (CategoryElement) query.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
             return categoryElementList;
 
         }

@@ -1,36 +1,29 @@
 
 package ir.dotin.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "Email")
 @Table(name = "t_Email")
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public class Email extends entity {
-
+public class Email extends ir.dotin.entity.Entity {
 
     @Column(name = "c_context", columnDefinition = "VARCHAR(255)")
     private String context;
 
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
     @Column(name = "c_subject", columnDefinition = "VARCHAR(255)")
     private String subject;
+
     @OneToMany()
     @JoinTable(name = "mm_EmployeeEmail",
             joinColumns = {@JoinColumn(name = "c_receiveEmailId")},
             inverseJoinColumns = {@JoinColumn(name = "c_receiverId")})
     private List<Employee> receiverEmployees;
 
-   /* @OneToMany()
+    @OneToMany()
     @JoinColumn(columnDefinition = "c_employeeSenderId")
     private List<Employee> senderEmail;
 
@@ -40,8 +33,15 @@ public class Email extends entity {
 
     public void setSenderEmail(List<Employee> senderEmail) {
         this.senderEmail = senderEmail;
-    }*/
+    }
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
     public String getContext() {
         return context;

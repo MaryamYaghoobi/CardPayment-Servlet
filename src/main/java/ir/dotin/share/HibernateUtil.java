@@ -12,14 +12,15 @@ public class HibernateUtil {
     private static SessionFactory factory;
 
     static {
-        Metadata sessionFactory;
-        try (StandardServiceRegistry registry = new StandardServiceRegistryBuilder().
-                configure("META-INF/hibernate.cfg.xml").build()) {
-           sessionFactory = new MetadataSources(registry).getMetadataBuilder().build();
-          //  sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        SessionFactory sessionFactory;
+
+               StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
+               sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
         }
-        factory = sessionFactory.getSessionFactoryBuilder().build();
-    }
+      //  factory = sessionFactory.getSessionFactoryBuilder().build();
+
 
     public static SessionFactory getSessionFactory() throws HibernateException {
         return factory;
@@ -28,8 +29,9 @@ public class HibernateUtil {
 
 }/*
     SessionFactory sessionFactory;
-    StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure
-            ("META-INF/hibernate.cfg.xml").build();
+        // configures settings from hibernate.cfg.xml
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-                Session session = sessionFactory.openSession();
-                session.beginTransaction();*/
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+*/
