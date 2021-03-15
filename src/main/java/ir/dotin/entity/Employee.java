@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity(name = "Employee")
 @Table(name = "t_Employee")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @SelectBeforeUpdate
 public class Employee extends ir.dotin.entity.Entity {
 

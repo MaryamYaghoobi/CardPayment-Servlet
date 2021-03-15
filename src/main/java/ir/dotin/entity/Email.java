@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity(name = "Email")
 @Table(name = "t_Email")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
 public class Email extends ir.dotin.entity.Entity {
 
@@ -23,7 +23,7 @@ public class Email extends ir.dotin.entity.Entity {
             inverseJoinColumns = {@JoinColumn(name = "c_receiverId")})
     private List<Employee> receiverEmployees;
 
-    @OneToMany()
+  /*  @OneToMany()
     @JoinColumn(columnDefinition = "c_employeeSenderId")
     private List<Employee> senderEmail;
 
@@ -33,7 +33,7 @@ public class Email extends ir.dotin.entity.Entity {
 
     public void setSenderEmail(List<Employee> senderEmail) {
         this.senderEmail = senderEmail;
-    }
+    }*/
 
     public String getSubject() {
         return subject;

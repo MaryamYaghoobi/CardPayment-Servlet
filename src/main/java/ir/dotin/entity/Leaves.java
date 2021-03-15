@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity(name = "Leaves")
 @Table(name = "t_Leaves")
 @SelectBeforeUpdate
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
 public class Leaves extends ir.dotin.entity.Entity {
 

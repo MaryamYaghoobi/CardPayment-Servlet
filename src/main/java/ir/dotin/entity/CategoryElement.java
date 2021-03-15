@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity(name = "CategoryElement")
 @Table(name = "t_CategoryElement")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
 public class CategoryElement extends ir.dotin.entity.Entity {
 
