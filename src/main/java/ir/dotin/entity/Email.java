@@ -7,8 +7,6 @@ import java.util.List;
 
 @Entity(name = "Email")
 @Table(name = "t_Email")
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-
 public class Email extends ir.dotin.entity.Entity {
 
     @Column(name = "c_context", columnDefinition = "VARCHAR(255)")
@@ -23,7 +21,7 @@ public class Email extends ir.dotin.entity.Entity {
             inverseJoinColumns = {@JoinColumn(name = "c_receiverId")})
     private List<Employee> receiverEmployees;
 
-   @OneToMany()
+ @OneToMany()
     @JoinColumn(columnDefinition = "c_employeeSenderId")
     private List<Employee> senderEmail;
 

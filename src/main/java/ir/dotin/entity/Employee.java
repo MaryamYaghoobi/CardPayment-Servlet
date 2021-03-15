@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity(name = "Employee")
 @Table(name = "t_Employee")
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @SelectBeforeUpdate
 public class Employee extends ir.dotin.entity.Entity {
 
@@ -38,7 +37,7 @@ public class Employee extends ir.dotin.entity.Entity {
     @ManyToOne()
     @JoinColumn(name = "c_gender")
     private CategoryElement gender;
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "c_employeeId")
     private List<Leaves> leaveList;
     @OneToMany()

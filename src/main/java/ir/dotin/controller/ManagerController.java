@@ -240,8 +240,10 @@ public class ManagerController extends HttpServlet {
     }
 
     public void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long employeeId = Long.parseLong(request.getParameter("id"));
+      String s=request.getParameter("id");
+        long employeeId = Long.parseLong(s.trim());
         Employee employee = employeeService.getUserDetails(employeeId);
+       // Employee employee = employeeService.getUserDetails(Long.parseLong(request.getParameter("id")));
      /* long empId = employee.getId();;
         long lastVersion = employee.getC_version();
         employeeService.updateVersion(empId, lastVersion);*/
