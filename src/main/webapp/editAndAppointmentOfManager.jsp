@@ -88,18 +88,23 @@
                    وضعیت:
                  </label>
                 <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="active" name="employeeStatus"
-                           value="active" ${requestScope.Employee.employeeStatus.code=='active'?'checked':''} >
+                    <input type="radio" class="form-check-input" id="active" name="disabled"
+                         
+						 value="active" <c:if test="$!requestScope.disabled} =='active'?'checked':''}" >
+						 <!--<c:if test="$!requestScope.disabled} =='active'?'checked':''} >-->
                     <label class="form-check-label">
                         فعال
                     </label>
+					</c:if>
                 </div>
+				
                 <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="inactive" name="employeeStatus"
-                           value="inactive" ${requestScope.Employee.employeeStatus.code=='inactive'?'checked':''} >
+                    <input type="radio" class="form-check-input" id="inactive" name="disabled"
+                           value="inactive" <c:if test="$requestScope.disabled} =='inactive'?'checked':''}" >
                     <label class="form-check-label">
                         غیر فعال
                     </label>
+					</c:if>
                 </div>
             </div>
         </div>

@@ -131,7 +131,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
                     وضعیت
                 </label>
                 <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="active" name="employeeStatus" value="active"
+                    <input type="radio" class="form-check-input" id="active" name="disabled" value="active"
                            checked>
                     <label class="form-check-label">
                         فعال
@@ -140,7 +140,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 
 
                 <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="inactive" name="employeeStatus" value="inactive">
+                    <input type="radio" class="form-check-input" id="inactive" name="disabled" value="inactive">
                     <label class="form-check-label">
                         غیر فعال
                    </label>

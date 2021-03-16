@@ -83,10 +83,12 @@
 
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label>
-                   وضعیت
+                   پست سازمانی
                  </label>
-                <input type="text" readonly class="form-control" id="employeeStatus" name="employeeStatus"
-                       value="<c:out value='${requestScope.employeeStatus}'/> ">
+                <input type="text" readonly class="form-control" id="role" name="role"
+                      
+					    value="<c:out value='${requestScope.Employee.role.name}'/> ">
+					  
                 <label class="form-check-label"></label>
             </div>
         </div>

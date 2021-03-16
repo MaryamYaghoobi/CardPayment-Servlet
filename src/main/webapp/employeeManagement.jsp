@@ -96,9 +96,9 @@
                 <td class="text-right" style="width: 21%;">
                    <button type="button"
                             class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="updateProfile"
-                            style="width: 82px;background-color: #F4C34E;border: none;" onclick="search(${employee.id})"
-							action="editAndAppointmentOfManager">
-                            <!--<a class="nav-link" href="ManagerController?action=editAndAppointmentOfManager">-->
+                            style="width: 82px;background-color: #F4C34E;border: none;" onclick="search(${employee.id})">
+							
+                          
 							<span class="fa fa-edit"></span>
 							</button>                      
                     <button type="button"

@@ -148,18 +148,14 @@ public class ManagerController extends HttpServlet {
             CategoryElement role = searchCategoryElement.findCategoryElement
                     (request.getParameter("role"));
             employee.setRole(role);
-           /* String Status = request.getParameter("employeeStatus");
-            CategoryElement employeeStatus = searchCategoryElement.findCategoryElement(Status);
-            employee.setEmployeeStatus(employeeStatus);*/
-          Boolean Status = Boolean.valueOf(request.getParameter("employeeStatus"));
+            Boolean Status = Boolean.valueOf(request.getParameter("disabled"));
+
+            if (request.getParameter("disabled").equals("inactive")) {
+                request.setAttribute("disabled", "غیرفعال ");
+            } else if (request.getParameter("disabled").equals("active")) {
+                request.setAttribute("disabled", "فعال");
+            }
             employee.setDisabled(Status);
-            boolean disable= Boolean.parseBoolean(request.getParameter("employeeStatus"));
-
-            if (request.getParameter("employeeStatus").equals("inactive")){
-                request.setAttribute("employeeStatus", "غیرفعال ");} else
-
-            if ( request.getParameter("employeeStatus").equals("active")){
-                request.setAttribute("employeeStatus", "فعال");}
             String g = request.getParameter("gender");
             CategoryElement gender = searchCategoryElement.findCategoryElement(g);
             employee.setGender(gender);
@@ -240,10 +236,10 @@ public class ManagerController extends HttpServlet {
     }
 
     public void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String s=request.getParameter("id");
+        String s = request.getParameter("id");
         long employeeId = Long.parseLong(s.trim());
         Employee employee = employeeService.getUserDetails(employeeId);
-       // Employee employee = employeeService.getUserDetails(Long.parseLong(request.getParameter("id")));
+        // Employee employee = employeeService.getUserDetails(Long.parseLong(request.getParameter("id")));
      /* long empId = employee.getId();;
         long lastVersion = employee.getC_version();
         employeeService.updateVersion(empId, lastVersion);*/
@@ -252,22 +248,15 @@ public class ManagerController extends HttpServlet {
         String lastName = request.getParameter("lastName");
         employee.setLastName(lastName);
         String email = request.getParameter("email");
-       /* Pattern pattern = Pattern.compile("\\b[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b");
-        String matcher = String.valueOf(pattern.matcher(email));*/
         employee.setEmail(email);
-     /* String Status = request.getParameter("employeeStatus");
-       CategoryElement employeeStatus = searchCategoryElement.findCategoryElement(Status);
-       employee.setEmployeeStatus(employeeStatus);*/
-       boolean Status = Boolean.parseBoolean(request.getParameter("employeeStatus"));
-       employee.setDisabled(Status);
-      boolean disable= Boolean.parseBoolean(request.getParameter("employeeStatus"));
+        boolean Status = Boolean.parseBoolean(request.getParameter("disabled"));
 
-        if (request.getParameter("employeeStatus").equals("inactive")){
-            request.setAttribute("employeeStatus", "غیرفعال ");} else
-
-        if ( request.getParameter("employeeStatus").equals("active")){
-            request.setAttribute("employeeStatus", "فعال");}
-
+        if (request.getParameter("disabled").equals("inactive")) {
+            request.setAttribute("disabled", "غیرفعال ");
+        } else if (request.getParameter("disabled").equals("active")) {
+            request.setAttribute("disabled", "فعال");
+        }
+        employee.setDisabled(Status);
         String[] managerDetail = request.getParameter("getManagerDetail").split("  ");
         employee.setManager(managerService.getManagerDetail(managerDetail[0], managerDetail[1]));
         managerService.updateUserDetails(employee);
@@ -294,16 +283,13 @@ public class ManagerController extends HttpServlet {
         request.setAttribute("firstName", request.getParameter("firstName"));
         request.setAttribute("lastName", request.getParameter("lastName"));
         request.setAttribute("username", request.getParameter("username"));
-      /* boolean Status = Boolean.parseBoolean(request.getParameter("employeeStatus"));
-        employee.setDisabled(Status);
-        boolean disable= Boolean.parseBoolean(request.getParameter("employeeStatus"));
-
-        if (request.getParameter("employeeStatus").equals("inactive")){
-            request.setAttribute("employeeStatus", "غیرفعال ");} else
-
-        if ( request.getParameter("employeeStatus").equals("active")){
-            request.setAttribute("employeeStatus", "فعال");}*/
-
+        boolean Status = Boolean.parseBoolean(request.getParameter("disabled"));
+        if (Status == true) {
+            request.setAttribute("disabled", "غیرفعال ");
+        } else if (Status == false) {
+            request.setAttribute("disabled", "فعال");
+        }
+        // employee.setDisabled(Status);
 
         RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
         rs.forward(request, response);
@@ -315,7 +301,6 @@ public class ManagerController extends HttpServlet {
         request.getSession().invalidate();
         response.sendRedirect("login.jsp");
     }
-//---------------------------------------------------------------
 
     public void downloadAttachment(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");

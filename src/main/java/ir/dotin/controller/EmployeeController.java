@@ -225,7 +225,7 @@ public class EmployeeController extends HttpServlet {
         employee.setEmail(email);
         employee.setFatherName(request.getParameter("fatherName"));
         employeeService.updateUserDetails(employee);
-        Boolean Status = Boolean.valueOf(request.getParameter("employeeStatus"));
+        /*Boolean Status = Boolean.valueOf(request.getParameter("employeeStatus"));
         employee.setDisabled(Status);
         boolean disable= Boolean.parseBoolean(request.getParameter("employeeStatus"));
 
@@ -233,7 +233,7 @@ public class EmployeeController extends HttpServlet {
             request.setAttribute("employeeStatus", "غیرفعال ");} else
 
         if ( request.getParameter("employeeStatus").equals("active")){
-            request.setAttribute("employeeStatus", "فعال");}
+            request.setAttribute("employeeStatus", "فعال");}*/
 
         request.setAttribute("employee", employee);
        RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
