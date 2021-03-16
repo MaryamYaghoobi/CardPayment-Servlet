@@ -267,11 +267,13 @@ public class ManagerController extends HttpServlet {
         request.setAttribute("username", request.getParameter("username"));
         boolean Status = Boolean.parseBoolean(request.getParameter("disabled"));
         if (Status == true) {
-            request.setAttribute("disabled", "غیرفعال ");
+            request.setAttribute("غیرفعال",Status);
+           // request.setAttribute("disabled", "غیرفعال ");
         } else if (Status == false) {
-            request.setAttribute("disabled", "فعال");
+            request.setAttribute("فعال", Status);
+          //  request.setAttribute("disabled", "فعال");
         }
-        // employee.setDisabled(Status);
+       // employee.setDisabled(Status);
 
         RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
         rs.forward(request, response);

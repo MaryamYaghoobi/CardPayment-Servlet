@@ -17,12 +17,6 @@ public class Validation {
         int allUsername = managerDao.searchAllUsername(usernameEntered);
         if (allUsername > 0)
             System.out.println("Username Exists");
-       /*for (String username : allUsername) {
-           if (usernameEntered.equals(username)) ;
-              *//*  System.out.println("Username Exists");
-            } else
-                System.out.println("Username Not Exists");*//*
-        }*/
         return false;
     }
 

@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDao {
-    public Employee updateVersion(long id, long c_version) {
+    public Employee updateVersion(long id, long version) {
         Transaction transaction = null;
-        Employee version = null;
+        Employee employee = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             Query querySelect = session.createQuery("select e from Employee e where e.id =:id");
@@ -24,17 +24,15 @@ public class EmployeeDao {
             querySelect.setLockMode(LockModeType.OPTIMISTIC);
             querySelect.getResultList();
             Query queryUpdate = session.createQuery("update Employee e set " +
-                    "version = version+1 where e.id =:id  ");
-
+                    "version = version+1 where e.id =:id and version=:version ");
             queryUpdate.setParameter("id", id);
-            queryUpdate.setParameter("version", c_version);
-            // queryUpdate.setLockMode(LockModeType.OPTIMISTIC);
-            version = (Employee) queryUpdate.getResultList();
+            queryUpdate.setParameter("version", version);
+            employee = (Employee) queryUpdate.getResultList();
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return version;
+        return employee;
     }
 
     public Employee searchUsername(String username) {
@@ -80,6 +78,7 @@ public class EmployeeDao {
             e.printStackTrace();
         }
         return employeeList;
+
     }
 
     public List<Employee> allEmployee() {
@@ -107,9 +106,9 @@ public class EmployeeDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-
         }
     }
+
 
     public List<Leaves> EmployeeLeave(Employee employee) {
         Transaction transaction = null;
@@ -136,11 +135,11 @@ public class EmployeeDao {
             session.update(updatedEmployee);
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+            e.printStackTrace();
         }
+
     }
+
 
     public List<Employee> ReceiveMessages(List<Long> employeeIds) {
         List<Employee> receivedEmailEmployees = new ArrayList<>();
