@@ -170,7 +170,6 @@ public class Employee extends ir.dotin.entity.Entity {
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.role = role;
-        //   this.employeeStatus = employeeStatus;
         this.username = username;
         this.password = password;
         this.manager = manager;
@@ -185,13 +184,12 @@ public class Employee extends ir.dotin.entity.Entity {
 
     }
 
-    public Employee(long id, String firstName, String lastName, String email, String fatherName, CategoryElement employeeStatus, Employee manager) {
+    public Employee(long id, String firstName, String lastName, String email, String fatherName, Employee manager) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.fatherName = fatherName;
-        //  this.employeeStatus = employeeStatus;
         this.manager = manager;
     }
 
