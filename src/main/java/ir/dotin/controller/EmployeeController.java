@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 5,
         maxRequestSize = 1024 * 1024 * 5 * 5)
@@ -37,7 +38,7 @@ public class EmployeeController extends HttpServlet {
     LeavesService leavesService = new LeavesService();
     EmailService emailService = new EmailService();
     EmployeeService employeeService = new EmployeeService();
-    SearchCategoryElement searchCategoryElement=new SearchCategoryElement();
+    SearchCategoryElement searchCategoryElement = new SearchCategoryElement();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -80,7 +81,6 @@ public class EmployeeController extends HttpServlet {
     }
 
 
-
     public void downloadAttachment(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -112,6 +112,7 @@ public class EmployeeController extends HttpServlet {
         rs.forward(request, response);
 
     }
+
     public void sentMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
@@ -124,19 +125,12 @@ public class EmployeeController extends HttpServlet {
     }
 
     public void forwardingMessage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-      /*  Part filePart = request.getPart("file");
-        String fileName = filePart.getSubmittedFileName();
-        for (Part part : request.getParts()) {
-            part.write(TOMCAT_FILE_PATH + fileName); }
-        response.getWriter().print("The file uploaded Successfully.");*/
-
         Part part = request.getPart("file");
         String fileName = part.getSubmittedFileName();
         if (fileName != null && !fileName.isEmpty()) {
             String uploadPath = TOMCAT_FILE_PATH + File.separator + fileName;
 
-                part.write(uploadPath + File.separator);
+            part.write(uploadPath + File.separator);
 
         }
         Employee senderEmail = employeeService.
@@ -155,24 +149,23 @@ public class EmployeeController extends HttpServlet {
         email.getReceiverEmployees().addAll(ReceiveMessages);
         emailService.addMessages(email);
         employeeService.forwardingMessage(senderEmail, email);
-        String messages="forwardingMessage";
+        String messages = "forwardingMessage";
         request.setAttribute(messages, true);
         RequestDispatcher rs = request.getRequestDispatcher("employeeDashboard.jsp");
         rs.forward(request, response);
     }
 
 
-   public void sendMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void sendMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Employee> employeeList = employeeService.allEmployee();
         request.setAttribute("employeeList", employeeList);
-       RequestDispatcher rs = request.getRequestDispatcher("forwardingMessage.jsp");
-       rs.forward(request, response);
+        RequestDispatcher rs = request.getRequestDispatcher("forwardingMessage.jsp");
+        rs.forward(request, response);
     }
 
     public void searchLeave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
-
         List<Leaves> leaveEmployeeList = employeeService.EmployeeLeave(employee);
         request.setAttribute("leaveEmployeeList", leaveEmployeeList);
         RequestDispatcher rs = request.getRequestDispatcher("leaveStatus.jsp");
@@ -181,7 +174,7 @@ public class EmployeeController extends HttpServlet {
 
 
     public void leaveRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Validation validation =new Validation();
+        Validation validation = new Validation();
         boolean validLeaveRequest;
         String leaveFromDate = request.getParameter("leaveFromDate");
         String leaveToDate = request.getParameter("leaveToDate");
@@ -189,7 +182,7 @@ public class EmployeeController extends HttpServlet {
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
 
-     try {
+        try {
             validLeaveRequest = validation.leaveValidation
                     (leaveFromDate, leaveToDate, employee);
             if (!validLeaveRequest) {
@@ -199,14 +192,14 @@ public class EmployeeController extends HttpServlet {
                 System.out.println("Leave is not valid");
                 return;
             }
-            Leaves leaveEmployee = new Leaves(leaveFromDate, leaveToDate,reason,
+            Leaves leaveEmployee = new Leaves(leaveFromDate, leaveToDate, reason,
                     searchCategoryElement.findCategoryElement("register"));
             leavesService.addLeave(leaveEmployee);
             employeeService.updateLeaveState(employee, leaveEmployee);
             request.setAttribute("invalidLeaveRequest", "validLeaveRequest");
             RequestDispatcher rs = request.getRequestDispatcher("leaveRequest.jsp");
             rs.forward(request, response);
-      } catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
@@ -214,9 +207,10 @@ public class EmployeeController extends HttpServlet {
     protected void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
         Employee employee = employeeService.getUserDetails(id);
-       /* long employeeId = employee.getId();;
-        long lastVersion = employee.getC_version();
-        employeeService.updateVersion(employeeId, lastVersion);*/
+        long employeeId = employee.getId();
+        ;
+        long lastVersion = employee.getVersion();
+        employeeService.updateVersion(employeeId, lastVersion);
         String firstName = request.getParameter("firstName");
         employee.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
@@ -225,41 +219,33 @@ public class EmployeeController extends HttpServlet {
         employee.setEmail(email);
         employee.setFatherName(request.getParameter("fatherName"));
         employeeService.updateUserDetails(employee);
-        /*Boolean Status = Boolean.valueOf(request.getParameter("employeeStatus"));
-        employee.setDisabled(Status);
-        boolean disable= Boolean.parseBoolean(request.getParameter("employeeStatus"));
-
-        if (request.getParameter("employeeStatus").equals("inactive")){
-            request.setAttribute("employeeStatus", "غیرفعال ");} else
-
-        if ( request.getParameter("employeeStatus").equals("active")){
-            request.setAttribute("employeeStatus", "فعال");}*/
-
         request.setAttribute("employee", employee);
-       RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
+        RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
         rs.forward(request, response);
-      /* String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(employee.getC_version());
+        String strLastVersion = String.valueOf(lastVersion);
+        String strGetVersion = String.valueOf(employee.getVersion());
         if (!strGetVersion.equals(strLastVersion)) {
             System.out.println("Synchronization has occurred");
-        }*/
+        }
     }
+
     public void editEmployeeProfiles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
         request.setAttribute("Employee", employee);
-      /* long employeeId = employee.getId();;
-        long lastVersion = employee.getC_version();
-        employeeService.updateVersion(employeeId, lastVersion);*/
+        long employeeId = employee.getId();
+        ;
+        long lastVersion = employee.getVersion();
+        employeeService.updateVersion(employeeId, lastVersion);
         RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
         rs.forward(request, response);
-        /*String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(employee.getC_version());
+        String strLastVersion = String.valueOf(lastVersion);
+        String strGetVersion = String.valueOf(employee.getVersion());
         if (!strGetVersion.equals(strLastVersion)) {
 
             System.out.println("SynchronizationHasOccurred");
-        }*/
+        }
     }
 
 }
