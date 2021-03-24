@@ -24,7 +24,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 <c:when test="${empty requestScope.ReceiveMessages}">
     <div style="width: 400px;border-radius: 5px; margin: 10px auto;text-align: center;">
         <div class="alert alert-info" id="info-alert">
-            <button type="button" class="close" data-dismiss="alert">x</button>
+            <button type="button" class="close" data-dismiss="alert"></button>
             <strong> پیام جدیدی ارسال نشده است.</strong>
 
         </div>

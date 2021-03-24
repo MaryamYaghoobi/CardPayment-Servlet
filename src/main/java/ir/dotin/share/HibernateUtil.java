@@ -8,10 +8,10 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil {
-    private static SessionFactory factory;
+    private static SessionFactory sessionFactory;
 
     static {
-        SessionFactory sessionFactory;
+//        SessionFactory sessionFactory;
 
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
@@ -22,7 +22,7 @@ public class HibernateUtil {
 
 
     public static SessionFactory getSessionFactory() throws HibernateException {
-        return factory;
+        return sessionFactory;
 
     }
 

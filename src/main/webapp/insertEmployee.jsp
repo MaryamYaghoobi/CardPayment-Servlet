@@ -27,10 +27,20 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 <c:if test="${sessionScope['invalidationUsername']}">
 
     <div style="width: 300px;border-radius: 5px; margin: 10px auto;">
-        <div class="alert alert-success" id="success-alert">
+        <div class="alert alert-success" id="success-alert" style="border: none;background-color: #F0E1BE;">
             <button type="button" class="close" data-dismiss="alert">x</button>
             <strong>
                نام کاربری تکراری است.
+            </strong>
+        </div>
+    </div>
+</c:if>
+<c:if test="${requestScope['success']}">
+    <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
+        <div class="alert alert-info" id="info-alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>
+             کاربر با موفقیت ثبت شد.
             </strong>
         </div>
     </div>
@@ -39,6 +49,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
      style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
     <form action="ManagerController" method="post" id="saveForm">
         <input type="hidden" name="action" value="addUser">
+			<input hidden type="hidden" name="version" id="version" value="${requestScope.Employee.version}">
         <div class="form-row">
             <div class="form-group col-md-4" style="margin-top: 17px;">
                 <label><label style="color: #ff4626">*</label>

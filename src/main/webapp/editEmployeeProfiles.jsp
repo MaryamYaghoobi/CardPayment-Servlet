@@ -21,6 +21,7 @@
     <form action="EmployeeController" method="post" id="editForm">
         <input type="hidden" name="action" value="updateProfile">
         <input hidden type="hidden" name="id" value="${requestScope.Employee.id}">
+		<input hidden type="hidden" name="version" value="${requestScope.Employee.version}">
         <div class="form-row">
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label>
@@ -33,7 +34,7 @@
                 <label>
                     رمز عبور
                 </label>
-                <input type="text" readonly class="form-control" id="password" name="password"
+                <input type="text" class="form-control" id="password" name="password"
                        value="<c:out value="${requestScope.Employee.password}"/>">
             </div>
         </div>
