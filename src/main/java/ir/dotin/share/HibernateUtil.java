@@ -11,15 +11,11 @@ public class HibernateUtil {
     private static SessionFactory sessionFactory;
 
     static {
-//        SessionFactory sessionFactory;
-
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
         sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
     }
-    // factory = sessionFactory.getSessionFactoryBuilder().build();
-
 
     public static SessionFactory getSessionFactory() throws HibernateException {
         return sessionFactory;
