@@ -46,16 +46,20 @@
         <div class="form-row">
 		
             <div class="form-group col-md-6" style="margin-top: 17px;">
+			<div class="range-from-example">
                 <label><label style="color: #ff4626">*</label>
                     از تاریخ</label>
-                <input type="text" placeholder="YYYY-MM-dd" class="form-control" id="leaveFromDate" name="leaveFromDate">
+                <input type="date" placeholder="YYYY-MM-dd" class="form-control" id="leaveFromDate" name="leaveFromDate">
             </div>
+			 </div>			
             <div class="form-group col-md-6" style="margin-top: 17px;">
+			<div class="range-to-example">
                 <label><label style="color: #ff4626">*</label>
                     تا تاریخ</label>
-                <input type="text" placeholder="YYYY-MM-dd" class="form-control" id="leaveToDate" name="leaveToDate">
+                <input type="date" placeholder="YYYY-MM-dd" class="form-control" id="leaveToDate" name="leaveToDate">
             </div>
         </div>
+		</div>
 		 <div class="form-group col-md-15" style="margin-top: 17px;">
                
  <label> دلیل :</label>
@@ -74,7 +78,9 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <!--===============================================================================-->	
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<!--=================================================================================-->	
+<!--=================================================================================-->
+<script type="text/javascript" src="./js/persian-datepicker.js"></script>	
+<!--=================================================================================-->
     <script>
 
         function dateCheck() {
@@ -96,6 +102,6 @@
             }
         }
     </script>
-	
+	   
 </body>
 </html>

@@ -11,12 +11,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!--<jsp:include page="body.jsp"/>-->
-
 <c:if test= "${requestScope['invalidationUserOrPassword'] && empty sessionScope['username']}">
     <div>
     <label>
-<b>نام کاربری یا رمز عبور نادرست است.</b>   
+<br><br><br>
+<h3 style="color:red; text-indent: 620px;">نام کاربری یا رمز عبور نادرست است</h3>     
     </label>
     </div>
     </c:if>

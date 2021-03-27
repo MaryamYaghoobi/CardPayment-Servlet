@@ -34,7 +34,6 @@ public class EmployeeController extends HttpServlet {
     public static final String TOMCAT_FILE_PATH = FILE_PATH_PREFIX
             + "\\javaSchool\\SESSION11\\apache-tomcat-8.0.0-RC5\\apache-tomcat-8.0.0-RC5";
 
-
     LeavesService leavesService = new LeavesService();
     EmailService emailService = new EmailService();
     EmployeeService employeeService = new EmployeeService();
@@ -76,6 +75,9 @@ public class EmployeeController extends HttpServlet {
             case "sentMessages":
                 sentMessages(request, response);
                 break;
+            case " cancelLeave":
+                cancelLeave(request, response);
+                break;
 
         }
     }
@@ -105,18 +107,15 @@ public class EmployeeController extends HttpServlet {
     public void ReceiveMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
-
         List<Object[]> ReceiveMessages = emailService.detailsMessagesReceived(employee);
         request.setAttribute("ReceiveMessages", ReceiveMessages);
         RequestDispatcher rs = request.getRequestDispatcher("ReceiveMessages.jsp");
         rs.forward(request, response);
-
     }
 
     public void sentMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
-
         List<Object[]> sentMessages = emailService.detailsMessagesSent(employee);
         request.setAttribute("sentMessages", sentMessages);
         RequestDispatcher rs = request.getRequestDispatcher("sentMessages.jsp");
@@ -129,9 +128,7 @@ public class EmployeeController extends HttpServlet {
         String fileName = part.getSubmittedFileName();
         if (fileName != null && !fileName.isEmpty()) {
             String uploadPath = TOMCAT_FILE_PATH + File.separator + fileName;
-
             part.write(uploadPath + File.separator);
-
         }
         Employee senderEmail = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
@@ -172,6 +169,12 @@ public class EmployeeController extends HttpServlet {
         rs.forward(request, response);
     }
 
+    public void cancelLeave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        long leaveId = Long.parseLong(request.getParameter("leaveId"));
+        leavesService.cancelLeave(leaveId);
+        System.out.println("The leave request was canceled");
+        searchLeave(request, response);
+    }
 
     public void leaveRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Validation validation = new Validation();
@@ -207,10 +210,8 @@ public class EmployeeController extends HttpServlet {
     protected void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
         Employee employee = employeeService.getUserDetails(id);
-        long employeeId = employee.getId();
-        ;
+        long employeeIds = employee.getId();
         long lastVersion = employee.getVersion();
-        employeeService.updateVersion(employeeId, lastVersion);
         String firstName = request.getParameter("firstName");
         employee.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
@@ -218,6 +219,7 @@ public class EmployeeController extends HttpServlet {
         String email = request.getParameter("email");
         employee.setEmail(email);
         employee.setFatherName(request.getParameter("fatherName"));
+        employeeService.updateVersion(employeeIds, lastVersion);
         employeeService.updateUserDetails(employee);
         request.setAttribute("employee", employee);
         RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
@@ -230,22 +232,10 @@ public class EmployeeController extends HttpServlet {
     }
 
     public void editEmployeeProfiles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
         request.setAttribute("Employee", employee);
-        long employeeId = employee.getId();
-        ;
-        long lastVersion = employee.getVersion();
-        employeeService.updateVersion(employeeId, lastVersion);
         RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
         rs.forward(request, response);
-        String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(employee.getVersion());
-        if (!strGetVersion.equals(strLastVersion)) {
-
-            System.out.println("SynchronizationHasOccurred");
-        }
     }
-
 }

@@ -35,11 +35,24 @@
   transition: 0.5s;
   padding-top: 60px;
 }
-
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 18px;
+   font-weight: bold;
+  color: black;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+  outline: none;
+}
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
    font-weight: bold;
   color: black;
   display: block;
@@ -67,12 +80,22 @@
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a class="nav-link" href="ManagerController?action=getAllActiveEmployees" >
-                        مدیریت کاربران
+   <button class="dropdown-btn">مدیریت کاربران 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+   <a class="nav-link" href="ManagerController?action=getAllActiveEmployees" >
+                       جستجوی کاربران
                     </a>
   <a class="nav-link" href="ManagerController?action=insertEmployee">
                         افزودن کاربر جدید
                     </a>
+  </div>
+  
+  <button class="dropdown-btn">مدیریت مرخصی 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
  <a class="nav-link" href="ManagerController?action=RegisteredLeaves" >
                          مدیریت مرخصی
                     </a>
@@ -83,7 +106,13 @@
   <a class="nav-link" href="EmployeeController?action=searchLeave">
                        وضعیت مرخصی
                     </a>
-					 <a class="nav-link" href="EmployeeController?action=sendMessages">
+  </div>
+ 
+ <button class="dropdown-btn">مدیریت پیام ها 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+ <a class="nav-link" href="EmployeeController?action=sendMessages">
                        ارسال پیام
                     </a>
 					<a class="nav-link" href="EmployeeController?action=ReceiveMessages">
@@ -92,7 +121,9 @@
 					<a class="nav-link" href="EmployeeController?action=sentMessages">
                       پیام های ارسالی
                     </a>
- <a class="nav-link " href="ManagerController?action=logout" >
+  </div>
+					
+ <a class="nav-link " href="ManagerController?action=logout" style=" font-size: 18px" >
                     خروج
                 </a>
 </div>
@@ -110,7 +141,22 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
 </script>
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
 
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+</script>
    
 </body>
 </html> 

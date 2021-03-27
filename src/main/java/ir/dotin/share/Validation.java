@@ -2,7 +2,6 @@ package ir.dotin.share;
 
 import ir.dotin.entity.Employee;
 import ir.dotin.entity.Leaves;
-import ir.dotin.repository.ManagerDao;
 import ir.dotin.service.EmployeeService;
 import ir.dotin.service.ManagerService;
 
@@ -29,7 +28,7 @@ public class Validation {
             for (Leaves leaveEmployee : leaveEmployeeList) {
                 leaveFromDate = leaveEmployee.getLeaveFromDate();
                 leaveToDate = leaveEmployee.getLeaveToDate();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date dateStart = simpleDateFormat.parse(leaveFromDate);
                 Date dateEnd = simpleDateFormat.parse(leaveToDate);
                 if (dateStart.compareTo(dateEnd) > 0) {

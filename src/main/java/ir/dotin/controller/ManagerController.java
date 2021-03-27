@@ -110,9 +110,7 @@ public class ManagerController extends HttpServlet {
 
         Employee manager = managerService.
                 searchUsername((String) request.getSession().getAttribute("username"));
-
         List<Employee> RegisteredLeaves = managerService.RegisteredLeaves((manager));
-
         request.setAttribute("RegisteredLeaves", RegisteredLeaves);
         RequestDispatcher rs = request.getRequestDispatcher("leavesManagement.jsp");
         rs.forward(request, response);
@@ -131,7 +129,6 @@ public class ManagerController extends HttpServlet {
             insertEmployee(request, response);
             long employeeId = employee.getId();
             long lastVersion = employee.getVersion();
-            employeeService.updateVersion(employeeId, lastVersion);
             String firstName = request.getParameter("firstName");
             employee.setFirstName(firstName);
             String lastName = request.getParameter("lastName");
@@ -147,19 +144,14 @@ public class ManagerController extends HttpServlet {
             CategoryElement role = searchCategoryElement.findCategoryElement
                     (request.getParameter("role"));
             employee.setRole(role);
-            Boolean Status = Boolean.valueOf(request.getParameter("disabled"));
-
-            if (request.getParameter("disabled").equals("inactive")) {
-                request.setAttribute("disabled", "غیرفعال ");
-            } else if (request.getParameter("disabled").equals("active")) {
-                request.setAttribute("disabled", "فعال");
-            }
+            boolean Status = Boolean.valueOf(request.getParameter("disabled"));
             employee.setDisabled(Status);
             String g = request.getParameter("gender");
             CategoryElement gender = searchCategoryElement.findCategoryElement(g);
             employee.setGender(gender);
             String[] managerDetail = request.getParameter("getManagerDetail").split("  ");
             employee.setManager(managerService.getManagerDetail(managerDetail[0], managerDetail[1]));
+            employeeService.updateVersion(employeeId, lastVersion);
             managerService.addUser(employee);
             getAllActiveEmployees(request, response);
             String strLastVersion = String.valueOf(lastVersion);
@@ -171,7 +163,6 @@ public class ManagerController extends HttpServlet {
     }
 
     public void insertEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Employee employee = new Employee();
         if (request.getSession().getAttribute("invalidationUsername") != null) {
             request.getSession().removeAttribute("invalidationUsername");
         }
@@ -198,7 +189,6 @@ public class ManagerController extends HttpServlet {
         rs.forward(request, response);
     }
 
-    //inactive employee
     public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long employeeId = Long.parseLong(request.getParameter("employeeId"));
         managerService.delete(employeeId);
@@ -222,10 +212,8 @@ public class ManagerController extends HttpServlet {
         String s = request.getParameter("id");
         long employeeId = Long.parseLong(s.trim());
         Employee employee = employeeService.getUserDetails(employeeId);
-        long empId = employee.getId();
-        ;
+        long employeeIds = employee.getId();
         long lastVersion = employee.getVersion();
-        employeeService.updateVersion(empId, lastVersion);
         String firstName = request.getParameter("firstName");
         employee.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
@@ -233,15 +221,10 @@ public class ManagerController extends HttpServlet {
         String email = request.getParameter("email");
         employee.setEmail(email);
         boolean Status = Boolean.parseBoolean(request.getParameter("disabled"));
-
-        if (request.getParameter("disabled").equals("inactive")) {
-            request.setAttribute("disabled", "غیرفعال ");
-        } else if (request.getParameter("disabled").equals("active")) {
-            request.setAttribute("disabled", "فعال");
-        }
         employee.setDisabled(Status);
         String[] managerDetail = request.getParameter("getManagerDetail").split("  ");
         employee.setManager(managerService.getManagerDetail(managerDetail[0], managerDetail[1]));
+        employeeService.updateVersion(employeeIds, lastVersion);
         managerService.updateUserDetails(employee);
         getAllActiveEmployees(request, response);
         String strLastVersion = String.valueOf(lastVersion);
@@ -265,16 +248,6 @@ public class ManagerController extends HttpServlet {
         request.setAttribute("firstName", request.getParameter("firstName"));
         request.setAttribute("lastName", request.getParameter("lastName"));
         request.setAttribute("username", request.getParameter("username"));
-        boolean Status = Boolean.parseBoolean(request.getParameter("disabled"));
-        if (Status == true) {
-            request.setAttribute("غیرفعال",Status);
-           // request.setAttribute("disabled", "غیرفعال ");
-        } else if (Status == false) {
-            request.setAttribute("فعال", Status);
-          //  request.setAttribute("disabled", "فعال");
-        }
-       // employee.setDisabled(Status);
-
         RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
         rs.forward(request, response);
 
@@ -310,7 +283,6 @@ public class ManagerController extends HttpServlet {
     public void ReceiveMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
-
         List<Object[]> ReceiveMessages = emailService.detailsMessagesReceived(employee);
         List<Object[]> sentMessages = emailService.detailsMessagesSent(employee);
         request.setAttribute("ReceiveMessages", ReceiveMessages);

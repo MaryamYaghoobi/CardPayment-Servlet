@@ -29,12 +29,13 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
     <div style="width: 300px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-success" id="success-alert" style="border: none;background-color: #F0E1BE;">
             <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong>
+            <strong style="color:red;">
                نام کاربری تکراری است.
             </strong>
         </div>
     </div>
 </c:if>
+<!--
 <c:if test="${requestScope['success']}">
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-info" id="info-alert">
@@ -44,7 +45,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
             </strong>
         </div>
     </div>
-</c:if>
+</c:if>-->
 <div class="container" name="container"
      style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
     <form action="ManagerController" method="post" id="saveForm">
@@ -116,6 +117,24 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
                 </select>
             </div>
         </div>
+		  <div class="form-row">
+         <div class="form-group col-md-6" style="margin-top: 17px;">
+                <label><label style="color: #ff4626">*</label>
+                     نقش
+                 </label>
+		<br>		 
+ <div class="form-check form-check-inline" >
+ <select name="role" id="role" class="form-control">
+    <option class="form-check-input" id="manager" name="role" value="manager" checked>مدیر</option>
+    <option  class="form-check-input" id="programmer" name="role" value="programmer">برنامه نویس</option>
+    <option  class="form-check-input" id="tester" name="role" value="tester">آزمونگر</option>
+    <option  class="form-check-input" id="analyzer" name="role" value="analyzer">تحلیلگر</option>
+	 <option  class="form-check-input" id="technicalSupport" name="role" value="technicalSupport">پشتیبان فنی</option>
+  </select>
+  <br><br>
+   </div>
+    </div>
+   </div>
         <div class="form-row">
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label>
@@ -158,12 +177,8 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
                 </div>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-8" style="margin-top: 17px;">
-                <label>
-                     نقش
-                 </label>
-<br>
+      
+   <!--
                 <div class="form-check form-check-inline">
                     <input type="radio" class="form-check-input" id="manager" name="role" value="manager" checked>
                     <label class="form-check-label">
@@ -201,13 +216,14 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
                 </div>
 				<br>
             </div>
-
+-->
             <div class=" col-md-4" style="margin-top: 17px;"><br><br><br><br>
                 <button type="submit" class="btn btn-primary"style="background-color: #F4C34E;border: none;">
                     ثبت اطلاعات
               </button>
             </div>
         </div>
+		
     </form>
 
 </div>

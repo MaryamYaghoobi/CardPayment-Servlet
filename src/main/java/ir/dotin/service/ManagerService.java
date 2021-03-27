@@ -6,13 +6,6 @@ import ir.dotin.repository.ManagerDao;
 import java.util.List;
 
 public class ManagerService {
-    private static ManagerService managerService = new ManagerService();
-    public ManagerService() {
-    }
-    public static ManagerService getInstance() {
-        return managerService;
-    }
-
     public List<Employee> RegisteredLeaves(Employee manager) {
         ManagerDao managerDao = new ManagerDao();
         return managerDao.RegisteredLeaves(manager);
@@ -58,10 +51,11 @@ public class ManagerService {
         return managerDao.searchId(id);
     }
 
-    //    public List<String> searchAllUsername(){
-//        ManagerDao managerDao = new ManagerDao();
-//        return managerDao.searchAllUsername();
-//    }
+    public int searchAllUsername(String username) {
+        ManagerDao managerDao = new ManagerDao();
+        return managerDao.searchAllUsername(username);
+    }
+
     public Employee searchUsername(String username) {
         ManagerDao managerDao = new ManagerDao();
         return managerDao.searchUsername(username);

@@ -3,11 +3,7 @@ package ir.dotin.repository;
 import ir.dotin.entity.Employee;
 import ir.dotin.share.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -33,6 +29,7 @@ public class ManagerDao {
         }
         return employeeList;
     }
+
 
     public void addUser(Employee employee) {
         Transaction transaction = null;
@@ -66,11 +63,13 @@ public class ManagerDao {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            String getEmployeeId = " select e from Employee e where e.id =:id and e.active =:active";
+            String getEmployeeId =
+                    " select e from Employee e where e.id =:id and e.active =:active";
             Query employeeQuery = session.createQuery(getEmployeeId);
             employeeQuery.setParameter("id", id);
             employeeQuery.setParameter("active", true);
             Employee employee = (Employee) employeeQuery.getSingleResult();
+            employee.setActive(true);
             session.update(employee);
             transaction.commit();
         } catch (Exception e) {
@@ -81,7 +80,6 @@ public class ManagerDao {
         }
 
     }
-
 
     public List<Employee> search(Employee employee) {
         Transaction transaction = null;
@@ -103,7 +101,6 @@ public class ManagerDao {
                 finalPredicate = criteriaBuilder.and(finalPredicate, criteriaBuilder.equal(emp.get("username"), employee.getUsername()));
             }
             Query.select(emp).where(finalPredicate);
-
             org.hibernate.Query<Employee> query = session.createQuery(Query);
             employees = query.getResultList();
         } catch (Exception e) {
@@ -129,7 +126,6 @@ public class ManagerDao {
     }
 
     public int searchAllUsername(String username) {
-        // Transaction transaction = null;
         Object userUsername = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
@@ -160,19 +156,16 @@ public class ManagerDao {
     }
 
     public Employee searchUsername(String username) {
-        //  Transaction transaction = null;
         Employee employeeList = null;
-        SessionFactory sessionFactory;
-        // configures settings from hibernate.cfg.xml
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
-        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("select e from Employee e where" +
-                " e.username =:username");
-        query.setParameter("username", username);
-        employeeList = (Employee) query.getSingleResult();
-        session.close();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            Query query = session.createQuery("select e from Employee e where" +
+                    " e.username =:username");
+            query.setParameter("username", username);
+            employeeList = (Employee) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return employeeList;
     }
 
@@ -213,12 +206,14 @@ public class ManagerDao {
         Transaction transaction = null;
         Employee employee = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-
             transaction = session.beginTransaction();
             employee = (Employee) session.createQuery("select e from Employee e where " +
                     "e.username =:username and e.password =:password")
                     .setParameter("username", username).setParameter("password", password).uniqueResult();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
         return employee;

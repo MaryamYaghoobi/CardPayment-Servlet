@@ -50,6 +50,9 @@
             <th class="text-center" scope="col" style="background-color:#F4C34E;">
                 وضعیت مرخصی
            </th>
+		   <th class="text-center" scope="col" style="background-color:#F4C34E;">
+               عملیات
+           </th>
         </tr>
         </thead>
         <tbody>
@@ -60,6 +63,15 @@
                 <td><c:out value="${leaves.leaveToDate}"/></td>
 				<td><c:out value="${leaves.reason}"/></td>
                 <td><c:out value="${leaves.leaveStatus.name}"/></td>
+				<td class="text-center" style="width: 21%;">
+				 <button type="button"
+                                class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"
+                                style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;"
+								onclick="cancelLeave(${leave.id})"><span
+                                class="fa fa-times"> 
+                             لغو
+                         </span></button>
+				</td>
             </tr>
         </c:forEach>
         </tbody>
@@ -67,6 +79,14 @@
     </c:otherwise>
     </c:choose>
 </div>
+ <script>
+       
+        function cancelLeave(leaveId) {
+            if (confirm("مرخصی لغو شود ؟")) {
+                window.location = 'EmployeeController?action=cancelLeave&leaveId=' + leaveId;
+            }
+        }
+    </script>
 <!--==============================================================-->	
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <!--===============================================================-->		

@@ -24,7 +24,7 @@ public class EmployeeDao {
             querySelect.setLockMode(LockModeType.OPTIMISTIC);
             querySelect.getResultList();
             Query queryUpdate = session.createQuery("update Employee e set " +
-                    "version = version+1 where e.id =:id and version=:version ");
+                    "e.version = e.version+1 where e.id =:id and e.version=:version ");
             queryUpdate.setParameter("id", id);
             queryUpdate.setParameter("version", version);
             employee = (Employee) queryUpdate.getResultList();

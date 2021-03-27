@@ -70,4 +70,27 @@ public class LeavesDao {
             e.printStackTrace();
         }
     }
+
+    public void cancelLeave(long leaveId) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            Query categoryElementQuery = session.createQuery
+                    (" select ce from CategoryElement ce where ce.code =:code");
+            categoryElementQuery.setParameter("code", "cancel");
+            CategoryElement cancel = (CategoryElement) categoryElementQuery.getSingleResult();
+            Query query = session.createQuery
+                    ("update Leaves l set l.leaveStatus =:cancel " +
+                            " where l.id =:id");
+            query.setParameter("cancel", cancel);
+            query.setParameter("id", leaveId);
+            query.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
 }

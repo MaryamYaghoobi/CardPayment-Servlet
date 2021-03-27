@@ -23,7 +23,6 @@ public class EmailDao {
             }
             e.printStackTrace();
         }
-
     }
 
     public List<Email> messagesReceived(Employee employee) {
@@ -40,6 +39,7 @@ public class EmailDao {
         }
         return receivedEmails;
     }
+
 
     public List<Object[]> detailsMessagesReceived(Employee employee) {
         List<Object[]> receivedEmailsInfo = new ArrayList<>();
