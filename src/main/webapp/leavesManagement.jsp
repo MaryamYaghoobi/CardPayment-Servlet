@@ -49,6 +49,12 @@
             <th class="text-center" scope="col" style="background-color:#F4C34E;">
                 تا تاریخ
             </th>
+			<th class="text-center" scope="col" style="background-color:#F4C34E;">
+                از ساعت
+           </th>
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
+                تا ساعت
+            </th>
 			            <th class="text-center" scope="col" style="background-color:#F4C34E;">
                 دلیل
             </th>
@@ -69,6 +75,8 @@
                     <td><c:out value="${Employee.lastName}"/></td>
                     <td><c:out value="${leave.leaveFromDate}"/></td>
                     <td><c:out value="${leave.leaveToDate}"/></td>
+					 <td><c:out value="${leave.leaveFromTime}"/></td>
+                    <td><c:out value="${leave.leaveToTime}"/></td>
 					<td><c:out value="${leave.reason}"/></td>
                     <td><c:out value="${leave.leaveStatus.name}"/></td>
                     <td class="text-right" style="width: 21%;">

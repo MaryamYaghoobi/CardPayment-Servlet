@@ -181,6 +181,8 @@ public class EmployeeController extends HttpServlet {
         boolean validLeaveRequest;
         String leaveFromDate = request.getParameter("leaveFromDate");
         String leaveToDate = request.getParameter("leaveToDate");
+        String leaveFromTime = request.getParameter("leaveFromTime");
+        String leaveToTime = request.getParameter("leaveToTime");
         String reason = request.getParameter("reason");
         Employee employee = employeeService.
                 searchUsername((String) request.getSession().getAttribute("username"));
@@ -195,7 +197,7 @@ public class EmployeeController extends HttpServlet {
                 System.out.println("Leave is not valid");
                 return;
             }
-            Leaves leaveEmployee = new Leaves(leaveFromDate, leaveToDate, reason,
+            Leaves leaveEmployee = new Leaves(leaveFromDate, leaveToDate,leaveFromTime,leaveToTime,reason,
                     searchCategoryElement.findCategoryElement("register"));
             leavesService.addLeave(leaveEmployee);
             employeeService.updateLeaveState(employee, leaveEmployee);

@@ -16,6 +16,10 @@ public class Leaves extends ir.dotin.entity.Entity {
     private String leaveToDate;
     @Column(name = "c_leaveFromDate", columnDefinition = "VARCHAR(255)")
     private String leaveFromDate;
+    @Column(name = "c_leaveToTime", columnDefinition = "VARCHAR(255)")
+    private String leaveToTime;
+    @Column(name = "c_leaveFromTime", columnDefinition = "VARCHAR(255)")
+    private String leaveFromTime;
     @Column(name = "c_reason", columnDefinition = "VARCHAR(255)")
     private String reason;
     @ManyToOne()
@@ -42,6 +46,22 @@ public class Leaves extends ir.dotin.entity.Entity {
         this.leaveFromDate = leaveFromDate;
     }
 
+    public String getLeaveToTime() {
+        return leaveToTime;
+    }
+
+    public void setLeaveToTime(String leaveToTime) {
+        this.leaveToTime = leaveToTime;
+    }
+
+    public String getLeaveFromTime() {
+        return leaveFromTime;
+    }
+
+    public void setLeaveFromTime(String leaveFromTime) {
+        this.leaveFromTime = leaveFromTime;
+    }
+
     public String getReason() {
         return reason;
     }
@@ -66,17 +86,14 @@ public class Leaves extends ir.dotin.entity.Entity {
         this.employee = employee;
     }
 
-    public Leaves(String leaveFromDate, String leaveToDate, String reason, CategoryElement leaveStatus) {
+    public Leaves(String leaveFromDate, String leaveToDate, String leaveFromTime, String leaveToTime, String reason, CategoryElement leaveStatus) {
         this.leaveFromDate = leaveFromDate;
         this.leaveToDate = leaveToDate;
+        this.leaveFromTime = leaveFromTime;
+        this.leaveToTime = leaveToTime;
         this.reason = reason;
         this.leaveStatus = leaveStatus;
 
     }
-
-    public Leaves() {
-
-    }
-
-
+    public Leaves(){}
 }

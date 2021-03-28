@@ -45,6 +45,12 @@
                  مرخصی تا تاریخ
             </th>
 			<th class="text-center" scope="col" style="background-color:#F4C34E;">
+                از ساعت
+            </th>
+            <th class="text-center" scope="col" style="background-color:#F4C34E;">
+                تا ساعت
+            </th>
+			<th class="text-center" scope="col" style="background-color:#F4C34E;">
                 دلیل
             </th>
             <th class="text-center" scope="col" style="background-color:#F4C34E;">
@@ -61,6 +67,8 @@
                 <td hidden><c:out value="${leaves.id}"/></td>               
                 <td><c:out value="${leaves.leaveFromDate}"/></td>
                 <td><c:out value="${leaves.leaveToDate}"/></td>
+				<td><c:out value="${leaves.leaveFromTime}"/></td>
+                <td><c:out value="${leaves.leaveToTime}"/></td>
 				<td><c:out value="${leaves.reason}"/></td>
                 <td><c:out value="${leaves.leaveStatus.name}"/></td>
 				<td class="text-center" style="width: 21%;">

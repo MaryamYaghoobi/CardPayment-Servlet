@@ -13,6 +13,15 @@
 <head>
   <title>درخواست مرخصی</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='css/normalize.css' rel='stylesheet' />
+    <link href='css/fontawesome/css/font-awesome.min.css' rel='stylesheet' />
+    <link href="css/vertical-responsive-menu.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/prism.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/persianDatepicker-default.css" />
+	<link rel="stylesheet" href="css/chung-timepicker.css">
+
+
     <jsp:include page="employeeHeader.jsp"/>
 </head>
 <body dir="rtl">
@@ -44,22 +53,31 @@
         <input type="hidden" name="action" value="leaveRequest">
 		 <label>درخواست مرخصی</label>
         <div class="form-row">
-		
+	
             <div class="form-group col-md-6" style="margin-top: 17px;">
-			<div class="range-from-example">
                 <label><label style="color: #ff4626">*</label>
                     از تاریخ</label>
-                <input type="date" placeholder="YYYY-MM-dd" class="form-control" id="leaveFromDate" name="leaveFromDate">
+                <input type="text"  class="form-control" id="leaveFromDate" name="leaveFromDate">
             </div>
-			 </div>			
             <div class="form-group col-md-6" style="margin-top: 17px;">
-			<div class="range-to-example">
                 <label><label style="color: #ff4626">*</label>
                     تا تاریخ</label>
-                <input type="date" placeholder="YYYY-MM-dd" class="form-control" id="leaveToDate" name="leaveToDate">
+                <input type="text"  class="form-control" id="leaveToDate" name="leaveToDate">			
             </div>
         </div>
-		</div>
+		<div class="form-row">
+	
+            <div class="form-group col-md-6" style="margin-top: 17px;">
+                <label><label style="color: #ff4626">*</label>
+                 از ساعت</label>
+                <input type="text"  class="form-control" id="leaveFromTime" name="leaveFromTime">
+            </div>
+            <div class="form-group col-md-6" style="margin-top: 17px;">
+                <label><label style="color: #ff4626">*</label>
+                    تا ساعت</label>
+                <input type="text"  class="form-control" id="leaveToTime" name="leaveToTime">			
+            </div>
+        </div>
 		 <div class="form-group col-md-15" style="margin-top: 17px;">
                
  <label> دلیل :</label>
@@ -75,12 +93,17 @@
     </form>
 </div>
 <!--===============================================================================-->	
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!--===============================================================================-->	
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>	
+<!--=================================================================================-->	
+    <script src="js/persianDatepicker.min.js"></script>
+<!--=================================================================================-->		
+    <script src="js/vertical-responsive-menu.min.js"></script>
 <!--=================================================================================-->
-<script type="text/javascript" src="./js/persian-datepicker.js"></script>	
+<script src="js/chung-timepicker.js"></script>
 <!--=================================================================================-->
+
     <script>
 
         function dateCheck() {
@@ -102,6 +125,34 @@
             }
         }
     </script>
-	   
+<!--=================================================================================-->			
+<script type="text/javascript">
+
+    $(function() {
+        $("#leaveFromDate").persianDatepicker();   
+    });
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $("#leaveToDate").persianDatepicker();
+       
+    });
+</script>
+<script type="text/javascript">
+    $(function() {
+		debugger;
+	var x =  $("#leaveFromTime")
+       $('#leaveFromTime').chungTimePicker();
+       
+    });
+</script>
+<script type="text/javascript">
+    $(function() {
+       $('#leaveToTime').chungTimePicker();
+       
+    });
+</script>	
+
 </body>
 </html>
