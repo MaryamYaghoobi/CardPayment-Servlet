@@ -12,7 +12,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>مدیریت کاربران</title>	
+	<title>مدیریت کاربران</title>
+<style>
+.disabledClass {
+	background-color: #FBA538 ;
+}
+
+  </style>	
 <!--==============================================================================================================-->	
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--==============================================================================================================-->
@@ -87,6 +93,7 @@
         <tbody>
         <c:forEach items="${requestScope.employeeList}" var="employee">
             <tr>
+			 <tr  class="${employee.disabled =='false' ? 'disabledClass' : 'enabledClass'}">
                 <td hidden><c:out value="${employee.id}"/></td>
                 <td><c:out value="${employee.firstName}"/></td>
                 <td><c:out value="${employee.lastName}"/></td>
@@ -98,7 +105,6 @@
                             class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="updateProfile"
                             style="width: 82px;background-color: #F4C34E;border: none;" onclick="search(${employee.id})">
 							
-                          
 							<span class="fa fa-edit"></span>
 							</button>                      
                     <button type="button"
