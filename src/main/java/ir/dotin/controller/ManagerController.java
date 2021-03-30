@@ -49,6 +49,9 @@ public class ManagerController extends HttpServlet {
             case "getAllActiveEmployees":
                 getAllActiveEmployees(request, response);
                 break;
+            case "getAllInActiveEmployees":
+                getAllInActiveEmployees(request, response);
+                break;
             case "delete":
                 delete(request, response);
                 break;
@@ -188,7 +191,11 @@ public class ManagerController extends HttpServlet {
         RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
         rs.forward(request, response);
     }
-
+    public void getAllInActiveEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("AllActiveEmployees", managerService.getAllInActiveEmployees());
+        RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
+        rs.forward(request, response);
+    }
     public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long employeeId = Long.parseLong(request.getParameter("employeeId"));
         managerService.delete(employeeId);

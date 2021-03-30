@@ -90,21 +90,23 @@
                  </label>
                 <div class="form-check form-check-inline">
                     <input type="radio" class="form-check-input" id="active" name="disabled"                         
-						 value="active" <c:if test="${!requestScope.disabled} =='active'?'checked':''}" >
-                    <label class="form-check-label">
-                        فعال
-                    </label>
+						 value="active" <c:if test="${!requestScope.disabled} =='false'?'checked':''}" >
+                  
 					</c:if>
                 </div>
-				
+				 <label>
+                 فعال
+                 </label>
                 <div class="form-check form-check-inline">
                     <input type="radio" class="form-check-input" id="inactive" name="disabled"
-                           value="inactive" <c:if test="${requestScope.disabled} =='inactive'?'checked':''}" >
-                    <label class="form-check-label">
-                        غیر فعال
-                    </label>
+                           value="inactive" <c:if test="${requestScope.disabled} =='true'?'checked':''}" >
+                   
+				
 					</c:if>
                 </div>
+				 <label>
+                  غیر فعال
+                 </label>
             </div>
         </div>
         <div class="form-row" dir="ltr">

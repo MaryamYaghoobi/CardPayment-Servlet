@@ -20,6 +20,10 @@ public class ManagerService {
         ManagerDao managerDao = new ManagerDao();
         return managerDao.getAllActiveEmployees();
     }
+    public List<Employee> getAllInActiveEmployees() {
+        ManagerDao managerDao = new ManagerDao();
+        return managerDao.getAllInActiveEmployees();
+    }
 
     public void updateUserDetails(Employee employee) {
         ManagerDao managerDao = new ManagerDao();

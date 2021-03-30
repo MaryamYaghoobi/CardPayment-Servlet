@@ -75,7 +75,7 @@ public class EmployeeController extends HttpServlet {
             case "sentMessages":
                 sentMessages(request, response);
                 break;
-            case " cancelLeave":
+            case "cancelLeave":
                 cancelLeave(request, response);
                 break;
 

@@ -29,6 +29,20 @@ public class ManagerDao {
         }
         return employeeList;
     }
+    public List<Employee> getAllInActiveEmployees() {
+        List<Employee> employeeList = new ArrayList<>();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            String getAllActiveEmployees = "select e from Employee e where " +
+                    "e.disabled =:disabled";
+            Query query = session.createQuery(getAllActiveEmployees);
+            query.setParameter("disabled", true);
+            employeeList = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return employeeList;
+    }
 
 
     public void addUser(Employee employee) {

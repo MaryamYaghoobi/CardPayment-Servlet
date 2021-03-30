@@ -13,21 +13,38 @@
 <html>
 <head>
 	<title>مدیریت کاربران</title>
-<style>
+
+	<style>
 .disabledClass {
 	background-color: #FBA538 ;
 }
 
-  </style>	
+  </style>
+  </style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
 <!--==============================================================================================================-->	
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--==============================================================================================================-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="css/status.css" rel="stylesheet" />
+<!--==============================================================================================================-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--==============================================================================================================-->
+
     <jsp:include page="managerHeader.jsp"/>
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
 <script>
+ function deActive(employeeId) {
+        if (confirm('کاربر غیر فعال شود؟')) {
+            window.location = 'ManagerController?action=inActiveEmployee&employeeId=' + employeeId;
+        }
+    }
+	 function active(employeeId) {
+        if (confirm('کاربر فعال شود؟')) {
+            window.location = 'ManagerController?action=getAllInActiveEmployees&employeeId=' + employeeId;
+        }
+    }
     function del(employeeId) {
         if (confirm('کاربر حذف شود؟')) {
             window.location = 'ManagerController?action=delete&employeeId=' + employeeId;
@@ -92,14 +109,29 @@
         </thead>
         <tbody>
         <c:forEach items="${requestScope.employeeList}" var="employee">
-            <tr>
-			 <tr  class="${employee.disabled =='false' ? 'disabledClass' : 'enabledClass'}">
+            
+			 <tr  class="${employee.disabled =='true' ? 'disabledClass' : 'enabledClass'}">
                 <td hidden><c:out value="${employee.id}"/></td>
                 <td><c:out value="${employee.firstName}"/></td>
                 <td><c:out value="${employee.lastName}"/></td>
                 <td><c:out value="${employee.manager.firstName}${employee.manager.lastName}"/></td>
                 <td><c:out value="${employee.role.name}"/></td>            
-				  <td><c:out value="${employee.disabled}"/></td>
+				  <td><!--<c:out value="${employee.disabled}"/>-->
+                    <div class="switch">
+                       <input type="radio" class="switch-input"  name="employeeStatus_active${employee.id}" onchange="active(${employee.id})"
+	                    value="active" 
+	                    id="active${employee.id}" ${employee.disabled=='false'?'checked':''}  >
+                          <label for="active${employee.id}" class="switch-label switch-label-off">فعال</label>
+	  
+                        <input type="radio" class="switch-input" name="employeeStatus_inactive${employee.id}" onchange="deActive(${employee.id})"
+	                     value="inactive" ${employee.disabled=='true'?'checked':''} 
+	                     id="inactive${employee.id}">
+                          <label for="inactive${employee.id}" class="switch-label switch-label-on">غیر فعال</label>
+						  
+                     <span class="switch-selection"></span>                   
+                   </div>
+ 				   
+                </td>	 				
                 <td class="text-right" style="width: 21%;">
                    <button type="button"
                             class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="updateProfile"
@@ -121,6 +153,13 @@
 	
 </div>
  
+ 
+ <script>   
 
+        $('#inactive').on('click', function () {
+    $(this).closest('tr').removeClass('enabledClass');
+    $(this).closest('tr').addClass('disabledClass');
+});
+ </script>
 </body>
 </html>
