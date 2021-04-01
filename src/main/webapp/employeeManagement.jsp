@@ -18,8 +18,14 @@
 .disabledClass {
 	background-color: #FBA538 ;
 }
+.deletededClass {
+	background-color: red ;
+}
+.enabledClass
+{
+	background-color:  #F0E1BE ;
+}
 
-  </style>
   </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
 <!--==============================================================================================================-->	
@@ -110,7 +116,13 @@
         <tbody>
         <c:forEach items="${requestScope.employeeList}" var="employee">
             
-			 <tr  class="${employee.disabled =='true' ? 'disabledClass' : 'enabledClass'}">
+			<!-- <tr  class="${employee.disabled =='true' ? 'disabledClass' : 'enabledClass'}">-->
+			 
+			 	  <tr  class="${employee.active=='true' && employee.disabled=='false' ? 'deletededClass' :
+	                           employee.active=='false' && employee.disabled=='true' ? 'disabledClass' :
+                               employee.active=='true' && employee.disabled=='true' ? 'deletededClass' :
+                               employee.active=='false' && employee.disabled=='false' ? 'enabledClass' : 'deletededClass'}">
+			 
                 <td hidden><c:out value="${employee.id}"/></td>
                 <td><c:out value="${employee.firstName}"/></td>
                 <td><c:out value="${employee.lastName}"/></td>
@@ -159,6 +171,19 @@
         $('#inactive').on('click', function () {
     $(this).closest('tr').removeClass('enabledClass');
     $(this).closest('tr').addClass('disabledClass');
+});
+ </script>
+ <script>   
+
+        $('#deleted${employee.id}').on('click', function () {
+    $(this).closest('tr').removeClass('enabledClass');
+    $(this).closest('tr').addClass('deletededClass');
+});
+<script>   
+
+        $('#deleted${employee.id}').on('click', function () {
+    $(this).closest('tr').removeClass('disabledClass');
+    $(this).closest('tr').addClass('deletededClass');
 });
  </script>
 </body>
