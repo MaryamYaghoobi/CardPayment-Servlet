@@ -160,8 +160,7 @@ public class AdminController extends HttpServlet {
     }
 
     public void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String s = request.getParameter("id");
-        long employeeId = Long.parseLong(s.trim());
+        long employeeId = Long.parseLong("id");
         Employee employee = employeeService.getUserDetails(employeeId);
         long employeeIds = employee.getId();
         long lastVersion = employee.getVersion();
@@ -171,8 +170,11 @@ public class AdminController extends HttpServlet {
         employee.setLastName(lastName);
         String email = request.getParameter("email");
         employee.setEmail(email);
-        boolean Status = Boolean.parseBoolean(request.getParameter("disabled"));
-        employee.setDisabled(Status);
+        String fatherName=request.getParameter("fatherName");
+        employee.setFatherName(fatherName);
+        CategoryElement role = searchCategoryElement.findCategoryElement
+                (request.getParameter("role"));
+        employee.setRole(role);
         String[] managerDetail = request.getParameter("getManagerDetail").split("  ");
         employee.setManager(adminService.getManagerDetail(managerDetail[0], managerDetail[1]));
         employeeService.updateVersion(employeeIds, lastVersion);

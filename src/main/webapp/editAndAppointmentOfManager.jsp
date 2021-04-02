@@ -83,32 +83,25 @@
                     </c:forEach>
                 </select>
             </div>
-            <div class="form-group col-md-7" style="margin-top: 17px;">
-                <br/>
-                <label>
-                   وضعیت:
-                 </label>
-                <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="active" name="disabled"                         
-						 value="active" <c:if test="${!requestScope.disabled} =='false'?'checked':''}" >
-                  
-					</c:if>
-                </div>
-				 <label>
-                 فعال
-                 </label>
-                <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="inactive" name="disabled"
-                           value="inactive" <c:if test="${requestScope.disabled} =='true'?'checked':''}" >
-                   
-				
-					</c:if>
-                </div>
-				 <label>
-                  غیر فعال
-                 </label>
-            </div>
-        </div>
+           </div>
+           		  <div class="form-row">
+          <div class="form-group col-md-10" style="margin-top: 17px;">
+                <label><label style="color: #ff4626">*</label>
+                     نقش
+                 </label>				 
+
+ <div class="form-check form-check-inline">
+ <select name="role" id="role" class="form-control">
+    <option class="form-check-input" id="manager" name="role" value="manager" checked>مدیر</option>
+    <option  class="form-check-input" id="programmer" name="role" value="programmer">برنامه نویس</option>
+    <option  class="form-check-input" id="tester" name="role" value="tester">آزمونگر</option>
+    <option  class="form-check-input" id="analyzer" name="role" value="analyzer">تحلیلگر</option>
+	 <option  class="form-check-input" id="technicalSupport" name="role" value="technicalSupport">پشتیبان فنی</option>
+  </select>
+  <br><br>
+   </div>
+    </div>
+   </div>
         <div class="form-row" dir="ltr">
             <div class=" col-md-3" style="margin-top: 17px;margin-bottom: 10px;">
 
