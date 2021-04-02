@@ -47,19 +47,21 @@ public class LoginController extends HttpServlet {
         if (employee != null) {
             session.setAttribute("username", username);
             if (employee.getRole().getCode().equals("manager")) {
-                RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
+                RequestDispatcher rs = request.getRequestDispatcher("managerDashboard.jsp");
+                rs.forward(request, response);
+            } else if (employee.getRole().getCode().equals("admin")) {
+                RequestDispatcher rs = request.getRequestDispatcher("adminManagement.jsp");
                 rs.forward(request, response);
             } else {
-
                 RequestDispatcher rs = request.getRequestDispatcher("employeeDashboard.jsp");
                 rs.forward(request, response);
             }
-
-        } else {
-            String message = "invalidationUserOrPassword";
-            request.setAttribute(message, true);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-            dispatcher.forward(request, response);
+        }else{
+                String message = "invalidationUserOrPassword";
+                request.setAttribute(message, true);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+                dispatcher.forward(request, response);
+            }
         }
     }
-}
+

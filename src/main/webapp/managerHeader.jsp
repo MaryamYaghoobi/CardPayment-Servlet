@@ -87,9 +87,6 @@
    <a class="nav-link" href="ManagerController?action=getAllActiveEmployees" >
                        جستجوی کاربران
                     </a>
-  <a class="nav-link" href="ManagerController?action=insertEmployee">
-                        افزودن کاربر جدید
-                    </a>
   </div>
   
   <button class="dropdown-btn">مدیریت مرخصی 
@@ -98,13 +95,6 @@
   <div class="dropdown-container">
  <a class="nav-link" href="ManagerController?action=RegisteredLeaves" >
                          مدیریت مرخصی
-                    </a>
- <a class="nav-link" href="leaveRequest.jsp">
-                        درخواست مرخصی
-                    </a>
-					
-  <a class="nav-link" href="EmployeeController?action=searchLeave">
-                       وضعیت مرخصی
                     </a>
   </div>
  

@@ -13,8 +13,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManagerDao {
-
+public class AdminDao {
     public List<Employee> getAllActiveEmployees() {
         List<Employee> employeeList = new ArrayList<>();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -29,7 +28,74 @@ public class ManagerDao {
         }
         return employeeList;
     }
-       public List<Employee> search(Employee employee) {
+
+    public List<Employee> getAllInActiveEmployees() {
+        List<Employee> employeeList = new ArrayList<>();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            String getAllActiveEmployees = "select e from Employee e where " +
+                    "e.disabled =:disabled";
+            Query query = session.createQuery(getAllActiveEmployees);
+            query.setParameter("disabled", true);
+            employeeList = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return employeeList;
+    }
+
+
+    public void addUser(Employee employee) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.save(employee);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUserDetails(Employee employee) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.update(employee);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(long id) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            String getEmployeeId =
+                    " select e from Employee e where e.id =:id and e.active =:active";
+            Query employeeQuery = session.createQuery(getEmployeeId);
+            employeeQuery.setParameter("id", id);
+            employeeQuery.setParameter("active", true);
+            Employee employee = (Employee) employeeQuery.getSingleResult();
+            employee.setActive(true);
+            session.update(employee);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+
+    }
+
+    public List<Employee> search(Employee employee) {
         Transaction transaction = null;
         List<Employee> employees = new ArrayList<>();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -132,44 +198,5 @@ public class ManagerDao {
         return managerEmployeeList;
     }
 
-    public List<Employee> RegisteredLeaves(Employee manager) {
 
-        List<Employee> employeeList = new ArrayList<>();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            String registeredLeaves = "select distinct e from Employee e join fetch e.leaveList el " +
-                    "where el.leaveStatus.code =:register  and e.manager.id =:managerId ";
-            Query query = session.createQuery(registeredLeaves);
-            query.setParameter("managerId", manager.getId());
-            query.setParameter("register", "register");
-            employeeList = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return employeeList;
-    }
-
-
-    public Employee login(String username, String password) {
-        Transaction transaction = null;
-        Employee employee = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            employee = (Employee) session.createQuery("select e from Employee e where " +
-                    "e.username =:username and e.password =:password")
-                    .setParameter("username", username).setParameter("password", password).uniqueResult();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return employee;
-    }
 }
-
-
-
-
-
-

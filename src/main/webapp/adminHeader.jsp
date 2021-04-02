@@ -11,14 +11,14 @@
 <!doctype html>
 <html>
 <head>
-    <title>employeeHeader</title>
-<!--=======================================================================================================-->		
+<!--========================================================================================================-->	
 <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
-integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"  crossorigin="anonymous">                             
-<!--============================================================================================================-->				
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<!--============================================================================================================-->		
-  <meta charset="utf-8">
+  integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"  crossorigin="anonymous">                     
+<!--=========================================================================================================-->				
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!--=========================================================================================================-->		
+    <meta charset="utf-8">
+
 <style>
 
 
@@ -77,45 +77,21 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 </style>
 </head>
 <body>
-<jsp:include page="body.jsp"/>
+
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <button class="dropdown-btn">مدیریت کاربران 
+   <button class="dropdown-btn">مدیریت کاربران 
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-   <a class="nav-link" href="EmployeeController?action=editEmployeeProfiles">
-                        ویرایش پروفایل
-                    <span class="sr-only">(current)</span></a>
-  </div>
- 
-					    <button class="dropdown-btn">مدیریت مرخصی 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-  <a class="nav-link" href="leaveRequest.jsp">
-                        درخواست مرخصی
+   <a class="nav-link" href="AdminController?action=getAllActiveEmployees" >
+                       جستجوی کاربران
                     </a>
-					
-  <a class="nav-link" href="EmployeeController?action=searchLeave">
-                       وضعیت مرخصی
+  <a class="nav-link" href="AdminController?action=insertEmployee">
+                        افزودن کاربر جدید
                     </a>
   </div>
-<button class="dropdown-btn">مدیریت پیام ها 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-<a class="nav-link" href="EmployeeController?action=sendMessages">
-                       ارسال پیام
-                    </a>
-					<a class="nav-link" href="EmployeeController?action=ReceiveMessages">
-                       پیام های دریافتی
-                    </a>
-					<a class="nav-link" href="EmployeeController?action=sentMessages">
-                      پیام های ارسالی
-                    </a>
-  </div>
-					
+  			
  <a class="nav-link " href="ManagerController?action=logout" style=" font-size: 18px" >
                     خروج
                 </a>

@@ -38,10 +38,6 @@ public class EmployeeService {
         return employeeDao.allEmployee();
     }
 
-    public List<Employee> allEmployee1() {
-        EmployeeDao employeeDao = new EmployeeDao();
-        return employeeDao.allEmployee();
-    }
 
     public void updateUserDetails(Employee employee) {
         EmployeeDao employeeDao = new EmployeeDao();

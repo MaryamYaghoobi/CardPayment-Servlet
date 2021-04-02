@@ -11,38 +11,14 @@ public class ManagerService {
         return managerDao.RegisteredLeaves(manager);
     }
 
-    public void addUser(Employee employee) {
-        ManagerDao managerDao = new ManagerDao();
-        managerDao.addUser(employee);
-    }
-
     public List<Employee> getAllActiveEmployees() {
         ManagerDao managerDao = new ManagerDao();
         return managerDao.getAllActiveEmployees();
-    }
-    public List<Employee> getAllInActiveEmployees() {
-        ManagerDao managerDao = new ManagerDao();
-        return managerDao.getAllInActiveEmployees();
-    }
-
-    public void updateUserDetails(Employee employee) {
-        ManagerDao managerDao = new ManagerDao();
-        managerDao.updateUserDetails(employee);
     }
 
     public List<Employee> allManager() {
         ManagerDao managerDao = new ManagerDao();
         return managerDao.allManager();
-    }
-
-    public Employee getManagerDetail(String firstName, String lastName) {
-        ManagerDao managerDao = new ManagerDao();
-        return managerDao.getManagerDetail(firstName, lastName);
-    }
-
-    public void delete(long employeeId) {
-        ManagerDao managerDao = new ManagerDao();
-        managerDao.delete(employeeId);
     }
 
     public List<Employee> searchEmployee(Employee employee) {

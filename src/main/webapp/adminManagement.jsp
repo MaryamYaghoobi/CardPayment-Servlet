@@ -36,34 +36,34 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!--==============================================================================================================-->
 
-    <jsp:include page="managerHeader.jsp"/>
+    <jsp:include page="adminHeader.jsp"/>
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
 <script>
  function deActive(employeeId) {
         if (confirm('کاربر غیر فعال شود؟')) {
-            window.location = 'ManagerController?action=inActiveEmployee&employeeId=' + employeeId;
+            window.location = 'AdminController?action=inActiveEmployee&employeeId=' + employeeId;
         }
     }
 	 function active(employeeId) {
         if (confirm('کاربر فعال شود؟')) {
-            window.location = 'ManagerController?action=getAllInActiveEmployees&employeeId=' + employeeId;
+            window.location = 'AdminController?action=getAllInActiveEmployees&employeeId=' + employeeId;
         }
     }
     function del(employeeId) {
         if (confirm('کاربر حذف شود؟')) {
-            window.location = 'ManagerController?action=delete&employeeId=' + employeeId;
+            window.location = 'AdminController?action=delete&employeeId=' + employeeId;
         }
     }
 
     function search(employeeId) {
-        window.location = 'ManagerController?action=editAndAppointmentOfManager&employeeId=' + employeeId;
+        window.location = 'AdminController?action=editAndAppointmentOfManager&employeeId=' + employeeId;
     }
        
 </script>
 <div class="container" style="margin-top: 50px;border-radius: 6px;background-color: #F0E1BE;">
-    <form action="ManagerController" method="post">
+    <form action="AdminController" method="post">
         <div>
             <div class="form-row">
                 <input hidden type="hidden" name="action" value="search">
@@ -109,8 +109,8 @@
             <th class="text-center" scope="col">نام خانوادگی</th>            
             <th class="text-center" scope="col">مدیر</th>    
             <th class="text-center" scope="col"> نقش</th>
-           <!-- <th class="text-center" scope="col">وضعیت</th>
-            <th class="text-center" scope="col">عملیات</th> -->                         
+            <th class="text-center" scope="col">وضعیت</th>
+            <th class="text-center" scope="col">عملیات</th>                           
         </tr>
         </thead>
         <tbody>
@@ -125,7 +125,7 @@
                 <td><c:out value="${employee.lastName}"/></td>
                 <td><c:out value="${employee.manager.firstName}${employee.manager.lastName}"/></td>
                 <td><c:out value="${employee.role.name}"/></td>            
-				<!-- <td><!--<c:out value="${employee.disabled}"/>
+				  <td><!--<c:out value="${employee.disabled}"/>-->
                     <div class="switch">
                        <input type="radio" class="switch-input"  name="employeeStatus_active${employee.id}" onchange="active(${employee.id})"
 	                    value="active" 
@@ -153,13 +153,12 @@
                             style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;"
 							onclick="del(${employee.id})">						                         
 						 <span class="fa fa-trash" aria-hidden="true"> </span> </button> 				  						                        
-                </td>-->
-				
+                </td>
             </tr>			
      </c:forEach>
         </tbody>
     </table>
-	<a class="nav-link" href="ManagerController?action=insertEmployee" style="width: 50px;color: black;margin-right:1080px; font-size: 30px;">&#43;</a>
+	<a class="nav-link" href="AdminController?action=insertEmployee" style="width: 50px;color: black;margin-right:1080px; font-size: 30px;">&#43;</a>
 	
 </div>
  
