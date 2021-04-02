@@ -40,28 +40,6 @@
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
-<script>
- function deActive(employeeId) {
-        if (confirm('کاربر غیر فعال شود؟')) {
-            window.location = 'ManagerController?action=inActiveEmployee&employeeId=' + employeeId;
-        }
-    }
-	 function active(employeeId) {
-        if (confirm('کاربر فعال شود؟')) {
-            window.location = 'ManagerController?action=getAllInActiveEmployees&employeeId=' + employeeId;
-        }
-    }
-    function del(employeeId) {
-        if (confirm('کاربر حذف شود؟')) {
-            window.location = 'ManagerController?action=delete&employeeId=' + employeeId;
-        }
-    }
-
-    function search(employeeId) {
-        window.location = 'ManagerController?action=editAndAppointmentOfManager&employeeId=' + employeeId;
-    }
-       
-</script>
 <div class="container" style="margin-top: 50px;border-radius: 6px;background-color: #F0E1BE;">
     <form action="ManagerController" method="post">
         <div>
@@ -124,42 +102,11 @@
                 <td><c:out value="${employee.firstName}"/></td>
                 <td><c:out value="${employee.lastName}"/></td>
                 <td><c:out value="${employee.manager.firstName}${employee.manager.lastName}"/></td>
-                <td><c:out value="${employee.role.name}"/></td>            
-				<!-- <td><!--<c:out value="${employee.disabled}"/>
-                    <div class="switch">
-                       <input type="radio" class="switch-input"  name="employeeStatus_active${employee.id}" onchange="active(${employee.id})"
-	                    value="active" 
-	                    id="active${employee.id}" ${employee.disabled=='false'?'checked':''}  >
-                          <label for="active${employee.id}" class="switch-label switch-label-off">فعال</label>
-	  
-                        <input type="radio" class="switch-input" name="employeeStatus_inactive${employee.id}" onchange="deActive(${employee.id})"
-	                     value="inactive" ${employee.disabled=='true'?'checked':''} 
-	                     id="inactive${employee.id}">
-                          <label for="inactive${employee.id}" class="switch-label switch-label-on">غیر فعال</label>
-						  
-                     <span class="switch-selection"></span>                   
-                   </div>
- 				   
-                </td>	 				
-                <td class="text-right" style="width: 21%;">
-                   <button type="button"
-                            class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="updateProfile"
-                            style="width: 82px;background-color: #F4C34E;border: none;" onclick="search(${employee.id})">
-							
-							<span class="fa fa-edit"></span>
-							</button>                      
-                    <button type="button"
-                            class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"
-                            style="width: 80px;margin-right:10px;background-color: #F4C34E;border: none;"
-							onclick="del(${employee.id})">						                         
-						 <span class="fa fa-trash" aria-hidden="true"> </span> </button> 				  						                        
-                </td>-->
-				
+                <td><c:out value="${employee.role.name}"/></td>            	
             </tr>			
      </c:forEach>
         </tbody>
     </table>
-	<a class="nav-link" href="ManagerController?action=insertEmployee" style="width: 50px;color: black;margin-right:1080px; font-size: 30px;">&#43;</a>
 	
 </div>
  

@@ -43,12 +43,12 @@
 <script>
  function deActive(employeeId) {
         if (confirm('کاربر غیر فعال شود؟')) {
-            window.location = 'AdminController?action=inActiveEmployee&employeeId=' + employeeId;
+            window.location = 'AdminController?action=getAllInActiveEmployees&employeeId=' + employeeId;
         }
     }
 	 function active(employeeId) {
         if (confirm('کاربر فعال شود؟')) {
-            window.location = 'AdminController?action=getAllInActiveEmployees&employeeId=' + employeeId;
+            window.location = 'AdminController?action=getAllActiveEmployees&employeeId=' + employeeId;
         }
     }
     function del(employeeId) {

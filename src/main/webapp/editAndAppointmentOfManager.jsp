@@ -12,14 +12,14 @@
 <html>
 <head>
 <title>ویرایش کاربران</title>
-<jsp:include page="managerHeader.jsp"/>
+ <jsp:include page="adminHeader.jsp"/>
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
 
 <div class="container" name="container"
      style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
-    <form action="ManagerController" method="post" id="editForm">
+    <form action="AdminController" method="post" id="editForm">
         <input type="hidden" name="action" value="updateProfile">
         <input hidden type="hidden" name="id" value="${requestScope.Employee.id}">
 		<input hidden type="hidden" name="version" value="${requestScope.Employee.version}">

@@ -20,7 +20,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 <!--======================================================================================================-->		
     <title>افزودن کاربر</title>
 
-    <jsp:include page="managerHeader.jsp"/>
+    <jsp:include page="adminHeader.jsp"/>
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
@@ -48,7 +48,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 </c:if>-->
 <div class="container" name="container"
      style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
-    <form action="ManagerController" method="post" id="saveForm">
+    <form action="AdminController" method="post" id="saveForm">
         <input type="hidden" name="action" value="addUser">
 			<input hidden type="hidden" name="version" id="version" value="${requestScope.Employee.version}">
         <div class="form-row">
@@ -177,46 +177,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
                 </div>
             </div>
         </div>
-      
-   <!--
-                <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="manager" name="role" value="manager" checked>
-                    <label class="form-check-label">
-                       مدیر
-                    </label>
-                </div>
-<br>
-
-                <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="programmer" name="role" value="programmer">
-                    <label class="form-check-label">
-                        برنامه نویس
-                    </label>
-                </div>
-				<br>
-                <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="tester" name="role" value="tester">
-                    <label class="form-check-label">
-                       آزمونگر
-                    </label>
-                </div>
-				<br>
-				 <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="analyzer" name="role" value="analyzer">
-                    <label class="form-check-label">
-                      تحلیلگر
-                    </label>
-                </div>
-				<br>
-				  <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="technicalSupport" name="role" value="technicalSupport">
-                    <label class="form-check-label">
-                       پشتیبان فنی
-                    </label>
-                </div>
-				<br>
-            </div>
--->
+     
             <div class=" col-md-4" style="margin-top: 17px;"><br><br><br><br>
                 <button type="submit" class="btn btn-primary"style="background-color: #F4C34E;border: none;">
                     ثبت اطلاعات
