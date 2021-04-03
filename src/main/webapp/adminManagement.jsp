@@ -115,6 +115,7 @@
         </thead>
         <tbody>
         <c:forEach items="${requestScope.employeeList}" var="employee">
+		<c:if test="${employee.active=='true'}">
 			 	  <tr  class="${employee.active=='true' && employee.disabled=='false' ? 'deletededClass' :
 	                           employee.active=='false' && employee.disabled=='true' ? 'disabledClass' :
                                employee.active=='true' && employee.disabled=='true' ? 'deletededClass' :
@@ -154,7 +155,8 @@
 							onclick="del(${employee.id})">						                         
 						 <span class="fa fa-trash" aria-hidden="true"> </span> </button> 				  						                        
                 </td>
-            </tr>			
+            </tr>
+</c:if>				
      </c:forEach>
         </tbody>
     </table>
