@@ -22,12 +22,16 @@
 <div id="login">
  <link rel="stylesheet" href="css/login.css">
    <form  name="Form" action="LoginController" method="post" onsubmit="return validateForm()">
+    <input type="hidden" name="action" value="login">
     <h1>ورود</h1>
     <input type="text" name="username" id="Uname" placeholder="نام کاربری">
     <input type="Password" name="password" id="Pass" placeholder="رمز عبور">
 	 
     <button type="submit" name="log" >ورود</button>
   </form>
+  <br>
+  	<a class="nav-link" href="LoginController?action=insertUser" style="width: 50px;color: black;margin-right:1080px; font-size: 10px;">ایجادحساب کاربری</a>
+
 </div>
   
 
