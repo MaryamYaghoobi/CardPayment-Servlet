@@ -3,6 +3,7 @@ package ir.dotin.controller;
 
 import ir.dotin.entity.Employee;
 import ir.dotin.service.ManagerService;
+import org.hibernate.Session;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +16,6 @@ import java.io.IOException;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
-    // private static final long serialVersionUID = 1 L;
     private ManagerService managerService;
 
     public void init() {

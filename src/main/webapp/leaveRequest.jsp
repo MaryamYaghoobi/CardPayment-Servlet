@@ -26,16 +26,7 @@
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
-<!--<c:if test="${requestScope['LeaveIsNotValid'] =='LeaveIsNotValid'}">
-    <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
-        <div class="alert alert-danger" id="danger-alert">
-            <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong>
-                تاریخ شروع بعد از تاریخ پایان است.
-            </strong>
-        </div>
-    </div>
-</c:if>-->
+
 <c:if test="${requestScope['LeaveIsNotValid'] =='validLeaveRequest'}">
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-success" id="success-alert">
@@ -119,7 +110,7 @@
                 window.alert("تاریخ پایان مرخصی نمیتواند خالی باشد.");
                 return false;
             }
-            if (Date.parse(leaveFromDate) >= Date.parse(leaveToDate)) {
+            if (Date.parse(leaveFromDate) > Date.parse(leaveToDate)) {
                 window.alert("تاریخ شروع بعد از تاریخ پایان است.");
                 return false;
             }

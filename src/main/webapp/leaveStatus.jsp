@@ -62,15 +62,15 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${requestScope.leaveEmployeeList}" var="leaves">
+        <c:forEach items="${requestScope.leaveEmployeeList}" var="leave">
             <tr>
-                <td hidden><c:out value="${leaves.id}"/></td>               
-                <td><c:out value="${leaves.leaveFromDate}"/></td>
-                <td><c:out value="${leaves.leaveToDate}"/></td>
-				<td><c:out value="${leaves.leaveFromTime}"/></td>
-                <td><c:out value="${leaves.leaveToTime}"/></td>
-				<td><c:out value="${leaves.reason}"/></td>
-                <td><c:out value="${leaves.leaveStatus.name}"/></td>
+                <td hidden><c:out value="${leave.id}"/></td>               
+                <td><c:out value="${leave.leaveFromDate}"/></td>
+                <td><c:out value="${leave.leaveToDate}"/></td>
+				<td><c:out value="${leave.leaveFromTime}"/></td>
+                <td><c:out value="${leave.leaveToTime}"/></td>
+				<td><c:out value="${leave.reason}"/></td>
+                <td><c:out value="${leave.leaveStatus.name}"/></td>
 				<td class="text-center" style="width: 21%;">
 				 <button type="button"
                                 class="btn btn-danger btn-rounded btn-lm my-0 badge-pill " value="delete"

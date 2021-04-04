@@ -29,15 +29,15 @@ public class Employee extends ir.dotin.entity.Entity {
     @ManyToOne()
     @JoinColumn(name = "c_manager")
     private Employee manager;
-    @OneToMany(mappedBy = "manager")
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL)
     private List<Employee> employees;
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "c_role")
     private CategoryElement role;
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "c_gender")
     private CategoryElement gender;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "c_employeeId")
     private List<Leaves> leaveList;
     @OneToMany()

@@ -98,7 +98,7 @@
                     </a>
   </div>
  
- <button class="dropdown-btn">مدیریت پیام ها 
+ <!--<button class="dropdown-btn">مدیریت پیام ها 
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
@@ -111,7 +111,7 @@
 					<a class="nav-link" href="EmployeeController?action=sentMessages">
                       پیام های ارسالی
                     </a>
-  </div>
+  </div>-->
 					
  <a class="nav-link " href="ManagerController?action=logout" style=" font-size: 18px" >
                     خروج

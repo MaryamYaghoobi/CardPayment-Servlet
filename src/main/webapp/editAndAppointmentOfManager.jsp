@@ -22,7 +22,6 @@
     <form action="AdminController" method="post" id="editForm">
         <input type="hidden" name="action" value="updateProfile">
         <input hidden type="hidden" name="id" value="${requestScope.Employee.id}">
-		<input hidden type="hidden" name="version" value="${requestScope.Employee.version}">
         <div class="form-row">
             <div class="form-group col-md-6" style="margin-top: 17px;">
                 <label>

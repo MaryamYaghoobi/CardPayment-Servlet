@@ -43,12 +43,12 @@
 <script>
  function deActive(employeeId) {
         if (confirm('کاربر غیر فعال شود؟')) {
-            window.location = 'AdminController?action=getAllInActiveEmployees&employeeId=' + employeeId;
+            window.location = 'AdminController?action=inActive&employeeId=' + employeeId;
         }
     }
 	 function active(employeeId) {
         if (confirm('کاربر فعال شود؟')) {
-            window.location = 'AdminController?action=getAllActiveEmployees&employeeId=' + employeeId;
+            window.location = 'AdminController?action=active&employeeId=' + employeeId;
         }
     }
     function del(employeeId) {
@@ -115,7 +115,7 @@
         </thead>
         <tbody>
         <c:forEach items="${requestScope.employeeList}" var="employee">
-		<c:if test="${employee.active=='true'}">
+		<c:if test="${employee.active=='false'}">
 			 	  <tr  class="${employee.active=='true' && employee.disabled=='false' ? 'deletededClass' :
 	                           employee.active=='false' && employee.disabled=='true' ? 'disabledClass' :
                                employee.active=='true' && employee.disabled=='true' ? 'deletededClass' :

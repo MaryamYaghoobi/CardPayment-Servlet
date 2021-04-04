@@ -2,62 +2,69 @@ package ir.dotin.service;
 
 import ir.dotin.entity.Employee;
 import ir.dotin.repository.AdminDao;
+import org.hibernate.Session;
 
 import java.util.List;
 
 public class AdminService {
-    public void addUser(Employee employee) {
+    public void addUser(Employee employee, Session session) {
         AdminDao adminDao = new AdminDao();
-        adminDao.addUser(employee);
+        adminDao.addUser(employee, session);
     }
 
-    public List<Employee> getAllActiveEmployees() {
+    public List<Employee> getAllActiveEmployees(Session session) {
         AdminDao adminDao = new AdminDao();
-        return adminDao.getAllActiveEmployees();
+        return adminDao.getAllActiveEmployees(session);
     }
 
-    public List<Employee> getAllInActiveEmployees() {
+    public void updateUserDetails(Employee employee, Session session) {
         AdminDao adminDao = new AdminDao();
-        return adminDao.getAllInActiveEmployees();
+        adminDao.updateUserDetails(employee, session);
     }
 
-    public void updateUserDetails(Employee employee) {
+    public List<Employee> allManager(Session session) {
         AdminDao adminDao = new AdminDao();
-        adminDao.updateUserDetails(employee);
+        return adminDao.allManager(session);
     }
 
-    public List<Employee> allManager() {
+    public Employee getManagerDetail(String firstName, String lastName, Session session) {
         AdminDao adminDao = new AdminDao();
-        return adminDao.allManager();
+        return adminDao.getManagerDetail(firstName, lastName, session);
     }
 
-    public Employee getManagerDetail(String firstName, String lastName) {
+    public void delete(Employee employee, Session session) {
         AdminDao adminDao = new AdminDao();
-        return adminDao.getManagerDetail(firstName, lastName);
+        adminDao.delete(employee, session);
     }
 
-    public void delete(long employeeId) {
+    public void active(Employee employee, Session session) {
         AdminDao adminDao = new AdminDao();
-        adminDao.delete(employeeId);
+        adminDao.active(employee, session);
     }
 
-    public List<Employee> searchEmployee(Employee employee) {
+    public void inActive(Employee employee, Session session) {
         AdminDao adminDao = new AdminDao();
-        return adminDao.search(employee);
+        adminDao.inActive(employee, session);
     }
 
-    public Employee searchId(long id) {
+    public List<Employee> searchEmployee(Employee employee, Session session) {
         AdminDao adminDao = new AdminDao();
-        return adminDao.searchId(id);
+        return adminDao.search(employee, session);
     }
 
-    public int searchAllUsername(String username) {
+    public Employee searchId(long id, Session session) {
         AdminDao adminDao = new AdminDao();
-        return adminDao.searchAllUsername(username);
+        return adminDao.searchId(id, session);
     }
 
-    public Employee searchUsername(String username) {
+
+    public List<String> searchAllUsername(String username, Session session) {
         AdminDao adminDao = new AdminDao();
-        return adminDao.searchUsername(username);
+        return adminDao.searchAllUsername(session);
+    }
+
+    public Employee searchUsername(String username, Session session) {
+        AdminDao adminDao = new AdminDao();
+        return adminDao.searchUsername(username, session);
     }
 }

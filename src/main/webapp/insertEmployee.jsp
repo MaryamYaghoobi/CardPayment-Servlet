@@ -29,28 +29,17 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
     <div style="width: 300px;border-radius: 5px; margin: 10px auto;">
         <div class="alert alert-success" id="success-alert" style="border: none;background-color: #F0E1BE;">
             <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong style="color:red;">
+             <strong style="color:red;">
                نام کاربری تکراری است.
             </strong>
         </div>
     </div>
 </c:if>
-<!--
-<c:if test="${requestScope['success']}">
-    <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
-        <div class="alert alert-info" id="info-alert">
-            <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong>
-             کاربر با موفقیت ثبت شد.
-            </strong>
-        </div>
-    </div>
-</c:if>-->
+
 <div class="container" name="container"
      style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
     <form action="AdminController" method="post" id="saveForm">
         <input type="hidden" name="action" value="addUser">
-			<input hidden type="hidden" name="version" id="version" value="${requestScope.Employee.version}">
         <div class="form-row">
             <div class="form-group col-md-4" style="margin-top: 17px;">
                 <label><label style="color: #ff4626">*</label>
@@ -161,7 +150,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
                     وضعیت
                 </label>
                 <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="active" name="disabled" value="active"
+                    <input type="radio" class="form-check-input" id="false" name="disabled" value="false"
                            checked>
                     <label class="form-check-label">
                         فعال
@@ -170,7 +159,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 
 
                 <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="inactive" name="disabled" value="inactive">
+                    <input type="radio" class="form-check-input" id="false" name="disabled" value="true">
                     <label class="form-check-label">
                         غیر فعال
                    </label>

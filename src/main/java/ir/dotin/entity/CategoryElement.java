@@ -14,9 +14,10 @@ public class CategoryElement extends ir.dotin.entity.Entity {
     @Column(name = "c_code", columnDefinition = "VARCHAR(255)")
     private String code;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private List<Category> category;
+
 
     public List<Category> getCategory() {
         return category;

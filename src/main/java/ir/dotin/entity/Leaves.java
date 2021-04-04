@@ -95,5 +95,7 @@ public class Leaves extends ir.dotin.entity.Entity {
         this.leaveStatus = leaveStatus;
 
     }
-    public Leaves(){}
+
+    public Leaves() {
+    }
 }

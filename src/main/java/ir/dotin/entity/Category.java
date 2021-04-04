@@ -1,7 +1,8 @@
 package ir.dotin.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.*;
+import javax.persistence.Table;
 
 @Entity(name = "Category")
 @Table(name = "t_Category")

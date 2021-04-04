@@ -7,7 +7,14 @@ import ir.dotin.service.EmailService;
 import ir.dotin.service.EmployeeService;
 import ir.dotin.service.LeavesService;
 import ir.dotin.service.SearchCategoryElement;
+import ir.dotin.share.HibernateUtil;
 import ir.dotin.share.Validation;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -19,7 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,6 +66,9 @@ public class EmployeeController extends HttpServlet {
             case "searchLeave":
                 searchLeave(request, response);
                 break;
+            case "cancelLeave":
+                cancelLeave(request, response);
+                break;
             case "sendMessages":
                 sendMessages(request, response);
                 break;
@@ -75,9 +84,7 @@ public class EmployeeController extends HttpServlet {
             case "sentMessages":
                 sentMessages(request, response);
                 break;
-            case "cancelLeave":
-                cancelLeave(request, response);
-                break;
+
 
         }
     }
@@ -105,88 +112,184 @@ public class EmployeeController extends HttpServlet {
     }
 
     public void ReceiveMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Employee employee = employeeService.
-                searchUsername((String) request.getSession().getAttribute("username"));
-        List<Object[]> ReceiveMessages = emailService.detailsMessagesReceived(employee);
-        request.setAttribute("ReceiveMessages", ReceiveMessages);
-        RequestDispatcher rs = request.getRequestDispatcher("ReceiveMessages.jsp");
-        rs.forward(request, response);
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Employee employee = employeeService.
+                    searchUsername((String) request.getSession().getAttribute("username"), session);
+            List<Object[]> ReceiveMessages = emailService.detailsMessagesReceived(employee, session);
+            request.setAttribute("ReceiveMessages", ReceiveMessages);
+            RequestDispatcher rs = request.getRequestDispatcher("ReceiveMessages.jsp");
+            rs.forward(request, response);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
     }
 
     public void sentMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Employee employee = employeeService.
-                searchUsername((String) request.getSession().getAttribute("username"));
-        List<Object[]> sentMessages = emailService.detailsMessagesSent(employee);
-        request.setAttribute("sentMessages", sentMessages);
-        RequestDispatcher rs = request.getRequestDispatcher("sentMessages.jsp");
-        rs.forward(request, response);
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Employee employee = employeeService.
+                    searchUsername((String) request.getSession().getAttribute("username"), session);
+            List<Object[]> sentMessages = emailService.detailsMessagesSent(employee, session);
+            request.setAttribute("sentMessages", sentMessages);
+            RequestDispatcher rs = request.getRequestDispatcher("sentMessages.jsp");
+            rs.forward(request, response);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
     }
 
     public void forwardingMessage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Part part = request.getPart("file");
-        String fileName = part.getSubmittedFileName();
-        if (fileName != null && !fileName.isEmpty()) {
-            String uploadPath = TOMCAT_FILE_PATH + File.separator + fileName;
-            part.write(uploadPath + File.separator);
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Part part = request.getPart("file");
+            String fileName = part.getSubmittedFileName();
+            if (fileName != null && !fileName.isEmpty()) {
+                String uploadPath = TOMCAT_FILE_PATH + File.separator + fileName;
+                part.write(uploadPath + File.separator);
+            }
+            Employee senderEmail = employeeService.
+                    searchUsername((String) request.getSession().getAttribute("username"), session);
+            Email email = new Email();
+            String subject = request.getParameter("subject");
+            email.setSubject(subject);
+            String message = request.getParameter("message");
+            email.setContext(message);
+            String[] employeeIds = request.getParameterValues("select");
+            List<Long> Ids = Arrays.stream(employeeIds)
+                    .map(Long::parseLong)
+                    .collect(Collectors.toList());
+            List<Employee> ReceiveMessages = employeeService.ReceiveMessages(Ids, session);
+            email.setReceiverEmployees(new ArrayList<>());
+            email.getReceiverEmployees().addAll(ReceiveMessages);
+            emailService.addMessages(email, session);
+            employeeService.forwardingMessage(senderEmail, email, session);
+            String messages = "forwardingMessage";
+            request.setAttribute(messages, true);
+            RequestDispatcher rs = request.getRequestDispatcher("employeeDashboard.jsp");
+            rs.forward(request, response);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+        } finally {
+            session.close();
         }
-        Employee senderEmail = employeeService.
-                searchUsername((String) request.getSession().getAttribute("username"));
-        Email email = new Email();
-        String subject = request.getParameter("subject");
-        email.setSubject(subject);
-        String message = request.getParameter("message");
-        email.setContext(message);
-        String[] employeeIds = request.getParameterValues("select");
-        List<Long> Ids = Arrays.stream(employeeIds)
-                .map(Long::parseLong)
-                .collect(Collectors.toList());
-        List<Employee> ReceiveMessages = employeeService.ReceiveMessages(Ids);
-        email.setReceiverEmployees(new ArrayList<>());
-        email.getReceiverEmployees().addAll(ReceiveMessages);
-        emailService.addMessages(email);
-        employeeService.forwardingMessage(senderEmail, email);
-        String messages = "forwardingMessage";
-        request.setAttribute(messages, true);
-        RequestDispatcher rs = request.getRequestDispatcher("employeeDashboard.jsp");
-        rs.forward(request, response);
     }
 
 
     public void sendMessages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Employee> employeeList = employeeService.allEmployee();
-        request.setAttribute("employeeList", employeeList);
-        RequestDispatcher rs = request.getRequestDispatcher("forwardingMessage.jsp");
-        rs.forward(request, response);
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            List<Employee> employeeList = employeeService.allEmployee(session);
+            request.setAttribute("employeeList", employeeList);
+            RequestDispatcher rs = request.getRequestDispatcher("forwardingMessage.jsp");
+            rs.forward(request, response);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
     }
 
     public void searchLeave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Employee employee = employeeService.
-                searchUsername((String) request.getSession().getAttribute("username"));
-        List<Leaves> leaveEmployeeList = employeeService.EmployeeLeave(employee);
-        request.setAttribute("leaveEmployeeList", leaveEmployeeList);
-        RequestDispatcher rs = request.getRequestDispatcher("leaveStatus.jsp");
-        rs.forward(request, response);
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Employee employee = employeeService.
+                    searchUsername((String) request.getSession().getAttribute("username"), session);
+            List<Leaves> leaveEmployeeList = employeeService.EmployeeLeave(employee, session);
+            request.setAttribute("leaveEmployeeList", leaveEmployeeList);
+            RequestDispatcher rs = request.getRequestDispatcher("leaveStatus.jsp");
+            rs.forward(request, response);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
     }
 
     public void cancelLeave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long leaveId = Long.parseLong(request.getParameter("leaveId"));
-        leavesService.cancelLeave(leaveId);
-        System.out.println("The leave request was canceled");
-        searchLeave(request, response);
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            long leaveId = Long.parseLong(request.getParameter("leaveId"));
+            leavesService.cancelLeave(leaveId, session);
+            System.out.println("The leave request was canceled");
+            searchLeave(request, response);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
     }
 
     public void leaveRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Validation validation = new Validation();
-        boolean validLeaveRequest;
-        String leaveFromDate = request.getParameter("leaveFromDate");
-        String leaveToDate = request.getParameter("leaveToDate");
-        String leaveFromTime = request.getParameter("leaveFromTime");
-        String leaveToTime = request.getParameter("leaveToTime");
-        String reason = request.getParameter("reason");
-        Employee employee = employeeService.
-                searchUsername((String) request.getSession().getAttribute("username"));
-
+        Transaction transaction = null;
+        Session session = null;
         try {
+            SessionFactory sessionFactory;
+            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            Validation validation = new Validation();
+            boolean validLeaveRequest;
+            String leaveFromDate = request.getParameter("leaveFromDate");
+            String leaveToDate = request.getParameter("leaveToDate");
+            String leaveFromTime = request.getParameter("leaveFromTime");
+            String leaveToTime = request.getParameter("leaveToTime");
+            String reason = request.getParameter("reason");
+            Employee employee = employeeService.
+                    searchUsername((String) request.getSession().getAttribute("username"), session);
             validLeaveRequest = validation.leaveValidation
                     (leaveFromDate, leaveToDate, employee);
             if (!validLeaveRequest) {
@@ -197,38 +300,76 @@ public class EmployeeController extends HttpServlet {
                 return;
             }
             Leaves leaveEmployee = new Leaves(leaveFromDate, leaveToDate, leaveFromTime, leaveToTime, reason,
-                    searchCategoryElement.findCategoryElement("register"));
-            leavesService.addLeave(leaveEmployee);
-            employeeService.updateLeaveState(employee, leaveEmployee);
-            request.setAttribute("invalidLeaveRequest", "validLeaveRequest");
+                    searchCategoryElement.findCategoryElement("register", session));
+            leavesService.addLeave(leaveEmployee, session);
+            employeeService.updateLeaveState(employee, leaveEmployee, session);
+            request.setAttribute("LeaveIsNotValid", "validLeaveRequest");
             RequestDispatcher rs = request.getRequestDispatcher("leaveRequest.jsp");
             rs.forward(request, response);
-        } catch (ParseException e) {
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
+
+        } finally {
+            session.close();
         }
+
     }
 
     protected void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long id = Long.parseLong(request.getParameter("id"));
-        Employee employee = employeeService.getUserDetails(id);
-        String firstName = request.getParameter("firstName");
-        employee.setFirstName(firstName);
-        String lastName = request.getParameter("lastName");
-        employee.setLastName(lastName);
-        String email = request.getParameter("email");
-        employee.setEmail(email);
-        employee.setFatherName(request.getParameter("fatherName"));
-        employeeService.updateUserDetails(employee);
-        request.setAttribute("employee", employee);
-        RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
-        rs.forward(request, response);
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            long id = Long.parseLong(request.getParameter("id"));
+            Employee employee = employeeService.getUserDetails(id, session);
+            String firstName = request.getParameter("firstName");
+            employee.setFirstName(firstName);
+            String lastName = request.getParameter("lastName");
+            employee.setLastName(lastName);
+            String email = request.getParameter("email");
+            employee.setEmail(email);
+            employee.setFatherName(request.getParameter("fatherName"));
+            employeeService.updateUserDetails(employee, session);
+            request.setAttribute("employee", employee);
+            RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
+            rs.forward(request, response);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
     }
 
     public void editEmployeeProfiles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Employee employee = employeeService.
-                searchUsername((String) request.getSession().getAttribute("username"));
-        request.setAttribute("Employee", employee);
-        RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
-        rs.forward(request, response);
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Employee employee = employeeService.
+                    searchUsername((String) request.getSession().getAttribute("username"), session);
+            request.setAttribute("Employee", employee);
+            RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
+            rs.forward(request, response);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
     }
 }

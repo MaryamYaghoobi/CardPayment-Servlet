@@ -21,18 +21,6 @@ public class Email extends ir.dotin.entity.Entity {
             inverseJoinColumns = {@JoinColumn(name = "c_receiverId")})
     private List<Employee> receiverEmployees;
 
- @OneToMany()
-    @JoinColumn(columnDefinition = "c_employeeSenderId")
-    private List<Employee> senderEmail;
-
-    public List<Employee> getSenderEmail() {
-        return senderEmail;
-    }
-
-    public void setSenderEmail(List<Employee> senderEmail) {
-        this.senderEmail = senderEmail;
-    }
-
     public String getSubject() {
         return subject;
     }

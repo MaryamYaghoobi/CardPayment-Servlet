@@ -15,137 +15,88 @@ import java.util.List;
 
 public class ManagerDao {
 
-    public List<Employee> getAllActiveEmployees() {
+    public List<Employee> getAllActiveEmployees(Session session) {
         List<Employee> employeeList = new ArrayList<>();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            String getAllActiveEmployees = "select e from Employee e where " +
-                    "e.disabled =:disabled";
-            Query query = session.createQuery(getAllActiveEmployees);
-            query.setParameter("disabled", false);
-            employeeList = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String getAllActiveEmployees = "select e from Employee e where " +
+                "e.disabled =:disabled";
+        Query query = session.createQuery(getAllActiveEmployees);
+        query.setParameter("disabled", false);
+        employeeList = query.getResultList();
         return employeeList;
     }
-       public List<Employee> search(Employee employee) {
-        Transaction transaction = null;
-        List<Employee> employees = new ArrayList<>();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<Employee> Query = criteriaBuilder.createQuery(Employee.class);
-            Root<Employee> emp = Query.from(Employee.class);
-            Predicate finalPredicate = criteriaBuilder.conjunction();
 
-            if (employee.getFirstName() != null && !employee.getFirstName().equals("")) {
-                finalPredicate = criteriaBuilder.and(finalPredicate, criteriaBuilder.equal(emp.get("firstName"), employee.getFirstName()));
-            }
-            if (employee.getLastName() != null && !employee.getLastName().equals("")) {
-                finalPredicate = criteriaBuilder.and(finalPredicate, criteriaBuilder.equal(emp.get("lastName"), employee.getLastName()));
-            }
-            if (employee.getUsername() != null && !employee.getUsername().equals("")) {
-                finalPredicate = criteriaBuilder.and(finalPredicate, criteriaBuilder.equal(emp.get("username"), employee.getUsername()));
-            }
-            Query.select(emp).where(finalPredicate);
-            org.hibernate.Query<Employee> query = session.createQuery(Query);
-            employees = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public List<Employee> search(Employee employee, Session session) {
+        List<Employee> employees = new ArrayList<>();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> Query = criteriaBuilder.createQuery(Employee.class);
+        Root<Employee> emp = Query.from(Employee.class);
+        Predicate finalPredicate = criteriaBuilder.conjunction();
+
+        if (employee.getFirstName() != null && !employee.getFirstName().equals("")) {
+            finalPredicate = criteriaBuilder.and(finalPredicate, criteriaBuilder.equal(emp.get("firstName"), employee.getFirstName()));
         }
+        if (employee.getLastName() != null && !employee.getLastName().equals("")) {
+            finalPredicate = criteriaBuilder.and(finalPredicate, criteriaBuilder.equal(emp.get("lastName"), employee.getLastName()));
+        }
+        if (employee.getUsername() != null && !employee.getUsername().equals("")) {
+            finalPredicate = criteriaBuilder.and(finalPredicate, criteriaBuilder.equal(emp.get("username"), employee.getUsername()));
+        }
+        Query.select(emp).where(finalPredicate);
+        org.hibernate.Query<Employee> query = session.createQuery(Query);
+        employees = query.getResultList();
         return employees;
 
     }
 
-    public Employee searchId(long id) {
-        Transaction transaction = null;
+    public Employee searchId(long id, Session session) {
         Employee employee = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            String searchId = "select e from Employee e where e.id =:id";
-            Query query = session.createQuery(searchId);
-            query.setParameter("id", id);
-            employee = (Employee) query.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String searchId = "select e from Employee e where e.id =:id";
+        Query query = session.createQuery(searchId);
+        query.setParameter("id", id);
+        employee = (Employee) query.getSingleResult();
         return employee;
     }
 
-    public int searchAllUsername(String username) {
-        Object userUsername = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            String searchAllUsername = "select count(e) from Employee e where username =:username";
-            Query query = session.createQuery(searchAllUsername, Object.class);
-            query.setParameter("username", username);
-            userUsername = query.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return userUsername == null ? 0 : 1;
-    }
 
-    public Employee getManagerDetail(String firstName, String lastName) {
+    public Employee getManagerDetail(String firstName, String lastName, Session session) {
         Employee getManagerDetail = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            Query query = session.createQuery("select e from Employee e where" +
-                    " e.role.code =:manager and e.firstName =:firstName and e.lastName =:lastName");
-            query.setParameter("manager", "manager");
-            query.setParameter("firstName", firstName);
-            query.setParameter("lastName", lastName);
-            getManagerDetail = (Employee) query.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Query query = session.createQuery("select e from Employee e where" +
+                " e.role.code =:manager and e.firstName =:firstName and e.lastName =:lastName");
+        query.setParameter("manager", "manager");
+        query.setParameter("firstName", firstName);
+        query.setParameter("lastName", lastName);
+        getManagerDetail = (Employee) query.getSingleResult();
         return getManagerDetail;
     }
 
-    public Employee searchUsername(String username) {
+    public Employee searchUsername(String username, Session session) {
         Employee employeeList = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            Query query = session.createQuery("select e from Employee e where" +
-                    " e.username =:username");
-            query.setParameter("username", username);
-            employeeList = (Employee) query.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Query query = session.createQuery("select e from Employee e where" +
+                " e.username =:username");
+        query.setParameter("username", username);
+        employeeList = (Employee) query.getSingleResult();
         return employeeList;
     }
 
-    public List<Employee> allManager() {
+    public List<Employee> allManager(Session session) {
         List<Employee> managerEmployeeList = new ArrayList<>();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            String allManager = "select e from Employee e where" +
-                    " e.role.code =:manager";
-            Query query = session.createQuery(allManager);
-            query.setParameter("manager", "manager");
-            managerEmployeeList = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String allManager = "select e from Employee e where" +
+                " e.role.code =:manager";
+        Query query = session.createQuery(allManager);
+        query.setParameter("manager", "manager");
+        managerEmployeeList = query.getResultList();
         return managerEmployeeList;
     }
 
-    public List<Employee> RegisteredLeaves(Employee manager) {
+    public List<Employee> RegisteredLeaves(Employee manager, Session session) {
 
         List<Employee> employeeList = new ArrayList<>();
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            String registeredLeaves = "select distinct e from Employee e join fetch e.leaveList el " +
-                    "where el.leaveStatus.code =:register  and e.manager.id =:managerId ";
-            Query query = session.createQuery(registeredLeaves);
-            query.setParameter("managerId", manager.getId());
-            query.setParameter("register", "register");
-            employeeList = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String registeredLeaves = "select distinct e from Employee e join fetch e.leaveList el " +
+                "where el.leaveStatus.code =:register  and e.manager.id =:managerId ";
+        Query query = session.createQuery(registeredLeaves);
+        query.setParameter("managerId", manager.getId());
+        query.setParameter("register", "register");
+        employeeList = query.getResultList();
         return employeeList;
     }
 
@@ -165,6 +116,13 @@ public class ManagerDao {
             e.printStackTrace();
         }
         return employee;
+    }
+
+    public List<String> searchAllUsername(Session session) {
+        List<String> usernames = new ArrayList<>();
+        Query query = session.createQuery("select e.username from Employee e ");
+        usernames = query.getResultList();
+        return usernames;
     }
 }
 
