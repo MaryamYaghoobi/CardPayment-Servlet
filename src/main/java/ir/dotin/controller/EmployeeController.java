@@ -120,7 +120,6 @@ public class EmployeeController extends HttpServlet {
         request.setAttribute("sentMessages", sentMessages);
         RequestDispatcher rs = request.getRequestDispatcher("sentMessages.jsp");
         rs.forward(request, response);
-
     }
 
     public void forwardingMessage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -197,7 +196,7 @@ public class EmployeeController extends HttpServlet {
                 System.out.println("Leave is not valid");
                 return;
             }
-            Leaves leaveEmployee = new Leaves(leaveFromDate, leaveToDate,leaveFromTime,leaveToTime,reason,
+            Leaves leaveEmployee = new Leaves(leaveFromDate, leaveToDate, leaveFromTime, leaveToTime, reason,
                     searchCategoryElement.findCategoryElement("register"));
             leavesService.addLeave(leaveEmployee);
             employeeService.updateLeaveState(employee, leaveEmployee);
@@ -212,8 +211,6 @@ public class EmployeeController extends HttpServlet {
     protected void updateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
         Employee employee = employeeService.getUserDetails(id);
-        long employeeIds = employee.getId();
-        long lastVersion = employee.getVersion();
         String firstName = request.getParameter("firstName");
         employee.setFirstName(firstName);
         String lastName = request.getParameter("lastName");
@@ -221,16 +218,10 @@ public class EmployeeController extends HttpServlet {
         String email = request.getParameter("email");
         employee.setEmail(email);
         employee.setFatherName(request.getParameter("fatherName"));
-        employeeService.updateVersion(employeeIds, lastVersion);
         employeeService.updateUserDetails(employee);
         request.setAttribute("employee", employee);
         RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
         rs.forward(request, response);
-        String strLastVersion = String.valueOf(lastVersion);
-        String strGetVersion = String.valueOf(employee.getVersion());
-        if (!strGetVersion.equals(strLastVersion)) {
-            System.out.println("Synchronization has occurred");
-        }
     }
 
     public void editEmployeeProfiles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
