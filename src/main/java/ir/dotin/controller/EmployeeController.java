@@ -276,10 +276,7 @@ public class EmployeeController extends HttpServlet {
         Transaction transaction = null;
         Session session = null;
         try {
-            SessionFactory sessionFactory;
-            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
-            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-            session = sessionFactory.openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Validation validation = new Validation();
             boolean validLeaveRequest;
