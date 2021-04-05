@@ -29,7 +29,7 @@
 
 <c:if test="${requestScope['LeaveIsNotValid'] =='validLeaveRequest'}">
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
-        <div class="alert alert-success" id="success-alert">
+        <div class="alert alert-success" id="success-alert" style="background-color: #F0DCAC;border: none;">
             <button type="button" class="close" data-dismiss="alert">x</button>
             <strong>درخواست با موفقیت ثبت شد.
             </strong>
@@ -59,12 +59,12 @@
 		<div class="form-row">
 	
             <div class="form-group col-md-6" style="margin-top: 17px;">
-                <label><label style="color: #ff4626">*</label>
+                <label><label style="color: #ff4626"></label>
                  از ساعت</label>
                 <input type="text"  class="form-control" id="leaveFromTime" name="leaveFromTime">
             </div>
             <div class="form-group col-md-6" style="margin-top: 17px;">
-                <label><label style="color: #ff4626">*</label>
+                <label><label style="color: #ff4626"></label>
                     تا ساعت</label>
                 <input type="text"  class="form-control" id="leaveToTime" name="leaveToTime">			
             </div>

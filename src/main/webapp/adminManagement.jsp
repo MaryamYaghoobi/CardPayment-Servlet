@@ -40,10 +40,13 @@
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
-<script>
- function deActive(employeeId) {
+<script>s
+ function deActive(employeeId, first) {
         if (confirm('کاربر غیر فعال شود؟')) {
-            window.location = 'AdminController?action=inActive&employeeId=' + employeeId;
+       <!-- alert(${requestScope.fisrtName});var firstName = document.getElementById('firstName');-->
+            
+          <!--  window.location = 'AdminController?action=inActive&employeeId=' + employeeId + '&firstName=' + fisrtName;-->
+		   window.location = 'AdminController?action=inActive&employeeId=' + employeeId;
         }
     }
 	 function active(employeeId) {

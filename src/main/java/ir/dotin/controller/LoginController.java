@@ -47,21 +47,6 @@ public class LoginController extends HttpServlet {
                 break;
         }
     }
-   /* protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-
-        dispatcher.forward(request, response);
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            authenticate(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 
     private void login(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
