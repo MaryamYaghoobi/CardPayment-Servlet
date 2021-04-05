@@ -29,8 +29,8 @@
 	 
     <button type="submit" name="log" >ورود</button>
   </form>
-  <br>
-  	<a class="nav-link" href="LoginController?action=insertUser" style="width: 50px;color: black;margin-right:1080px; font-size: 10px;">ایجادحساب کاربری</a>
+  <br><br><br>
+  	<a class="nav-link" href="LoginController?action=insertUser" style="width: 50px; color: black; font-size: 15px;  margin-left: 90px;">ایجادحساب کاربری</a>
 
 </div>
   
