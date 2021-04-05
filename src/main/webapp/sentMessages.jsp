@@ -42,8 +42,8 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
           
             <th class="text-center" scope="col" style="background-color:#F4C34E;">نام دریافت کننده</th>
             <th class="text-center" scope="col" style="background-color:#F4C34E;">نام خانوادگی دریافت کننده</th>
+			<th class="text-center" scope="col" style="background-color:#F4C34E;">عنوان</th>
             <th class="text-center" scope="col" style="background-color:#F4C34E;">متن پیام ارسال شده</th>
-			<th class="text-center" scope="col" style="background-color:#F4C34E;">دلیل</th>
             <th class="text-center" scope="col" style="background-color:#F4C34E;">فایل پیوست</th>
         </tr>
         </thead>
