@@ -2,6 +2,7 @@ package ir.dotin.service;
 
 import ir.dotin.entity.Employee;
 import ir.dotin.repository.AdminDao;
+import ir.dotin.repository.EmployeeDao;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -66,5 +67,9 @@ public class AdminService {
     public Employee searchUsername(String username, Session session) {
         AdminDao adminDao = new AdminDao();
         return adminDao.searchUsername(username, session);
+    }
+    public Employee getUserDetails(long id, Session session) {
+        AdminDao adminDao = new AdminDao();
+        return adminDao.getUserDetails(id, session);
     }
 }

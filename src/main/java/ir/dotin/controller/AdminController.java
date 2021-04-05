@@ -210,7 +210,7 @@ public class AdminController extends HttpServlet {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
-            Employee employee = employeeService.getUserDetails(Long
+            Employee employee = adminService.getUserDetails(Long
                     .parseLong(request.getParameter("employeeId")),session);
             employee.setDisabled(false);
         adminService.active(employee,session);
@@ -233,7 +233,7 @@ public class AdminController extends HttpServlet {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
-            Employee employee = employeeService.getUserDetails(Long
+            Employee employee = adminService.getUserDetails(Long
                     .parseLong(request.getParameter("employeeId")),session);
             employee.setDisabled(true);
             adminService.inActive(employee,session);
@@ -257,7 +257,7 @@ public class AdminController extends HttpServlet {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
-            Employee employee = employeeService.getUserDetails(Long
+            Employee employee = adminService.getUserDetails(Long
                     .parseLong(request.getParameter("employeeId")),session);
             employee.setActive(true);
             adminService.delete(employee,session);

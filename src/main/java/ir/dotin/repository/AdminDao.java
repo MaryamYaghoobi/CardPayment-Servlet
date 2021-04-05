@@ -120,6 +120,15 @@ public class AdminDao {
         managerEmployeeList = query.getResultList();
         return managerEmployeeList;
     }
+    public Employee getUserDetails(long id, Session session) {
+        Employee employeeList = new Employee();
+        String getUserDetails = "select e from Employee e " +
+                "where e.id =:id";
+        Query query = session.createQuery(getUserDetails);
+        query.setParameter("id", id);
+        employeeList = (Employee) query.getSingleResult();
+        return employeeList;
 
+    }
 
 }
