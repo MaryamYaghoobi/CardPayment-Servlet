@@ -15,16 +15,6 @@ import java.util.List;
 
 public class ManagerDao {
 
-    public List<Employee> getAllActiveEmployees(Session session) {
-        List<Employee> employeeList = new ArrayList<>();
-        String getAllActiveEmployees = "select e from Employee e where " +
-                "e.disabled =:disabled";
-        Query query = session.createQuery(getAllActiveEmployees);
-        query.setParameter("disabled", false);
-        employeeList = query.getResultList();
-        return employeeList;
-    }
-
     public List<Employee> search(Employee employee, Session session) {
         List<Employee> employees = new ArrayList<>();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -56,19 +46,6 @@ public class ManagerDao {
         employee = (Employee) query.getSingleResult();
         return employee;
     }
-
-
-    public Employee getManagerDetail(String firstName, String lastName, Session session) {
-        Employee getManagerDetail = null;
-        Query query = session.createQuery("select e from Employee e where" +
-                " e.role.code =:manager and e.firstName =:firstName and e.lastName =:lastName");
-        query.setParameter("manager", "manager");
-        query.setParameter("firstName", firstName);
-        query.setParameter("lastName", lastName);
-        getManagerDetail = (Employee) query.getSingleResult();
-        return getManagerDetail;
-    }
-
     public Employee searchUsername(String username, Session session) {
         Employee employeeList = null;
         Query query = session.createQuery("select e from Employee e where" +

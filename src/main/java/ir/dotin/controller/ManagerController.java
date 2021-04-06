@@ -38,9 +38,6 @@ public class ManagerController extends HttpServlet {
         String action = null;
         action = request.getParameter("action");
         switch (action) {
-            case "getAllActiveEmployees":
-                getAllActiveEmployees(request, response);
-                break;
             case "search":
                 search(request, response);
                 break;
@@ -128,26 +125,6 @@ public class ManagerController extends HttpServlet {
         }
     }
 
-    public void getAllActiveEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Transaction transaction = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            request.setAttribute("AllActiveEmployees", managerService.getAllActiveEmployees(session));
-            RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
-            rs.forward(request, response);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-
-        } finally {
-            session.close();
-        }
-    }
 
     public void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Transaction transaction = null;

@@ -12,11 +12,6 @@ public class ManagerService {
         return managerDao.RegisteredLeaves(manager, session);
     }
 
-    public List<Employee> getAllActiveEmployees(Session session) {
-        ManagerDao managerDao = new ManagerDao();
-        return managerDao.getAllActiveEmployees(session);
-    }
-
     public List<Employee> allManager(Session session) {
         ManagerDao managerDao = new ManagerDao();
         return managerDao.allManager(session);
