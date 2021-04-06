@@ -333,6 +333,7 @@ public class EmployeeController extends HttpServlet {
             employee.setFatherName(request.getParameter("fatherName"));
             employeeService.updateUserDetails(employee, session);
             request.setAttribute("employee", employee);
+            request.setAttribute("succsess", "succsess");
             RequestDispatcher rs = request.getRequestDispatcher("editEmployeeProfiles.jsp");
             rs.forward(request, response);
             transaction.commit();
