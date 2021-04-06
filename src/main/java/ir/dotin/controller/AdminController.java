@@ -117,8 +117,9 @@ public class AdminController extends HttpServlet {
             String[] managerDetail = request.getParameter("getManagerDetail").split("  ");
             employee.setManager(adminService.getManagerDetail(managerDetail[0], managerDetail[1],session));
             adminService.addUser(employee,session);
-            request.setAttribute("valid", "valid");
-            getAllActiveEmployees(request, response);
+            request.setAttribute("succsess", "succsess");
+            RequestDispatcher rs = request.getRequestDispatcher("insertEmployee.jsp");
+            rs.forward(request, response);
             transaction.commit();
         } catch (Exception e) {
                 if (transaction != null) {

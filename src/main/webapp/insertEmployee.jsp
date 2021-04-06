@@ -17,7 +17,8 @@
 <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
  href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"                       
 integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
-<!--======================================================================================================-->		
+<!--======================================================================================================-->
+ <link rel="stylesheet" href="css/persianDatepicker-default.css" />		
     <title>افزودن کاربر</title>
 
     <jsp:include page="adminHeader.jsp"/>
@@ -27,10 +28,20 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 <c:if test="${sessionScope['invalidationUsername']}">
 
     <div style="width: 300px;border-radius: 5px; margin: 10px auto;">
-        <div class="alert alert-success" id="success-alert" style="border: none;background-color: #F0E1BE;">
+        <div class="alert alert-success" id="success-alert" style="border: none;background-color: #F0DCAC;border: none;">
             <button type="button" class="close" data-dismiss="alert">x</button>
              <strong style="color:red;">
                نام کاربری تکراری است.
+            </strong>
+        </div>
+    </div>
+</c:if>
+<c:if test="${requestScope['valid'] =='valid'}">
+    <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
+        <div class="alert alert-success" id="success-alert" style="background-color: #F0DCAC;border: none;">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>
+             کاربر با موفقیت ثبت شد.
             </strong>
         </div>
     </div>
@@ -190,6 +201,20 @@ crossorigin="anonymous"></script>
     <script src="resources/js/jquery.min.js"></script>
 <!--======================================================================================================-->		
     <script src="resources/js/jquery.validate.min.js"></script>
-<!--======================================================================================================-->		
+<!--=================================================================================-->	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--===============================================================================-->	
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>	
+<!--=================================================================================-->	
+    <script src="js/persianDatepicker.min.js"></script>
+<!--=================================================================================-->		
+    <script src="js/vertical-responsive-menu.min.js"></script>
+<!--=================================================================================-->
+<script type="text/javascript">
+
+    $(function() {
+        $("#dateOfBirth").persianDatepicker();   
+    });
+</script>
 </body>
 </html>
