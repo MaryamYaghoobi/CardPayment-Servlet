@@ -103,7 +103,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
                 <label><label style="color: #ff4626">*</label>
                     تاریخ تولد
                 </label>
-                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="تاریخ تولد">
+                <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="تاریخ تولد">
                   
             </div>
             <div class="form-group col-md-6" style="margin-top: 17px;">
