@@ -117,6 +117,7 @@ public class AdminController extends HttpServlet {
             String[] managerDetail = request.getParameter("getManagerDetail").split("  ");
             employee.setManager(adminService.getManagerDetail(managerDetail[0], managerDetail[1],session));
             adminService.addUser(employee,session);
+            request.setAttribute("valid", "valid");
             getAllActiveEmployees(request, response);
             transaction.commit();
         } catch (Exception e) {
@@ -140,8 +141,6 @@ public class AdminController extends HttpServlet {
             transaction = session.beginTransaction();
         List<String> allManager = allManager();
         request.setAttribute("managerList", allManager);
-            String messages = "success";
-            request.setAttribute(messages, true);
         RequestDispatcher rs = request.getRequestDispatcher("insertEmployee.jsp");
         rs.forward(request, response);
             transaction.commit();
@@ -326,7 +325,9 @@ public class AdminController extends HttpServlet {
             employee.setRole(role);
             employee.setManager(getManagerDetail);
             adminService.updateUserDetails(employee,session);
-            getAllActiveEmployees(request, response);
+            request.setAttribute("succsess", "succsess");
+            RequestDispatcher rs = request.getRequestDispatcher("editAndAppointmentOfManager.jsp");
+            rs.forward(request, response);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

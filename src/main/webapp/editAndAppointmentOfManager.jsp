@@ -16,7 +16,16 @@
 </head>
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
-
+<c:if test="${requestScope['succsess'] =='succsess'}">
+    <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
+        <div class="alert alert-success" id="success-alert" style="background-color: #F0DCAC;border: none;">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>
+             پروفایل با موفقیت ویرایش شد.
+            </strong>
+        </div>
+    </div>
+</c:if>
 <div class="container" name="container"
      style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
     <form action="AdminController" method="post" id="editForm">
