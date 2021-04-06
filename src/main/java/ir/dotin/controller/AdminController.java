@@ -214,8 +214,8 @@ public class AdminController extends HttpServlet {
                     .parseLong(request.getParameter("employeeId")),session);
             employee.setDisabled(false);
         adminService.active(employee,session);
-        getAllActiveEmployees(request, response);
             transaction.commit();
+            search(request, response);
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -237,8 +237,8 @@ public class AdminController extends HttpServlet {
                     .parseLong(request.getParameter("employeeId")),session);
             employee.setDisabled(true);
             adminService.inActive(employee,session);
-            getAllActiveEmployees(request, response);
             transaction.commit();
+            search(request, response);
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

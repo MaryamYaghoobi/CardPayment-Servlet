@@ -93,6 +93,7 @@
         </thead>
         <tbody>
         <c:forEach items="${requestScope.employeeList}" var="employee">
+		<c:if test="${employee.active=='false'}">
 			 	  <tr  class="${employee.active=='true' && employee.disabled=='false' ? 'deletededClass' :
 	                           employee.active=='false' && employee.disabled=='true' ? 'disabledClass' :
                                employee.active=='true' && employee.disabled=='true' ? 'deletededClass' :
@@ -103,7 +104,8 @@
                 <td><c:out value="${employee.lastName}"/></td>
                 <td><c:out value="${employee.manager.firstName}${employee.manager.lastName}"/></td>
                 <td><c:out value="${employee.role.name}"/></td>            	
-            </tr>			
+            </tr>
+</c:if>			
      </c:forEach>
         </tbody>
     </table>

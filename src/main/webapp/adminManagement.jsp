@@ -41,17 +41,23 @@
 <body dir="rtl">
 <jsp:include page="body.jsp"/>
 <script>s
- function deActive(employeeId, first) {
+ function deActive(employeeId) {
         if (confirm('کاربر غیر فعال شود؟')) {
-       <!-- alert(${requestScope.fisrtName});var firstName = document.getElementById('firstName');-->
-            
-          <!--  window.location = 'AdminController?action=inActive&employeeId=' + employeeId + '&firstName=' + fisrtName;-->
-		   window.location = 'AdminController?action=inActive&employeeId=' + employeeId;
+		var firstName = document.getElementById("firstName").value;
+		var lastName = document.getElementById("lastName").value;
+		var username = document.getElementById("username").value;
+           window.location = 'AdminController?action=inActive&employeeId=' + employeeId + '&firstName=' + firstName+
+		   '&lastName=' + lastName+'&username=' + username;
+		   
         }
     }
 	 function active(employeeId) {
         if (confirm('کاربر فعال شود؟')) {
-            window.location = 'AdminController?action=active&employeeId=' + employeeId;
+			var firstName = document.getElementById("firstName").value;
+		var lastName = document.getElementById("lastName").value;
+		var username = document.getElementById("username").value;
+           window.location = 'AdminController?action=active&employeeId=' + employeeId + '&firstName=' + firstName+
+		   '&lastName=' + lastName+'&username=' + username;
         }
     }
     function del(employeeId) {
@@ -60,7 +66,7 @@
         }
     }
 
-    function search(employeeId) {
+    function edited(employeeId) {
         window.location = 'AdminController?action=editAndAppointmentOfManager&employeeId=' + employeeId;
     }
        
@@ -148,7 +154,7 @@
                 <td class="text-right" style="width: 21%;">
                    <button type="button"
                             class="btn btn-primary btn-rounded btn-lm my-0 badge-pill " value="updateProfile"
-                            style="width: 82px;background-color: #F4C34E;border: none;" onclick="search(${employee.id})">
+                            style="width: 82px;background-color: #F4C34E;border: none;" onclick="edited(${employee.id})">
 							
 							<span class="fa fa-edit"></span>
 							</button>                      
