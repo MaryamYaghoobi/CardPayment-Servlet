@@ -26,7 +26,7 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
 <c:if test="${sessionScope['invalidationUsername']}">
 
     <div style="width: 300px;border-radius: 5px; margin: 10px auto;">
-        <div class="alert alert-success" id="success-alert" style="border: none;background-color: #F0E1BE;">
+        <div class="alert alert-success" id="success-alert" style="border: none;background-color: #F0DCAC;border: none;">
             <button type="button" class="close" data-dismiss="alert">x</button>
              <strong style="color:red;">
                نام کاربری تکراری است.
@@ -34,7 +34,16 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
         </div>
     </div>
 </c:if>
-
+<c:if test="${requestScope['addSuccess']}">
+    <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
+        <div class="alert alert-info" id="info-alert" style="background-color: #F0DCAC;border: none;">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>
+               کاربر با موفقیت ثبت شد
+            </strong>
+        </div>
+    </div>
+</c:if>
 <div class="container" name="container"
      style="background-color: #F0E1BE; width: 700px; margin-top: 55px;border-radius: 5px;">
     <form action="LoginController" method="post" id="saveForm">

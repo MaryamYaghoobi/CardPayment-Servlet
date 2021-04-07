@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
                 addAccount(request, response);
                 break;
             case "insertUser":
-                insertUser(request, response, usernameRepetitive);
+                insertUser(request, response);
                 break;
         }
     }
@@ -94,11 +94,10 @@ public class LoginController extends HttpServlet {
             if (invalidationUsername) {
                 request.getSession().setAttribute("invalidationUsername", invalidationUsername);
                 usernameRepetitive = true;
-                insertUser(request, response, usernameRepetitive);
+                insertUser(request, response);
                 return;
             }
             employee.setUsername(userName);
-            insertUser(request, response,usernameRepetitive);
             String firstName = request.getParameter("firstName");
             employee.setFirstName(firstName);
             String lastName = request.getParameter("lastName");
@@ -120,7 +119,10 @@ public class LoginController extends HttpServlet {
             CategoryElement gender = searchCategoryElement.findCategoryElement(g,session);
             employee.setGender(gender);
            adminService.addUser(employee,session);
-            getAllActiveEmployees(request, response);
+            String messages = "addSuccess";
+            request.setAttribute(messages, true);
+            RequestDispatcher rs = request.getRequestDispatcher("insertEmployee.jsp");
+            rs.forward(request, response);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -135,7 +137,7 @@ public class LoginController extends HttpServlet {
     }
 
 
-    public void insertUser(HttpServletRequest request, HttpServletResponse response, boolean usernameRepetitive) throws IOException, ServletException {
+    public void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Transaction transaction = null;
         Session session = null;
         try{
@@ -156,26 +158,8 @@ public class LoginController extends HttpServlet {
             session.close();
         }
     }
-    public void getAllActiveEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Transaction transaction = null;
-        Session session = null;
-        try{
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            request.setAttribute("AllActiveEmployees", adminService.getAllActiveEmployees(session));
-            RequestDispatcher rs = request.getRequestDispatcher("adminManagement.jsp");
-            rs.forward(request, response);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
 
-        } finally {
-            session.close();
-        }
     }
-        }
+
 
 
