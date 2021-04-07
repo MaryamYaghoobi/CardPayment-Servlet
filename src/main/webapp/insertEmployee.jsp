@@ -36,12 +36,12 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
         </div>
     </div>
 </c:if>
-<c:if test="${requestScope['valid'] =='valid'}">
+<c:if test="${requestScope['addSuccess']}">
     <div style="width: 450px;border-radius: 5px; margin: 10px auto;">
-        <div class="alert alert-success" id="success-alert" style="background-color: #F0DCAC;border: none;">
+        <div class="alert alert-info" id="info-alert" style="background-color: #F0DCAC;border: none;">
             <button type="button" class="close" data-dismiss="alert">x</button>
             <strong>
-             کاربر با موفقیت ثبت شد.
+               کاربر با موفقیت ثبت شد
             </strong>
         </div>
     </div>

@@ -92,7 +92,6 @@ public class AdminController extends HttpServlet {
                 return;
             }
             employee.setUsername(userName);
-            insertEmployee(request, response);
             String firstName = request.getParameter("firstName");
             employee.setFirstName(firstName);
             String lastName = request.getParameter("lastName");
@@ -117,8 +116,8 @@ public class AdminController extends HttpServlet {
             String[] managerDetail = request.getParameter("getManagerDetail").split("  ");
             employee.setManager(adminService.getManagerDetail(managerDetail[0], managerDetail[1],session));
             adminService.addUser(employee,session);
-          /*  String messages = "addSuccess";
-            request.setAttribute(messages, "invalidationUsername");*/
+            String messages = "addSuccess";
+            request.setAttribute(messages, true);
             RequestDispatcher rs = request.getRequestDispatcher("insertEmployee.jsp");
             rs.forward(request, response);
             transaction.commit();
