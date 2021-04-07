@@ -17,12 +17,13 @@
 <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
  href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"                       
 integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
-<!--======================================================================================================-->		
+<!--======================================================================================================-->	
+ <link rel="stylesheet" href="css/persianDatepicker-default.css" />	
+ 
     <title>افزودن کاربر</title>
 
 </head>
 <body dir="rtl">
-<jsp:include page="body.jsp"/>
 <c:if test="${sessionScope['invalidationUsername']}">
 
     <div style="width: 300px;border-radius: 5px; margin: 10px auto;">
@@ -150,7 +151,6 @@ integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8
     </form>
 
 </div>
-
 <!--======================================================================================================-->	
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -163,6 +163,20 @@ crossorigin="anonymous"></script>
     <script src="resources/js/jquery.min.js"></script>
 <!--======================================================================================================-->		
     <script src="resources/js/jquery.validate.min.js"></script>
-<!--======================================================================================================-->		
+<!--=================================================================================-->	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--===============================================================================-->	
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>	
+<!--=================================================================================-->	
+    <script src="js/persianDatepicker.min.js"></script>
+<!--=================================================================================-->		
+    <script src="js/vertical-responsive-menu.min.js"></script>
+<!--=================================================================================-->
+<script type="text/javascript">
+
+    $(function() {
+        $("#dateOfBirth").persianDatepicker();   
+    });
+</script>	
 </body>
 </html>

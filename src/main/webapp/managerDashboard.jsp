@@ -13,6 +13,7 @@
 <head>
     <title>manager</title>
 <jsp:include page="managerHeader.jsp"/>
+
 </head>
 <body>
 <jsp:include page="body.jsp"/>
