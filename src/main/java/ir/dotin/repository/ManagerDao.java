@@ -37,7 +37,15 @@ public class ManagerDao {
         return employees;
 
     }
-
+    public List<Employee> getAllActiveEmployees(Session session) {
+        List<Employee> employeeList = new ArrayList<>();
+        String getAllActiveEmployees = "select e from Employee e where " +
+                "e.disabled =:param";
+        Query query = session.createQuery(getAllActiveEmployees);
+        query.setParameter("param", Boolean.FALSE);
+        employeeList = query.getResultList();
+        return employeeList;
+    }
     public Employee searchId(long id, Session session) {
         Employee employee = null;
         String searchId = "select e from Employee e where e.id =:id";

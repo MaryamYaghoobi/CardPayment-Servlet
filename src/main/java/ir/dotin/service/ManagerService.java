@@ -37,7 +37,10 @@ public class ManagerService {
         Employee employee = managerDao.login(username, password);
         return employee;
     }
-
+    public List<Employee> getAllActiveEmployees( Session session) {
+        ManagerDao managerDao = new ManagerDao();
+        return managerDao.getAllActiveEmployees(session);
+    }
     public List<String> searchAllUsername(Session session) {
         ManagerDao managerDao = new ManagerDao();
         return managerDao.searchAllUsername(session);

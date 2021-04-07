@@ -7,7 +7,11 @@ import ir.dotin.service.LeavesService;
 import ir.dotin.service.ManagerService;
 import ir.dotin.share.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -40,6 +44,9 @@ public class ManagerController extends HttpServlet {
         switch (action) {
             case "search":
                 search(request, response);
+                break;
+            case "getAllActiveEmployees":
+                getAllActiveEmployees(request, response);
                 break;
             case "RegisteredLeaves":
                 RegisteredLeaves(request, response);
@@ -157,6 +164,29 @@ public class ManagerController extends HttpServlet {
             session.close();
         }
 
+    }
+    public void getAllActiveEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            SessionFactory sessionFactory;
+            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("META-INF/hibernate.cfg.xml").build();
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            request.setAttribute("AllActiveEmployees", managerService.getAllActiveEmployees(session));
+            RequestDispatcher rs = request.getRequestDispatcher("employeeManagement.jsp");
+            rs.forward(request, response);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
     }
 
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
