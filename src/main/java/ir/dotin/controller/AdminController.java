@@ -48,7 +48,7 @@ public class AdminController extends HttpServlet {
                 addUser(request, response);
                 break;
             case "insertEmployee":
-                insertEmployee(request, response, usernameRepetitive);
+                insertEmployee(request, response);
                 break;
             case "getAllActiveEmployees":
                 getAllActiveEmployees(request, response);
@@ -88,11 +88,11 @@ public class AdminController extends HttpServlet {
             if (invalidationUsername) {
                 request.getSession().setAttribute("invalidationUsername", invalidationUsername);
                 usernameRepetitive = true;
-                insertEmployee(request, response, usernameRepetitive);
+                insertEmployee(request, response);
                 return;
             }
             employee.setUsername(userName);
-            insertEmployee(request, response,usernameRepetitive);
+            insertEmployee(request, response);
             String firstName = request.getParameter("firstName");
             employee.setFirstName(firstName);
             String lastName = request.getParameter("lastName");
@@ -117,7 +117,8 @@ public class AdminController extends HttpServlet {
             String[] managerDetail = request.getParameter("getManagerDetail").split("  ");
             employee.setManager(adminService.getManagerDetail(managerDetail[0], managerDetail[1],session));
             adminService.addUser(employee,session);
-            request.setAttribute("succsess", "succsess");
+          /*  String messages = "addSuccess";
+            request.setAttribute(messages, "invalidationUsername");*/
             RequestDispatcher rs = request.getRequestDispatcher("insertEmployee.jsp");
             rs.forward(request, response);
             transaction.commit();
@@ -134,7 +135,7 @@ public class AdminController extends HttpServlet {
         }
 
 
-    public void insertEmployee(HttpServletRequest request, HttpServletResponse response, boolean usernameRepetitive) throws IOException, ServletException {
+    public void insertEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Transaction transaction = null;
         Session session = null;
         try{
