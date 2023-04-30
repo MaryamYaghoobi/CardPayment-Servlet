@@ -1,4 +1,4 @@
-package ir.dotin.share;
+package ir.co.isc.helper.utils;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
