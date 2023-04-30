@@ -34,12 +34,20 @@ public class CardsService {
         CardsDao cardsDao =new CardsDao();
         return cardsDao.findAll();
     }
-    public List<Object[]> findBinCards(String nationalCode){
+   /* public List<Object[]> findBinCards(String nationalCode){
         CardsDao cardsDao = new CardsDao();
         return cardsDao.findBinCards(nationalCode);
-    }
-    public List<Object[]> findTypeCards(String nationalCode){
+    }*/
+   public List<String> findBinCards(String nationalCode){
+       CardsDao cardsDao = new CardsDao();
+       return cardsDao.findBinCards(nationalCode);
+   }
+   /* public List<Object[]> findTypeCards(String nationalCode){
         CardsDao cardsDao = new CardsDao();
         return cardsDao.findTypeCards(nationalCode);
-    }
+    }*/
+   public List<String> findTypeCards(String issuerCode){
+       CardsDao cardsDao = new CardsDao();
+       return cardsDao.findTypeCards(issuerCode);
+   }
 }

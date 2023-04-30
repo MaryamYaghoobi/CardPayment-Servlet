@@ -32,26 +32,35 @@ public class DuplicateNationalCode  {
     }
         return invalidNationalCode;
     }
-    public boolean checkDuplicateCardsBin(String customerNationalCode) {
+    public boolean checkDuplicateCardsBin(String issuerCodeEntered,String cardTypeEntered) {
 
-        boolean duplicateCustomerNationalCode = false;
+        boolean duplicateBinCard = false;
+        boolean duplicateTypeCard = false;
         Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
-        List<Object[]> CardsNumber = CardsService.getInstance().findBinCards(customerNationalCode);
-            for (Object[] nationalCode : CardsNumber) {
-                if (customerNationalCode.equals(nationalCode)) {
-                    duplicateCustomerNationalCode = true;
-                    logger.info("This issuer exists for" + duplicateCustomerNationalCode );
+            List<String> binCardsNumber = CardsService.getInstance().findBinCards(issuerCodeEntered);
+            for (String binCard : binCardsNumber)
+                if (issuerCodeEntered.equals(binCard)) {
+                    logger.info("This issuer existed" + duplicateBinCard);
+                    duplicateBinCard = true;
                 }
-            }
+            List<String> cardType = CardsService.getInstance().findTypeCards(String.valueOf(binCardsNumber));
+            for (String cards : cardType)
+                if (cardTypeEntered.equals(cards))
+                    duplicateTypeCard = true;
+            logger.info("This type card exists for" + duplicateTypeCard);
+
             transaction.commit();
         } finally {
             session.close();
         }
-        return duplicateCustomerNationalCode;
-    }
-}}}
+
+        return duplicateBinCard;
+    }}
+
+
+

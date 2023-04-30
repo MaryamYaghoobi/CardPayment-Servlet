@@ -71,7 +71,7 @@ public class CardsDao {
         }
         return cardsList;
     }
-    public List<Object[]> findBinCards(String nationalCode) {
+   /* public List<Object[]> findBinCards(String nationalCode) {
         List<Object[]> binList = new ArrayList<>();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query query = session.createQuery("select Cards.cardNumber , Cards.issuerName from Customers c , Cards join c.cardsList  cc join Cards .customers  ca " +
@@ -82,8 +82,31 @@ public class CardsDao {
             e.printStackTrace();
         }
         return binList;
+    }*/
+   public List<String> findBinCards(String nationalCode) {
+       List<String> binList = new ArrayList<>();
+       try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+           Query query = session.createQuery("select  Cards.issuerName from Customers c , Cards join c.cardsList  cc join Cards .customers  ca " +
+                   "  where ca.nationalCode=:nationalCode");
+           query.setParameter("nationalCode", nationalCode);
+           binList = query.getResultList();
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+       return binList;
+   }
+    public List<String> findTypeCards(String issuerCode) {
+        List<String> cardType = new ArrayList<>();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query query = session.createQuery("select  c.cardType from  Cards c where c.issuerCode=:issuerCode");
+            query.setParameter("issuerCode", issuerCode);
+            cardType = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cardType;
     }
-    public List<Object[]> findTypeCards(String nationalCode) {
+   /* public List<Object[]> findTypeCards(String nationalCode) {
         List<Object[]> binList = new ArrayList<>();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query query = session.createQuery("select Cards.cardNumber , Cards.cardType from Customers c , Cards join c.cardsList  cc join Cards .customers  ca " +
@@ -94,5 +117,5 @@ public class CardsDao {
             e.printStackTrace();
         }
         return binList;
-    }
+    }*/
 }
