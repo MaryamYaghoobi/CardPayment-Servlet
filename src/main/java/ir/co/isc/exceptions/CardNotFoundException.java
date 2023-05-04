@@ -1,6 +1,6 @@
-package ir.co.isc.helper.exceptions;
+package ir.co.isc.exceptions;
 
-public class CardNotFoundException extends Exception {
+public class CardNotFoundException extends RuntimeException {
     public CardNotFoundException() {
     }
 

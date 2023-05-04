@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity(name = "Category")
 @Table(name = "t_Category")
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category extends ir.co.isc.entity.Entity {
+public class Category extends BaseEntity implements Serializable {
 
     @Column(name = "c_name", columnDefinition = "VARCHAR(255)")
     private String name;

@@ -22,7 +22,7 @@
     <mapping class="ir.co.isc.entity.Cards"/>
     <mapping class="ir.co.isc.entity.CategoryElement"/>
     <mapping class="ir.co.isc.entity.Category"/>
-    <mapping class="ir.co.isc.entity.Entity"/>
+    <mapping class="ir.co.isc.entity.BaseEntity"/>
 
 </session-factory>
 

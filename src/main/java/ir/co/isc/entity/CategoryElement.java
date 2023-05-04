@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "CategoryElement")
@@ -15,7 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryElement extends ir.co.isc.entity.Entity {
+public class CategoryElement extends BaseEntity implements Serializable {
 
     @Column(name = "c_name", columnDefinition = "VARCHAR(255)")
     private String name;

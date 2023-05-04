@@ -117,7 +117,7 @@ public class BankerController extends HttpServlet {
 
     public void findAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("cardList", CardsService.getInstance().findAllCards());
-        req.getRequestDispatcher("employeeManagement.jsp").forward(req, resp);
+
     }
 
 
@@ -145,7 +145,7 @@ public class BankerController extends HttpServlet {
             request.setAttribute("nationalCode", request.getParameter("nationalCode"));
             request.setAttribute("cardNumber", request.getParameter("cardNumber"));
             request.setAttribute("issuerName", request.getParameter("issuerName"));
-            RequestDispatcher rs = request.getRequestDispatcher("adminManagement.jsp");
+
             rs.forward(request, response);
             transaction.commit();
         } catch (Exception e) {
