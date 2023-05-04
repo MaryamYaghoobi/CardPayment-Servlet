@@ -1,4 +1,4 @@
-package ir.co.isc.helper.utils;
+package ir.co.isc.helper;
 
 import org.apache.log4j.Logger;
 
