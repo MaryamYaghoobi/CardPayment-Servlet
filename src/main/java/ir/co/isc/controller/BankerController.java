@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
@@ -72,20 +71,12 @@ public class BankerController extends HttpServlet {
         } else {
             //If there is no national code, you must:
             //Register the card for this national code
-            //todo تاریخ انقضا
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
-            String expiredDate = request.getParameter("expirationDate");
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/yy", Locale.ENGLISH);
+            String dateInString = request.getParameter("expirationDate");
             LocalDate expirationDate = null;
-            if (expiredDate != null && !expiredDate.equals("")) {
-                try {
-                    expirationDate = formatter.parse(expiredDate);
-                } catch (ParseException e) {
-                    logger.error("String can not parse to Data" + e.getMessage());
-                }
+            if (dateInString != null && !dateInString.equals("")) {
+                card.setExpirationDate(expirationDate);
             }
-
-            LocalDate expiredDate = LocalDate.now();
-
             CategoryElement cardType = CategoryElementService.getInstance().findByCodeCategory(request.getParameter("cardType"));
             CategoryElement cardStatus = CategoryElementService.getInstance().findByCodeCategory(request.getParameter("cardStatus"));
 
@@ -94,7 +85,6 @@ public class BankerController extends HttpServlet {
             CardNumber.append(selectedBinCard);
             int checkDigit = generationCardNumber.getCheckDigit(CardNumber.toString());
             CardNumber.append(checkDigit);
-            card.setExpirationDate(expirationDate);
             card.setCardType(cardType);
             card.setCardStatus(cardStatus);
             card.setCardNumber(String.valueOf(CardNumber));
@@ -107,8 +97,9 @@ public class BankerController extends HttpServlet {
             }
         }
     }
-    public void findAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("cardList", CardsService.getInstance().findAllCards());
+
+    public void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("cardList", CardsService.getInstance().findAllCards());
 
     }
 

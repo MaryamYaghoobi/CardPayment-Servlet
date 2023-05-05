@@ -22,6 +22,7 @@ import java.time.LocalDate;
 public class Cards extends BaseEntity implements Serializable {
     @Column(name = "c_cardNumber", columnDefinition = "VARCHAR(16)")
     private String cardNumber;
+    @Temporal(TemporalType.DATE)
     @Column(name = "c_expirationDate", columnDefinition = "DATE")
     private LocalDate expirationDate;
     @Column(name = "c_cvv2", columnDefinition = "VARCHAR(3)")
