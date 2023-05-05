@@ -1,12 +1,12 @@
-package ir.co.isc.helper;
+package ir.co.isc.service.Cards;
 
 import ir.co.isc.exceptions.DuplicateCardNumberException;
-import ir.co.isc.service.CardsService;
-import ir.co.isc.service.CustomersService;
+import ir.co.isc.service.Customers.CustomersService;
 import org.apache.log4j.Logger;
 import java.util.List;
 
-public class DuplicateNationalCode {
+public class CheckduplicationCardService {
+
     Logger logger = Logger.getRootLogger();
 
     public boolean checkDuplicateNationalCode(String nationalCodeEntered) {
@@ -35,7 +35,7 @@ public class DuplicateNationalCode {
         return invalidNationalCode;
     }
 
-    public boolean checkDuplicateCardsBin(String customersNationalCode, String cardTypeEntered) {
+    public boolean checkDuplicateCards(String customersNationalCode, String cardTypeEntered) {
 
         boolean duplicateBinCard = false;
         boolean duplicateTypeCard = false;

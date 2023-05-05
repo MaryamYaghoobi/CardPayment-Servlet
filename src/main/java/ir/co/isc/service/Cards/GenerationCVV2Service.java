@@ -1,10 +1,10 @@
-package ir.co.isc.helper;
+package ir.co.isc.service.Cards;
 
 import org.apache.log4j.Logger;
 
 import java.util.Random;
 
-public class GenerationCVV2 {
+public class GenerationCVV2Service {
     Logger logger = Logger.getRootLogger();
 
     public int generateCVV2() {

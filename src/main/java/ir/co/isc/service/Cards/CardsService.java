@@ -1,7 +1,6 @@
-package ir.co.isc.service;
+package ir.co.isc.service.Cards;
 
 import ir.co.isc.entity.Cards;
-import ir.co.isc.entity.Customers;
 import ir.co.isc.repository.CardsDao;
 import org.hibernate.Session;
 

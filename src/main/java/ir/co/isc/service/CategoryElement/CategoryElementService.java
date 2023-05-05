@@ -1,8 +1,7 @@
-package ir.co.isc.service;
+package ir.co.isc.service.CategoryElement;
 
 import ir.co.isc.entity.CategoryElement;
 import ir.co.isc.repository.CategoryElementDao;
-import org.hibernate.Session;
 
 public class CategoryElementService {
     private static CategoryElementService categoryElementService = new CategoryElementService();

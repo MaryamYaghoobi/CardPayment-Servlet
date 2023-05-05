@@ -1,8 +1,6 @@
-package ir.co.isc.helper;
+package ir.co.isc.service.Cards;
 
-import ir.co.isc.entity.Cards;
-
-public class GenerationCardNumber {
+public class GenerationCardNumberService {
     /*  Cards card = new Cards();
 
       public String generateCardNumber(Cards issuerCode) {
