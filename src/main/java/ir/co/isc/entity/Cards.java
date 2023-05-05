@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @Entity(name = "Cards")
@@ -23,8 +24,8 @@ public class Cards extends BaseEntity implements Serializable {
     @Column(name = "c_cardNumber", columnDefinition = "VARCHAR(16)")
     private String cardNumber;
     @Temporal(TemporalType.DATE)
-    @Column(name = "c_expirationDate", columnDefinition = "DATE")
-    private LocalDate expirationDate;
+    @Column(name = "c_expirationDate")
+    private Date expirationDate;
     @Column(name = "c_cvv2", columnDefinition = "VARCHAR(3)")
     private String cvv2;
     @Column(name = "c_issuerCode", columnDefinition = "VARCHAR(6)")

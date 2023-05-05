@@ -23,8 +23,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -73,10 +74,16 @@ public class BankerController extends HttpServlet {
             //Register the card for this national code
             SimpleDateFormat formatter = new SimpleDateFormat("MM/yy", Locale.ENGLISH);
             String dateInString = request.getParameter("expirationDate");
-            LocalDate expirationDate = null;
+            Date expirationDate = null;
             if (dateInString != null && !dateInString.equals("")) {
-                card.setExpirationDate(expirationDate);
+                try {
+                    expirationDate = formatter.parse(dateInString);
+                } catch (ParseException p) {
+                    logger.error("String can not parse to Data" + p.getMessage());
+                }
             }
+            card.setExpirationDate(expirationDate);
+
             CategoryElement cardType = CategoryElementService.getInstance().findByCodeCategory(request.getParameter("cardType"));
             CategoryElement cardStatus = CategoryElementService.getInstance().findByCodeCategory(request.getParameter("cardStatus"));
 
