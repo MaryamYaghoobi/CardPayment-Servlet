@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-@WebServlet("/AdminController")
+@WebServlet("/Banker")
 public class BankerController extends HttpServlet {
     static Logger logger = null;
 
@@ -106,6 +106,7 @@ public class BankerController extends HttpServlet {
 
     public void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("cardList", CardsService.getInstance().findAllCards());
+        request.getRequestDispatcher("insertEmployee.jsp").forward(request, response);
 
     }
 
